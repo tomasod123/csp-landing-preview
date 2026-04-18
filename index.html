@@ -640,22 +640,22 @@
     background: var(--csp-surface);
     border: 1px solid var(--csp-ink-300);
     border-radius: var(--csp-r-xl);
-    padding: 40px;
+    padding: 32px 34px;
     max-width: 960px; margin: 0 auto;
     box-shadow: var(--csp-shadow);
   }
   .scorecard .sc-honest {
     font-family: var(--csp-font-mono); font-size: 11px;
-    color: var(--csp-ink-700); letter-spacing: 0.04em; line-height: 1.65;
-    padding: 14px 16px; background: var(--csp-blue-50);
+    color: var(--csp-ink-700); letter-spacing: 0.04em; line-height: 1.55;
+    padding: 12px 14px; background: var(--csp-blue-50);
     border-left: 2px solid var(--csp-blue-800);
-    border-radius: 4px; margin-bottom: 22px;
+    border-radius: 4px; margin-bottom: 18px;
   }
 
   .sc-revenue {
     display: grid; grid-template-columns: 1fr auto; gap: 18px;
     align-items: center;
-    padding: 16px 18px; margin-bottom: 24px;
+    padding: 12px 16px; margin-bottom: 18px;
     background: var(--csp-surface-2);
     border: 1px dashed var(--csp-ink-300);
     border-radius: var(--csp-r);
@@ -685,45 +685,40 @@
     box-shadow: 0 0 0 3px rgba(30,64,175,0.12);
   }
 
-  .sc-rows { display: flex; flex-direction: column; gap: 4px; }
+  .sc-rows { display: flex; flex-direction: column; gap: 0; }
   .sc-row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 200px 52px;
+    grid-template-columns: minmax(0, 1fr) 180px 44px;
     grid-template-areas:
       "label slider val"
       "anchors anchors anchors";
-    gap: 10px 22px; align-items: center;
-    padding: 16px 0; border-bottom: 1px dashed var(--csp-ink-300);
+    gap: 4px 18px; align-items: center;
+    padding: 10px 0 12px; border-bottom: 1px dashed var(--csp-ink-300);
   }
   .sc-row:last-child { border-bottom: none; }
   .sc-label { grid-area: label; }
   .sc-label .lbl {
-    font-family: var(--csp-font-ui); font-size: 14.5px; font-weight: 600;
-    color: var(--csp-warm-900); display: block; line-height: 1.3;
-  }
-  .sc-label .sub {
-    font-family: var(--csp-font-mono); font-size: 10.5px;
-    color: var(--csp-ink-500); margin-top: 3px; letter-spacing: 0.04em;
+    font-family: var(--csp-font-ui); font-size: 14px; font-weight: 600;
+    color: var(--csp-warm-900); display: block; line-height: 1.25;
   }
   .sc-slider { grid-area: slider; }
   .sc-val { grid-area: val; }
   .sc-anchors {
     grid-area: anchors;
     display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-    padding-top: 4px;
   }
   .sc-anchor {
-    font-family: var(--csp-font-mono); font-size: 10.5px;
-    color: var(--csp-ink-500); letter-spacing: 0.02em; line-height: 1.5;
+    font-family: var(--csp-font-mono); font-size: 10px;
+    color: var(--csp-ink-500); letter-spacing: 0.02em; line-height: 1.4;
   }
   .sc-anchor b {
-    font-weight: 700; margin-right: 6px;
+    font-weight: 700; margin-right: 5px;
     font-family: var(--csp-font-mono); letter-spacing: 0.05em;
   }
   .sc-anchor.lo b { color: var(--csp-danger); }
   .sc-anchor.hi b { color: var(--csp-success); }
   @media (max-width: 720px) {
-    .sc-anchors { grid-template-columns: 1fr; gap: 6px; }
+    .sc-anchors { grid-template-columns: 1fr; gap: 4px; }
   }
   .sc-slider { display: flex; align-items: center; }
   .sc-slider input[type="range"] {
@@ -1541,123 +1536,93 @@
 
       <div class="sc-rows">
         <div class="sc-row" data-sc="speed">
-          <div class="sc-label">
-            <span class="lbl">Speed to lead</span>
-            <span class="sub">How fast inbound leads get a human on the line</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Speed to lead</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Speed to lead score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> Leads often wait 24–48 hours. We call when we get to it.</div>
-            <div class="sc-anchor hi"><b>10</b> Every inbound contacted inside 2 minutes, 24/7, tracked to the second on a live team dashboard.</div>
+            <div class="sc-anchor lo"><b>1</b> Leads wait 24–48 hours for a call.</div>
+            <div class="sc-anchor hi"><b>10</b> Every inbound contacted inside 2 minutes, 24/7.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="conversion">
-          <div class="sc-label">
-            <span class="lbl">Website to booked appointment</span>
-            <span class="sub">Your site turning visitors into scheduled consults</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Website to booked appointment</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Website conversion score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> I don't know our visit-to-book rate. I don't even know where to look.</div>
-            <div class="sc-anchor hi"><b>10</b> Booking rate tracked per traffic source, A/B tested monthly, converting 2–3× industry average.</div>
+            <div class="sc-anchor lo"><b>1</b> I don't know our visit-to-book rate.</div>
+            <div class="sc-anchor hi"><b>10</b> Booking rate tracked per traffic source, A/B tested monthly.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="attribution">
-          <div class="sc-label">
-            <span class="lbl">Lead source attribution</span>
-            <span class="sub">Knowing which campaign produced which dollar</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Lead source attribution</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Lead attribution score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> We have no idea which campaign actually brought a paying patient.</div>
-            <div class="sc-anchor hi"><b>10</b> Every patient tracked source-to-cash, multi-touch, LTV by channel, exported to shareholders weekly.</div>
+            <div class="sc-anchor lo"><b>1</b> No idea which campaign brought which paying patient.</div>
+            <div class="sc-anchor hi"><b>10</b> Every patient tracked source-to-cash, LTV by channel.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="frontdesk">
-          <div class="sc-label">
-            <span class="lbl">Front desk sales performance</span>
-            <span class="sub">Scripts, call review, and conversion tracking</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Front desk sales performance</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Front desk score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> Front desk answers when they can. No script. No call review. Nobody tracks close rate.</div>
-            <div class="sc-anchor hi"><b>10</b> Every call recorded and scored. Scripts versioned. Weekly coaching. Call-to-book rate on the wall.</div>
+            <div class="sc-anchor lo"><b>1</b> No scripts, no call review, no close-rate tracking.</div>
+            <div class="sc-anchor hi"><b>10</b> Every call scored, scripts versioned, weekly coaching, rate on the wall.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="reactivation">
-          <div class="sc-label">
-            <span class="lbl">Patient reactivation</span>
-            <span class="sub">Mining your past-patient database on cadence</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Patient reactivation</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Reactivation score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> We don't really contact past patients unless they reach out first.</div>
-            <div class="sc-anchor hi"><b>10</b> Database segmented by treatment, recency, and LTV. Monthly automated reactivation producing a predictable 5-figure lift.</div>
+            <div class="sc-anchor lo"><b>1</b> We don't contact past patients unless they reach out.</div>
+            <div class="sc-anchor hi"><b>10</b> Monthly automated reactivation producing predictable 5-figure lift.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="roi">
-          <div class="sc-label">
-            <span class="lbl">Marketing ROI visibility</span>
-            <span class="sub">Spend matched to collected revenue, not CPL averages</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Marketing ROI visibility</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Marketing ROI score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> I spend and I hope. Nobody can tell me ROI in dollars collected.</div>
-            <div class="sc-anchor hi"><b>10</b> Every spend matched to collected revenue inside 48 hours. Channel-level ROI is the first slide in every leadership meeting.</div>
+            <div class="sc-anchor lo"><b>1</b> I spend and hope. Nobody can tell me ROI in cash.</div>
+            <div class="sc-anchor hi"><b>10</b> Every spend matched to collected revenue inside 48 hours.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="integration">
-          <div class="sc-label">
-            <span class="lbl">Tech-stack integration</span>
-            <span class="sub">Ads, CRM, practice software, phone, reporting, one source of truth</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Tech-stack integration</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Integration score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> Tools don't really talk. We paste data between screens. Reports are stitched together by hand.</div>
-            <div class="sc-anchor hi"><b>10</b> Every tool connected in real time. Zero manual data entry. Single source of truth every team member trusts.</div>
+            <div class="sc-anchor lo"><b>1</b> Tools don't talk. We paste data between screens.</div>
+            <div class="sc-anchor hi"><b>10</b> Every tool connected in real time, zero manual data entry.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="ltv">
-          <div class="sc-label">
-            <span class="lbl">LTV and retention</span>
-            <span class="sub">Tracking lifetime value and cross-treatment pathways</span>
-          </div>
+          <div class="sc-label"><span class="lbl">LTV and retention</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="LTV score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> We don't track lifetime value at all. A patient is a patient.</div>
-            <div class="sc-anchor hi"><b>10</b> LTV tracked per treatment, channel, and provider. Every consult priced against LTV. Cross-sell pathways mapped per patient type.</div>
+            <div class="sc-anchor lo"><b>1</b> We don't track lifetime value at all.</div>
+            <div class="sc-anchor hi"><b>10</b> LTV tracked per treatment, channel, and provider. Cross-sell mapped.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="reviews">
-          <div class="sc-label">
-            <span class="lbl">Reputation and reviews</span>
-            <span class="sub">Review stack, response cadence, map-pack dominance</span>
-          </div>
+          <div class="sc-label"><span class="lbl">Reputation and reviews</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Reviews score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> We ask patients for reviews when we remember. We rarely do.</div>
-            <div class="sc-anchor hi"><b>10</b> Every completed treatment triggers a personalised review request. 500+ five-star reviews. Managed response on every review.</div>
+            <div class="sc-anchor lo"><b>1</b> We ask for reviews when we remember. We rarely do.</div>
+            <div class="sc-anchor hi"><b>10</b> 500+ five-star reviews. Every review gets a managed response.</div>
           </div>
         </div>
         <div class="sc-row" data-sc="noshow">
-          <div class="sc-label">
-            <span class="lbl">No-show and cancellation recovery</span>
-            <span class="sub">Predictive scoring plus human-voice recovery</span>
-          </div>
+          <div class="sc-label"><span class="lbl">No-show and cancellation recovery</span></div>
           <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="No-show recovery score" /></div>
           <div class="sc-val">5</div>
           <div class="sc-anchors">
-            <div class="sc-anchor lo"><b>1</b> If they don't show, we move on. No recovery sequence at all.</div>
-            <div class="sc-anchor hi"><b>10</b> Every booked patient scored for ghost risk. At-risk get pre-emptive human outreach. No-show rate under 5%, 40%+ rebook rate.</div>
+            <div class="sc-anchor lo"><b>1</b> If they don't show, we move on. No recovery.</div>
+            <div class="sc-anchor hi"><b>10</b> Ghost-risk scoring, pre-emptive outreach, under 5% no-show rate.</div>
           </div>
         </div>
       </div>
@@ -1816,44 +1781,24 @@
         <div class="ans">Keep them. We install between your existing stack. The operating system runs on top. Most Engine clients keep their current creative team and let us own the conversion chain, attribution, and retention. We don't fire the people doing good work, we just plug the leaks around them.</div>
       </details>
       <details class="faq-item">
-        <summary><span><span class="qn">Q.03</span>Our front desk handles the calls just fine.</span></summary>
-        <div class="ans">The average clinic has 60% of inbound leads arrive after 5pm or on the weekend. Front desk is not sales. Sales is a structured, measurable process with scripts, SLAs, and revenue attribution per call. We install both, train the team that handles them, and put a weekly scorecard on the wall.</div>
-      </details>
-      <details class="faq-item">
-        <summary><span><span class="qn">Q.04</span>We're already booked out three months ahead.</span></summary>
+        <summary><span><span class="qn">Q.03</span>We're already booked out three months ahead.</span></summary>
         <div class="ans">Booked-out with low-ticket services is a trap. The real question is revenue per chair-hour and whether it is compounding quarter over quarter. We install the mix shift from commodity services to high-ticket treatment plans without adding volume, so the same diary produces more EBITDA.</div>
       </details>
       <details class="faq-item">
-        <summary><span><span class="qn">Q.05</span>What does this cost?</span></summary>
+        <summary><span><span class="qn">Q.04</span>What does this cost?</span></summary>
         <div class="ans">Custom per clinic. The Engine tier starts at a level that pays for itself inside 90 days on a 2x ROI framework. The diagnostic call is free and produces a mapped 90-day plan whether we work together or not. If the plan is worth nothing to you, you keep the plan and walk.</div>
       </details>
       <details class="faq-item">
-        <summary><span><span class="qn">Q.06</span>How long until I see results?</span></summary>
+        <summary><span><span class="qn">Q.05</span>How long until I see results?</span></summary>
         <div class="ans">Week-two reactivation is the first visible lift, usually mid-five-figures. 30 days for measurable consult and revenue signals. 90 days for the full engine installed end to end. Ongoing optimization is weekly after that, with a structured constraint-diagnosis call every Monday.</div>
       </details>
       <details class="faq-item">
-        <summary><span><span class="qn">Q.07</span>Are you going to lock us into a long contract?</span></summary>
+        <summary><span><span class="qn">Q.06</span>Are you going to lock us into a long contract?</span></summary>
         <div class="ans">No. 90-day install, month-to-month after that. Our job is to make it obvious you should stay, not to trap you until you do. Current retention sits at 94% for a reason.</div>
       </details>
       <details class="faq-item">
-        <summary><span><span class="qn">Q.08</span>Who actually runs the install, not a junior account manager?</span></summary>
-        <div class="ans">Every diagnostic call is Tomás O'Dwyer personally. Every install is led by Jess McCarthy (COO) with a named specialist per workflow. You don't get passed to a pod of juniors. You get the team on the homepage.</div>
-      </details>
-      <details class="faq-item">
-        <summary><span><span class="qn">Q.09</span>We're thinking about selling the clinic in 2–3 years.</span></summary>
-        <div class="ans">Then this is less optional than you think. Everything we install, attribution, SOPs, LTV tracking, review stack, reactivation, is exactly what a buyer or broker will ask you to produce in due diligence. We optimise the clinic for the EBITDA multiple, not just this month's cash.</div>
-      </details>
-      <details class="faq-item">
-        <summary><span><span class="qn">Q.10</span>What if we're not in the US or Australia?</span></summary>
-        <div class="ans">Clients currently installed across the US, AU, and UK. The system is the same. Ad platforms, compliance quirks, and tax are localised by the team. If your country is not on that list, we tell you on the call instead of figuring it out in month three.</div>
-      </details>
-      <details class="faq-item">
-        <summary><span><span class="qn">Q.11</span>Can we just buy the AI reception or reactivation piece standalone?</span></summary>
-        <div class="ans">No. Installing AI reception into a broken front-desk process makes the problem faster, not smaller. The same goes for reactivation on top of bad attribution. The system works because the pillars reinforce each other. If you want a single tool, buy a tool. We install the layer between them.</div>
-      </details>
-      <details class="faq-item">
-        <summary><span><span class="qn">Q.12</span>What happens on the diagnostic call?</span></summary>
-        <div class="ans">60 minutes. We look at your actual spend, attribution, consult data, and database. We identify the tightest constraint, map a custom 90-day roadmap live on the call, and tell you honestly whether we are a fit. You leave with the roadmap either way.</div>
+        <summary><span><span class="qn">Q.07</span>What happens on the diagnostic call?</span></summary>
+        <div class="ans">60 minutes with Tomás or the Head of Strategy. We look at your actual spend, attribution, consult data, and database. We identify the tightest constraint, map a custom 90-day roadmap live on the call, and tell you honestly whether we are a fit. You leave with the roadmap either way.</div>
       </details>
     </div>
   </div>
