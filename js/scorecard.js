@@ -22,6 +22,11 @@
   var oppCopyEl     = document.getElementById('sc-opp-copy');
   var oppSecEl      = document.getElementById('sc-opp-secondary');
   var ctaEl         = document.getElementById('sc-cta');
+  var tierBox       = document.getElementById('sc-tier');
+  var chips         = root.querySelectorAll('.sc-chip');
+  var skipBtn       = document.getElementById('sc-tier-skip');
+  var expandBtn     = document.getElementById('sc-expand-btn');
+  var rowsBox       = root.querySelector('.sc-rows');
 
   var MAX       = rows.length * 10; // 10 rows × 10 = 100
   var STORE_KEY = 'csp-scorecard-v4';
@@ -269,7 +274,7 @@
     }
   } catch (e) { /* ignore */ }
 
-  // Wire
+  // Wire sliders + revenue + currency
   rows.forEach(function (row) {
     var input = row.querySelector('input[type="range"]');
     input.addEventListener('input', update);
@@ -281,6 +286,63 @@
   }
   if (currencyInput) {
     currencyInput.addEventListener('change', update);
+  }
+
+  /* Two-tier UX:
+     - Initial state: .sc-rows is hidden (locked), chips visible
+     - Pick 3 chips → reveal those 3 rows (still "locked" = only selected shown)
+     - "Score all 10" button or skip link → unlock all rows */
+  function enterLockedMode() {
+    if (rowsBox) rowsBox.classList.add('sc-locked');
+  }
+  function exitLockedMode() {
+    if (rowsBox) rowsBox.classList.remove('sc-locked');
+    rows.forEach(function (r) { r.classList.remove('sc-selected'); });
+  }
+  function refreshLockedRows() {
+    var selected = [];
+    chips.forEach(function (c) {
+      if (c.classList.contains('active')) selected.push(c.getAttribute('data-target'));
+    });
+    rows.forEach(function (row) {
+      var key = row.getAttribute('data-sc');
+      if (selected.indexOf(key) !== -1) row.classList.add('sc-selected');
+      else row.classList.remove('sc-selected');
+    });
+  }
+  function countActive() {
+    var n = 0;
+    chips.forEach(function (c) { if (c.classList.contains('active')) n++; });
+    return n;
+  }
+
+  // Start locked
+  enterLockedMode();
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var isActive = chip.classList.contains('active');
+      if (!isActive && countActive() >= 3) return; // max 3
+      chip.classList.toggle('active');
+      refreshLockedRows();
+      if (countActive() === 3) {
+        // Smooth scroll to first selected row
+        var firstSel = root.querySelector('.sc-row.sc-selected');
+        if (firstSel) firstSel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  if (skipBtn) {
+    skipBtn.addEventListener('click', function () {
+      exitLockedMode();
+      if (tierBox) tierBox.style.display = 'none';
+    });
+  }
+  if (expandBtn) {
+    expandBtn.addEventListener('click', function () {
+      exitLockedMode();
+    });
   }
 
   update();
