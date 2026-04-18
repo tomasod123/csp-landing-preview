@@ -1,0 +1,121 @@
+/* ============================================================
+ * CSP BRAND TOKENS — v5
+ * Canonical design tokens. Drop into any page via:
+ *   <link rel="stylesheet" href="tokens.css" />
+ * All colors, fonts, spacing, shadows, radii live here.
+ * ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ---------- Color · Warm neutrals ---------- */
+  --csp-warm-900: #1A1A19;   /* Near-black, warm undertone. Headlines, hero bg. */
+  --csp-warm-700: #34322D;   /* Secondary dark. Body copy on light. */
+
+  /* ---------- Color · Brand blue ---------- */
+  --csp-blue-900: #1E3A8A;   /* Deepest emphasis. Logo, hover-pressed. */
+  --csp-blue-800: #1E40AF;   /* ★ PRIMARY. All CTAs, links, accents. */
+  --csp-blue-700: #1D4ED8;   /* Hover/bright. Text links in body. */
+  --csp-blue-400: #3B82F6;   /* Rare — data viz, terminal prompts. */
+  --csp-blue-100: #DBEAFE;   /* Border on tinted surfaces. */
+  --csp-blue-50:  #EFF6FF;   /* Callout backgrounds, tag chips. */
+
+  /* ---------- Color · Ink (body text + borders) ---------- */
+  --csp-ink-900:  #0F172A;
+  --csp-ink-700:  #334155;
+  --csp-ink-500:  #64748B;
+  --csp-ink-300:  #E2E8F0;
+
+  /* ---------- Color · Surfaces ---------- */
+  --csp-bg:        #F8F8F7;   /* Warm off-white. Default page bg. */
+  --csp-surface:   #FFFFFF;   /* Cards, modals. */
+  --csp-surface-2: #F1F5F9;   /* Alt sections. */
+
+  /* ---------- Color · Status ---------- */
+  --csp-success: #059669;
+  --csp-warning: #B45309;
+  --csp-danger:  #B91C1C;
+
+  /* ---------- Shadows ---------- */
+  --csp-shadow-sm:        0 1px 2px rgba(15,23,42,0.04);
+  --csp-shadow:           0 4px 20px rgba(15,23,42,0.06);
+  --csp-shadow-lg:        0 12px 32px rgba(15,23,42,0.08);
+  --csp-shadow-xl:        0 24px 48px rgba(15,23,42,0.12);
+
+  /* Tinted (blue-halo) shadows for primary CTA — Manus signature */
+  --csp-shadow-cta:       0 4px 14px rgba(30,64,175,0.28), 0 1px 2px rgba(30,64,175,0.2);
+  --csp-shadow-cta-hover: 0 10px 24px rgba(30,64,175,0.34), 0 2px 4px rgba(30,64,175,0.22);
+
+  /* ---------- Radius ---------- */
+  --csp-r-xs:   3px;
+  --csp-r-sm:   4px;
+  --csp-r:      8px;
+  --csp-r-md:   10px;
+  --csp-r-lg:   12px;
+  --csp-r-xl:   16px;
+  --csp-r-full: 999px;
+
+  /* ---------- Spacing scale (4/8/12/16/24/32/48/64/96) ---------- */
+  --csp-sp-1:  4px;
+  --csp-sp-2:  8px;
+  --csp-sp-3:  12px;
+  --csp-sp-4:  16px;
+  --csp-sp-6:  24px;
+  --csp-sp-8:  32px;
+  --csp-sp-12: 48px;
+  --csp-sp-16: 64px;
+  --csp-sp-24: 96px;
+
+  /* ---------- Type stacks ---------- */
+  --csp-font-display: 'Sora', 'Inter', -apple-system, system-ui, sans-serif;
+  --csp-font-ui:      'Inter', -apple-system, system-ui, sans-serif;
+  --csp-font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---------- Type sizes (fluid where useful) ---------- */
+  --csp-text-xs:      0.75rem;    /* 12px */
+  --csp-text-sm:      0.875rem;   /* 14px */
+  --csp-text-base:    1rem;       /* 16px */
+  --csp-text-lg:      1.125rem;   /* 18px */
+  --csp-text-xl:      1.25rem;    /* 20px */
+  --csp-text-2xl:     1.5rem;     /* 24px */
+  --csp-text-3xl:     1.875rem;   /* 30px */
+  --csp-text-4xl:     2.25rem;    /* 36px */
+  --csp-text-5xl:     2.75rem;    /* 44px */
+  --csp-text-display: clamp(2.5rem, 4vw + 1rem, 4.5rem);
+
+  /* ---------- Type tracking (letter-spacing) ---------- */
+  --csp-track-display: -0.03em;
+  --csp-track-h:       -0.01em;
+  --csp-track-body:     0;
+  --csp-track-mono:     0.04em;
+  --csp-track-caps:     0.12em;
+  --csp-track-eyebrow:  0.18em;
+
+  /* ---------- Transitions ---------- */
+  --csp-ease:          cubic-bezier(0.4, 0, 0.2, 1);
+  --csp-ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --csp-dur-fast:      0.15s;
+  --csp-dur:           0.2s;
+  --csp-dur-slow:      0.4s;
+  --csp-dur-reveal:    0.7s;
+  --csp-dur-count:     1.1s;
+}
+
+/* ---------- Defaults applied to body of anything using tokens ---------- */
+html, body {
+  font-family: var(--csp-font-ui);
+  color: var(--csp-ink-900);
+  background: var(--csp-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Reduced motion — respect user preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

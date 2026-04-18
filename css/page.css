@@ -1,0 +1,51 @@
+/* ============================================================
+ * CSP Landing · page-specific overrides + safeguards
+ * Core page CSS is inline in index.html (via brand tokens).
+ * This file holds motion safeguards and v1.x iteration overrides.
+ * ============================================================ */
+
+/* Respect reduced-motion everywhere , double insurance on top of tokens.css */
+@media (prefers-reduced-motion: reduce) {
+  .logo-strip .track { animation: none !important; }
+  .hero-float { transform: rotate(-2deg) !important; }
+  .hero h1 .hl.shimmer {
+    animation: none !important;
+    background: var(--csp-blue-800) !important;
+    -webkit-background-clip: unset !important; background-clip: unset !important;
+    -webkit-text-fill-color: var(--csp-blue-800) !important;
+  }
+  .sticky-cta { transition: none !important; }
+}
+
+/* Print: hide interactive-only surfaces */
+@media print {
+  .sticky-cta, .vsl-section, .logo-strip, .hero-float { display: none !important; }
+}
+
+/* Focus-visible polish on interactive elements (accessibility) */
+a:focus-visible,
+button:focus-visible,
+input[type="range"]:focus-visible,
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--csp-blue-800);
+  outline-offset: 3px;
+  border-radius: var(--csp-r-sm);
+}
+
+/* Selection color */
+::selection {
+  background: var(--csp-blue-800);
+  color: #fff;
+}
+
+/* Small viewport tweaks */
+@media (max-width: 520px) {
+  .hero { padding: 48px 0 64px; }
+  section { padding: 72px 0; }
+  section h2 { font-size: 32px; }
+  .cta-strip { padding: 44px 24px; }
+  .cta-strip h2 { font-size: 28px; }
+  .case-hero, .enemy-card { padding: 28px 24px; }
+  .quote-card { padding: 28px 24px; }
+  .quote-card blockquote { font-size: 16.5px; }
+}
