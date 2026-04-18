@@ -178,6 +178,12 @@
     font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.72);
     margin: 20px auto 0; max-width: 620px;
   }
+  .hero p.hero-resolver {
+    font-size: 16px; line-height: 1.55;
+    color: rgba(255,255,255,0.82);
+    margin: 0 auto 28px; max-width: 720px;
+    font-family: var(--csp-font-ui); font-weight: 500;
+  }
 
   .vsl-wrap {
     position: relative;
@@ -803,12 +809,13 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
   }
   .sc-anchor {
-    font-family: var(--csp-font-mono); font-size: 10px;
-    color: var(--csp-ink-500); letter-spacing: 0.02em; line-height: 1.4;
+    font-family: var(--csp-font-ui); font-size: 13px;
+    color: var(--csp-ink-700); letter-spacing: 0; line-height: 1.5;
   }
   .sc-anchor b {
-    font-weight: 700; margin-right: 5px;
-    font-family: var(--csp-font-mono); letter-spacing: 0.05em;
+    font-weight: 700; margin-right: 7px;
+    font-family: var(--csp-font-mono); font-size: 11.5px;
+    letter-spacing: 0.05em;
   }
   .sc-anchor.lo b { color: var(--csp-danger); }
   .sc-anchor.hi b { color: var(--csp-success); }
@@ -1013,6 +1020,7 @@
   .qualify-col {
     background: var(--csp-surface); border: 1px solid var(--csp-ink-300);
     border-radius: var(--csp-r-lg); padding: 26px 28px;
+    display: flex; flex-direction: column;
   }
   .qualify-col.good { border-left: 3px solid var(--csp-success); }
   .qualify-col.bad  { border-left: 3px solid var(--csp-ink-500); background: var(--csp-surface-2); }
@@ -1041,6 +1049,15 @@
   }
   .qualify-col.bad li::before {
     content: "✕"; color: var(--csp-ink-500); font-weight: 700;
+  }
+  .qualify-col .q-note {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px dashed var(--csp-ink-300);
+    font-size: 12.5px; font-style: italic;
+    color: var(--csp-ink-700); line-height: 1.55;
+  }
+  .qualify-col .btn {
+    align-self: flex-start; margin-top: 22px;
   }
   @media (max-width: 760px) { .qualify-grid { grid-template-columns: 1fr; } }
 
@@ -1294,6 +1311,7 @@
   <div class="wrap-narrow">
     <span class="eye">Watch first</span>
     <h1>Your clinic doesn't have a marketing problem. It has a <span class="hl shimmer">systems</span> problem.</h1>
+    <p class="hero-resolver">The fix for 7-figure clinics who've already tried new ads, new offers, and new agencies. Agencies send you leads. We fill your books and build your enterprise value.</p>
     <div class="vsl-wrap">
       <div id="vidalytics_embed_Swi29HjsECOPJ_vA" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
       <script type="text/javascript">
@@ -1325,7 +1343,7 @@
       <p class="vsl-cta-note"><span class="accent">Watch it first.</span> Every client worth $100k+ watched this before they booked.</p>
       <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=hero" target="_blank" rel="noopener">Book your clinic roadmap call →</a>
     </div>
-    <p class="hero-sub">A full breakdown of the Clinic Success Engine. For 7 and 8-figure clinic owners who've been burned by four agencies and want a system that compounds into EBITDA, not another dashboard.</p>
+    <p class="hero-sub">A focused breakdown of the Clinic Success Engine. For 7 and 8-figure operators who want a system that compounds into EBITDA, not another dashboard.</p>
   </div>
 </section>
 
@@ -1347,8 +1365,8 @@
           <div class="m-lbl">Client retention</div>
         </div>
         <div class="proof-metric">
-          <div class="m-val count" data-count="3">3</div>
-          <div class="m-lbl">Continents served</div>
+          <div class="m-val count" data-count="14" data-suffix="d">14d</div>
+          <div class="m-lbl">Avg payoff · reactivation first</div>
         </div>
       </div>
       <div class="proof-card">
@@ -1527,9 +1545,9 @@
         </div>
       </div>
       <div class="case-hero alt">
-        <span class="badge">Emir · Aesthetics · Brand-new clinic</span>
+        <span class="badge">Emir · Aesthetics · Outlier case · Launch</span>
         <h3>Zero list. No site. No ads. Outranked the top competitor in his city in six months.</h3>
-        <p>We built the foundation from scratch. Irresistible offer, review stack, local SEO, and paid acquisition at 50% below industry cost per lead. He is now scaling to a second location with the same playbook.</p>
+        <p><strong>The rare exception.</strong> We normally install for established 7 and 8-figure operators, not brand-new clinics. Emir came in with an operator mindset from day one, which made this possible. Foundation built from scratch: offer, review stack, local SEO, and paid acquisition at 50% below industry cost per lead. He is scaling to a second location.</p>
         <div class="stat-row">
           <div class="stat"><div class="val count" data-count="50" data-suffix="%">50%</div><div class="lab">Below industry CPL</div></div>
           <div class="stat"><div class="val count" data-count="6" data-suffix="mo">6mo</div><div class="lab">To market #1</div></div>
@@ -1916,8 +1934,8 @@
 <section data-cursor-glow>
   <div class="wrap">
     <span class="sec-eye">10b · Honest fit</span>
-    <h2>If you read the next two boxes and the left one is you, book the call.</h2>
-    <p class="intro">We only take on a small number of clinics per quarter. We would rather spend a 45-minute call telling you no than 12 weeks installing for a clinic we cannot move.</p>
+    <h2>This only works for one kind of clinic owner. Here's whether that's you.</h2>
+    <p class="intro">We take on a small number of clinics per quarter. We would rather spend a 45-minute roadmap call telling you no than 12 weeks installing for a clinic we cannot move. Read both boxes honestly.</p>
     <div class="qualify-grid">
       <div class="qualify-col good">
         <span class="q-eye">This is for you if</span>
@@ -1929,6 +1947,8 @@
           <li>Thinking in 12 to 36 month horizons: enterprise value, exit optionality, buying back your own time.</li>
           <li>Willing to change process with your team, not just outsource it.</li>
         </ul>
+        <p class="q-note">The engine compounds hardest above $300k/month. Below that we install, but the upside is capped.</p>
+        <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=qualify_good" target="_blank" rel="noopener">Book my roadmap call →</a>
       </div>
       <div class="qualify-col bad">
         <span class="q-eye">Not for you if</span>
@@ -2036,8 +2056,8 @@
 <div class="sticky-cta" id="sticky-cta">
   <div class="wrap">
     <div class="copy">
-      <span>Every week you delay, a competitor installs the same system first.</span>
-      <span class="sub" id="sticky-sub">April intake · 3 slots remaining</span>
+      <span>Book before the next clinic in your city does.</span>
+      <span class="sub" id="sticky-sub">April intake · 2 of 3 slots gone</span>
     </div>
     <div class="spacer"></div>
     <a class="btn btn-primary" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=sticky" target="_blank" rel="noopener">Book roadmap call →</a>
@@ -2099,14 +2119,18 @@
     var longMonth = months[m];
     var shortMonth = short[m];
 
+    var taken = 3 - slots;
+    var goneLongFmt  = taken > 0 ? (taken + ' of 3 slots gone') : '3 slots remaining';
+    var goneShortFmt = taken > 0 ? (taken + '/3 SLOTS GONE')    : '3 SLOTS';
+
     var navStatus = document.getElementById('nav-status');
-    if (navStatus) navStatus.textContent = shortMonth + ' INTAKE · ' + slots + ' ' + slotsWord;
+    if (navStatus) navStatus.textContent = shortMonth + ' INTAKE · ' + goneShortFmt;
 
     var finalUrg = document.getElementById('final-urg');
-    if (finalUrg) finalUrg.textContent = longMonth + ' intake · ' + slots + ' ' + slotsWord.toLowerCase() + ' remaining · Held by Tomás or Head of Strategy';
+    if (finalUrg) finalUrg.textContent = longMonth + ' intake · ' + goneLongFmt + ' · Held by Tomás or Head of Strategy';
 
     var stickySub = document.getElementById('sticky-sub');
-    if (stickySub) stickySub.textContent = longMonth + ' intake · ' + slots + ' ' + slotsWord.toLowerCase() + ' remaining';
+    if (stickySub) stickySub.textContent = longMonth + ' intake · ' + goneLongFmt;
   })();
 
   // Sticky CTA reveal after hero scroll (desktop + mobile)
