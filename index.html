@@ -64,25 +64,32 @@
     max-width: 680px;
   }
 
-  /* ============ NAV (minimal, conversion-first, dark) ============ */
+  /* ============ NAV (light/off-white with scroll-shadow) ============ */
   .site-nav {
     position: sticky; top: 0; z-index: 40;
-    background: rgba(20,20,19,0.82);
+    background: rgba(248,248,247,0.78);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    padding: 14px 0;
+    border-bottom: 1px solid rgba(15,23,42,0.06);
+    padding: 12px 0;
+    transition: box-shadow 0.25s var(--csp-ease), background 0.25s var(--csp-ease), border-color 0.25s var(--csp-ease);
+  }
+  .site-nav.scrolled {
+    background: rgba(248,248,247,0.94);
+    border-bottom-color: var(--csp-ink-300);
+    box-shadow: 0 6px 20px rgba(15,23,42,0.06);
   }
   .site-nav .wrap { display: flex; align-items: center; gap: 16px; }
   .nav-logo {
     font-family: var(--csp-font-display); font-weight: 700;
-    font-size: 16px; color: #fff; letter-spacing: -0.02em;
+    font-size: 16px; color: var(--csp-warm-900); letter-spacing: -0.02em;
     display: flex; align-items: center; gap: 9px; text-decoration: none;
   }
-  .nav-logo .mark { width: 11px; height: 11px; border-radius: 3px; background: var(--csp-blue-400); }
+  .nav-logo .mark { width: 11px; height: 11px; border-radius: 3px; background: var(--csp-blue-800); }
+  .nav-logo img { height: 26px; width: auto; display: block; }
   .site-nav .spacer { flex: 1; }
   .nav-status {
     font-family: var(--csp-font-mono); font-size: 10.5px; font-weight: 600;
-    color: rgba(255,255,255,0.6); letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--csp-ink-500); letter-spacing: 0.12em; text-transform: uppercase;
     display: flex; align-items: center; gap: 7px;
   }
   .nav-status::before {
@@ -118,9 +125,9 @@
   .btn-outline:hover { border-color: var(--csp-blue-800); color: var(--csp-blue-800); }
   .btn-lg { padding: 16px 28px; font-size: 15px; }
 
-  /* ============ HERO (VSL-first, dark) ============ */
+  /* ============ HERO (VSL above the fold, dark) ============ */
   .hero {
-    padding: 72px 0 88px; text-align: center;
+    padding: 36px 0 56px; text-align: center;
     background: var(--csp-warm-900); color: #fff;
     position: relative; overflow: hidden;
   }
@@ -152,9 +159,9 @@
   }
   .hero h1 {
     font-family: var(--csp-font-display); font-weight: 800;
-    font-size: clamp(36px, 4.4vw, 54px); line-height: 1.06;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.08;
     letter-spacing: -0.035em; color: #fff;
-    margin: 0 auto 18px; max-width: 880px;
+    margin: 0 auto 22px; max-width: 820px;
   }
   .hero h1 .hl { color: var(--csp-blue-400); }
   .hero h1 .hl.shimmer {
@@ -165,8 +172,8 @@
     animation: csp-shimmer 3s linear infinite;
   }
   .hero p.hero-sub {
-    font-size: 17.5px; line-height: 1.55; color: rgba(255,255,255,0.72);
-    margin: 0 auto 36px; max-width: 620px;
+    font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.72);
+    margin: 20px auto 0; max-width: 620px;
   }
 
   .vsl-wrap {
@@ -175,16 +182,16 @@
     overflow: hidden;
     box-shadow: 0 32px 100px rgba(0,0,0,0.6), 0 8px 24px rgba(30,64,175,0.25);
     background: #000;
-    margin: 0 auto 32px;
-    max-width: 920px;
+    margin: 0 auto 24px;
+    max-width: 860px;
     border: 1px solid rgba(255,255,255,0.08);
   }
   .vsl-cta-row {
-    display: flex; flex-direction: column; gap: 14px; align-items: center;
+    display: flex; flex-direction: column; gap: 12px; align-items: center;
   }
   .vsl-cta-note {
-    font-family: var(--csp-font-mono); font-size: 11.5px;
-    color: rgba(255,255,255,0.55); letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: var(--csp-font-mono); font-size: 11px;
+    color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase;
   }
   .vsl-cta-note .accent { color: var(--csp-blue-400); font-weight: 700; }
 
@@ -810,15 +817,24 @@
     margin: 0 auto 28px; max-width: 580px; line-height: 1.6;
   }
   .cta-strip .urg {
-    margin-top: 24px;
     font-family: var(--csp-font-mono); font-size: 11px;
-    color: rgba(255,255,255,0.55); letter-spacing: 0.12em; text-transform: uppercase;
-    display: inline-flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.6); letter-spacing: 0.12em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px; text-align: left;
   }
   .cta-strip .urg::before {
     content: ""; width: 7px; height: 7px; border-radius: 50%;
     background: var(--csp-warning); box-shadow: 0 0 6px var(--csp-warning);
     animation: csp-pulse 1.8s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  .cta-strip .final-cta-row {
+    margin-top: 20px;
+    display: flex; align-items: center; justify-content: center; gap: 28px;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 680px) {
+    .cta-strip .final-cta-row { flex-direction: column; gap: 16px; }
+    .cta-strip .final-cta-row .btn { width: 100%; justify-content: center; }
   }
 
   /* ============ FAQ (at bottom) ============ */
@@ -931,19 +947,23 @@
 <!-- ============================== NAV ============================== -->
 <nav class="site-nav" aria-label="Main">
   <div class="wrap">
-    <a href="./" class="nav-logo"><span class="mark"></span>Clinic Success Partners</a>
+    <a href="./" class="nav-logo">
+      <picture>
+        <source srcset="./assets/logo.webp" type="image/webp" />
+        <img src="./assets/logo.webp" alt="Clinic Success Partners" onerror="this.style.display='none';this.parentElement.parentElement.innerHTML='<span class=&quot;mark&quot;></span>Clinic Success Partners';" />
+      </picture>
+    </a>
     <div class="spacer"></div>
     <span class="nav-status" id="nav-status">APRIL INTAKE · 3 SLOTS</span>
     <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=nav" target="_blank" rel="noopener">Book diagnostic →</a>
   </div>
 </nav>
 
-<!-- ============================== HERO (VSL-first) ============================== -->
+<!-- ============================== HERO (VSL above the fold) ============================== -->
 <section class="hero">
   <div class="wrap-narrow">
     <span class="eye">Watch first · 9 minutes</span>
-    <h1>You don't have a marketing problem.<br>You have a <span class="hl shimmer">systems</span> problem.</h1>
-    <p class="hero-sub">The 9-minute breakdown of the Clinic Success Engine. For 7 and 8-figure clinic owners who've been burned by four agencies and want an operating system, not another dashboard.</p>
+    <h1>You don't have a marketing problem. You have a <span class="hl shimmer">systems</span> problem.</h1>
     <div class="vsl-wrap">
       <div id="vidalytics_embed_Swi29HjsECOPJ_vA" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
       <script type="text/javascript">
@@ -962,6 +982,7 @@
       <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=hero" target="_blank" rel="noopener">Book your free diagnostic →</a>
       <p class="vsl-cta-note"><span class="accent">Our best-performing clients</span> watched this video before booking a call</p>
     </div>
+    <p class="hero-sub">The 9-minute breakdown of the Clinic Success Engine. For 7 and 8-figure clinic owners who've been burned by four agencies and want an operating system, not another dashboard.</p>
   </div>
 </section>
 
@@ -1188,13 +1209,13 @@
     <h2>What clinic owners say after the engine is installed.</h2>
     <div class="testi-featured">
       <div class="testi-video">
-        <iframe src="https://www.youtube.com/embed/6-cNng_cL8M?rel=0&modestbranding=1" title="Liden from Jacupi Podiatry · Clinic Success Partners testimonial" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6-cNng_cL8M?rel=0&modestbranding=1" title="Liridon from Jakupi Podiatry · Clinic Success Partners testimonial" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       <div class="testi-meta">
         <span class="m-eye">Featured testimonial</span>
         <h4>"They really boosted my numbers. It's made a big, big difference throughout this year."</h4>
-        <p>Liden used CSP to install SMS reactivation, Meta ads, and Google Ads inside his podiatry practice. CSP became his drop-in marketing department.</p>
-        <div class="testi-attrib"><strong>LIDEN</strong> · JACUPI PODIATRY · 12-MONTH CLIENT</div>
+        <p>Liridon used CSP to install SMS reactivation, Meta ads, and Google Ads inside his podiatry practice. CSP became his drop-in marketing department.</p>
+        <div class="testi-attrib"><strong>LIRIDON</strong> · JAKUPI PODIATRY · 12-MONTH CLIENT</div>
       </div>
     </div>
     <div class="testi-quotes">
@@ -1410,29 +1431,29 @@
     <span class="sec-eye">11 · Your next move</span>
     <h2>Two options. Neither is "keep doing what you're doing."</h2>
     <div class="fork-grid">
-      <div class="fork-card active">
-        <div class="fk-eye">Option 01 · Diagnostic</div>
-        <h3>Book a 60-minute diagnostic call.</h3>
-        <p>We map your current stack, identify the tightest revenue leak, and ship you a custom 90-day roadmap. Tomás or the Head of Strategy runs every call personally.</p>
-        <ul>
-          <li>Constraint-first diagnosis, not a pitch</li>
-          <li>Custom 90-day roadmap delivered</li>
-          <li>Clarity on whether we're a fit, either way</li>
-          <li>Zero-obligation. Zero-cost.</li>
-        </ul>
-        <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=fork_active" target="_blank" rel="noopener">Book my diagnostic →</a>
-      </div>
       <div class="fork-card inactive">
-        <div class="fk-eye">Option 02 · Do nothing</div>
+        <div class="fk-eye">Option 01 · Do nothing</div>
         <h3>Keep running the same playbook.</h3>
         <p>The world keeps spinning. Your competitors with weaker clinical skill but better systems take the local market one patient at a time.</p>
         <ul>
           <li>Same revenue, same stress, same team</li>
           <li>Database keeps compounding as dead weight</li>
           <li>Market share erodes to AI-enabled competitors</li>
-          <li>One more year of "we'll fix it next quarter"</li>
+          <li>Clinic stays a job, not an asset</li>
         </ul>
-        <div style="font-family: var(--csp-font-mono); font-size: 10.5px; color: var(--csp-ink-500); letter-spacing: 0.1em; text-transform: uppercase; margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--csp-ink-300);">No call-to-action here. Deliberately.</div>
+        <div style="font-family: var(--csp-font-mono); font-size: 10.5px; color: var(--csp-ink-500); letter-spacing: 0.1em; text-transform: uppercase; margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--csp-ink-300);">This is the default path.</div>
+      </div>
+      <div class="fork-card active">
+        <div class="fk-eye">Option 02 · Diagnostic</div>
+        <h3>Book a 60-minute roadmap call.</h3>
+        <p>We diagnose your current stack, identify the tightest revenue leak, and ship you a custom 90-day roadmap. Tomás or the Head of Strategy runs every call personally.</p>
+        <ul>
+          <li>Constraint-first diagnosis, transparent about what we do</li>
+          <li>Custom 90-day roadmap built live on the call</li>
+          <li>Honest answer on fit, either way</li>
+          <li>Built toward enterprise value, not just more leads</li>
+        </ul>
+        <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=fork_active" target="_blank" rel="noopener">Book my diagnostic →</a>
       </div>
     </div>
   </div>
@@ -1444,9 +1465,11 @@
     <div class="cta-strip">
       <span class="eye">12 · Final</span>
       <h2>Run your clinic like a <span class="hl-inv">business</span>, not a job.</h2>
-      <p>60-minute diagnostic. We map your bottleneck, ship the 90-day roadmap, and you decide what's next. No pitch. Either way, you leave with a plan.</p>
-      <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=final_strip" target="_blank" rel="noopener">Book your diagnostic call →</a>
-      <div class="urg" id="final-urg">April intake · 3 slots remaining · Held by Tomás or Head of Strategy</div>
+      <p>60-minute roadmap call. We diagnose the bottleneck, ship the 90-day plan, you decide what's next. Built toward enterprise value, not vanity metrics.</p>
+      <div class="final-cta-row">
+        <div class="urg" id="final-urg">April intake · 3 slots remaining · Held by Tomás or Head of Strategy</div>
+        <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=final_strip" target="_blank" rel="noopener">Book your diagnostic call →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1585,6 +1608,41 @@
     window.addEventListener('scroll', check, { passive: true });
     setThreshold();
     check();
+  })();
+
+  // Nav scroll-class: add .scrolled once user scrolls past 40px
+  (function(){
+    var nav = document.querySelector('.site-nav');
+    if (!nav) return;
+    function check(){
+      if (window.scrollY > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+  })();
+
+  // Lightweight section reveal on scroll (fade + rise)
+  (function(){
+    if (!('IntersectionObserver' in window)) return;
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+    var targets = document.querySelectorAll('section, .proof-card, .case-hero, .pillar, .failure, .problem, .quote-card, .fork-card');
+    targets.forEach(function(el){
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(12px)';
+      el.style.transition = 'opacity 0.6s var(--csp-ease), transform 0.6s var(--csp-ease)';
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function(el){ io.observe(el); });
   })();
 </script>
 
