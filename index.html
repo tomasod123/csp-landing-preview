@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clinic Success Partners · The Operating System for 7-Figure Clinics</title>
-<meta name="description" content="You don't have a marketing problem. You have a systems problem. Watch the 9-minute breakdown of the Clinic Success Engine." />
+<meta name="description" content="Your clinic doesn't have a marketing problem. It has a systems problem. Watch the breakdown of the Clinic Success Engine." />
 <meta name="robots" content="index,follow" />
 
 <!-- Open Graph -->
@@ -203,13 +203,22 @@
     border-bottom: 1px solid var(--csp-ink-300);
   }
   .proof-grid {
-    display: grid; grid-template-columns: 280px 1fr;
+    display: grid; grid-template-columns: 1fr 300px;
     gap: 36px; align-items: center;
   }
   .proof-card {
     background: var(--csp-warm-900); color: #fff;
     padding: 22px 24px; border-radius: var(--csp-r-lg);
     box-shadow: var(--csp-shadow-xl);
+    animation: csp-float 6s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes csp-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .proof-card { animation: none; }
   }
   .proof-card .fl {
     font-family: var(--csp-font-mono); font-size: 10px;
@@ -420,7 +429,8 @@
     padding: 38px 32px; border-radius: var(--csp-r-lg);
     position: relative; overflow: hidden;
   }
-  .case-hero.alt { background: linear-gradient(135deg, #0B1120, #1A1A19); }
+  .case-hero.alt { background: linear-gradient(135deg, var(--csp-blue-900) 0%, var(--csp-blue-800) 100%); }
+  .case-hero.alt::before { background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.10), transparent 55%); }
   .case-hero::before {
     content: ""; position: absolute;
     top: -40%; right: -10%; width: 110%; height: 200%;
@@ -484,7 +494,8 @@
   .testi-attrib { font-family: var(--csp-font-mono); font-size: 11.5px; color: var(--csp-ink-500); letter-spacing: 0.08em; }
   .testi-attrib strong { color: var(--csp-warm-900); }
 
-  .testi-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .testi-quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 980px) { .testi-quotes { grid-template-columns: 1fr 1fr; } }
   .quote-card {
     background: var(--csp-surface); border: 1px solid var(--csp-ink-300);
     border-radius: var(--csp-r-lg); padding: 32px 28px;
@@ -523,25 +534,35 @@
   .ai-grid h2 { margin-bottom: 16px; }
   .ai-grid .intro { margin-bottom: 22px; }
   .ai-pains {
-    display: flex; flex-direction: column; gap: 10px;
+    display: flex; flex-direction: column; gap: 14px;
     margin: 24px 0 30px;
   }
-  .ai-pain {
-    background: var(--csp-surface); border: 1px solid var(--csp-ink-300);
-    border-left: 2px solid var(--csp-danger);
-    border-radius: var(--csp-r);
-    padding: 13px 18px;
+  .ai-pair {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    align-items: stretch;
   }
-  .ai-pain-lbl {
+  .ai-pain, .ai-fix {
+    background: var(--csp-surface); border: 1px solid var(--csp-ink-300);
+    border-radius: var(--csp-r);
+    padding: 13px 16px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .ai-pain { border-left: 3px solid var(--csp-danger); }
+  .ai-fix { border-left: 3px solid var(--csp-success); }
+  .ai-pain-lbl, .ai-fix-lbl {
     font-family: var(--csp-font-mono); font-size: 9.5px;
     letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--csp-ink-500); font-weight: 700; margin-bottom: 5px; display: block;
+    font-weight: 700; margin-bottom: 5px; display: block;
   }
-  .ai-pain p {
+  .ai-pain-lbl { color: var(--csp-danger); }
+  .ai-fix-lbl  { color: var(--csp-success); }
+  .ai-pain p, .ai-fix p {
     font-family: var(--csp-font-display); font-weight: 500;
-    font-size: 14.5px; letter-spacing: -0.01em; line-height: 1.5;
+    font-size: 14px; letter-spacing: -0.01em; line-height: 1.5;
     color: var(--csp-warm-900); margin: 0;
   }
+  .ai-fix p strong { font-weight: 700; color: var(--csp-warm-900); }
+  @media (max-width: 720px) { .ai-pair { grid-template-columns: 1fr; } }
   .ai-section-head {
     font-family: var(--csp-font-mono); font-size: 10.5px;
     letter-spacing: 0.16em; text-transform: uppercase;
@@ -664,13 +685,18 @@
     box-shadow: 0 0 0 3px rgba(30,64,175,0.12);
   }
 
-  .sc-rows { display: flex; flex-direction: column; gap: 8px; }
+  .sc-rows { display: flex; flex-direction: column; gap: 4px; }
   .sc-row {
-    display: grid; grid-template-columns: 1fr 200px 44px;
-    gap: 22px; align-items: center;
-    padding: 14px 0; border-bottom: 1px dashed var(--csp-ink-300);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px 52px;
+    grid-template-areas:
+      "label slider val"
+      "anchors anchors anchors";
+    gap: 10px 22px; align-items: center;
+    padding: 16px 0; border-bottom: 1px dashed var(--csp-ink-300);
   }
   .sc-row:last-child { border-bottom: none; }
+  .sc-label { grid-area: label; }
   .sc-label .lbl {
     font-family: var(--csp-font-ui); font-size: 14.5px; font-weight: 600;
     color: var(--csp-warm-900); display: block; line-height: 1.3;
@@ -678,6 +704,26 @@
   .sc-label .sub {
     font-family: var(--csp-font-mono); font-size: 10.5px;
     color: var(--csp-ink-500); margin-top: 3px; letter-spacing: 0.04em;
+  }
+  .sc-slider { grid-area: slider; }
+  .sc-val { grid-area: val; }
+  .sc-anchors {
+    grid-area: anchors;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    padding-top: 4px;
+  }
+  .sc-anchor {
+    font-family: var(--csp-font-mono); font-size: 10.5px;
+    color: var(--csp-ink-500); letter-spacing: 0.02em; line-height: 1.5;
+  }
+  .sc-anchor b {
+    font-weight: 700; margin-right: 6px;
+    font-family: var(--csp-font-mono); letter-spacing: 0.05em;
+  }
+  .sc-anchor.lo b { color: var(--csp-danger); }
+  .sc-anchor.hi b { color: var(--csp-success); }
+  @media (max-width: 720px) {
+    .sc-anchors { grid-template-columns: 1fr; gap: 6px; }
   }
   .sc-slider { display: flex; align-items: center; }
   .sc-slider input[type="range"] {
@@ -724,6 +770,10 @@
     color: var(--csp-warm-900);
   }
   .sc-score .max { font-size: 28px; color: var(--csp-ink-500); font-weight: 500; }
+  .sc-score #sc-score-val { transition: color 0.35s var(--csp-ease); }
+  .sc-score.tier-red #sc-score-val    { color: var(--csp-danger); }
+  .sc-score.tier-amber #sc-score-val  { color: var(--csp-warning); }
+  .sc-score.tier-green #sc-score-val  { color: var(--csp-success); }
   .sc-bar {
     height: 8px; background: var(--csp-ink-300); border-radius: 999px;
     margin-top: 14px; overflow: hidden;
@@ -1077,8 +1127,8 @@
 <!-- ============================== HERO (VSL above the fold) ============================== -->
 <section class="hero">
   <div class="wrap-narrow">
-    <span class="eye">Watch first · 9 minutes</span>
-    <h1>You don't have a marketing problem. You have a <span class="hl shimmer">systems</span> problem.</h1>
+    <span class="eye">Watch first</span>
+    <h1>Your clinic doesn't have a marketing problem. It has a <span class="hl shimmer">systems</span> problem.</h1>
     <div class="vsl-wrap">
       <div id="vidalytics_embed_Swi29HjsECOPJ_vA" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
       <script type="text/javascript">
@@ -1097,7 +1147,7 @@
       <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=hero" target="_blank" rel="noopener">Book your free diagnostic →</a>
       <p class="vsl-cta-note"><span class="accent">Our best-performing clients</span> watched this video before booking a call</p>
     </div>
-    <p class="hero-sub">The 9-minute breakdown of the Clinic Success Engine. For 7 and 8-figure clinic owners who've been burned by four agencies and want a system that compounds into EBITDA, not another dashboard.</p>
+    <p class="hero-sub">A full breakdown of the Clinic Success Engine. For 7 and 8-figure clinic owners who've been burned by four agencies and want a system that compounds into EBITDA, not another dashboard.</p>
   </div>
 </section>
 
@@ -1105,12 +1155,6 @@
 <section class="proof-bar">
   <div class="wrap">
     <div class="proof-grid">
-      <div class="proof-card">
-        <div class="fl">LIVE · W16</div>
-        <div class="fv count" data-count="184" data-prefix="$" data-suffix="k">$184k</div>
-        <div class="fc">client avg · monthly revenue</div>
-        <svg width="200" height="24" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 L25 17 L50 18 L75 12 L100 9 L125 6 L150 7 L175 3 L200 1"/></svg>
-      </div>
       <div class="proof-metrics">
         <div class="proof-metric">
           <div class="m-val count" data-count="12400000" data-prefix="$">$12.4M</div>
@@ -1128,6 +1172,12 @@
           <div class="m-val count" data-count="3">3</div>
           <div class="m-lbl">Continents served</div>
         </div>
+      </div>
+      <div class="proof-card">
+        <div class="fl">LIVE · W16</div>
+        <div class="fv count" data-count="184" data-prefix="$" data-suffix="k">$184k</div>
+        <div class="fc">client avg · monthly revenue</div>
+        <svg width="200" height="24" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 L25 17 L50 18 L75 12 L100 9 L125 6 L150 7 L175 3 L200 1"/></svg>
       </div>
     </div>
   </div>
@@ -1147,13 +1197,19 @@
         <div class="e-row"><span class="x">03</span><span class="strike">"Our area doesn't spend."</span></div>
         <div class="e-row"><span class="x">04</span><span class="strike">"The team doesn't close."</span></div>
         <div class="e-row"><span class="x">05</span><span class="strike">"Another device will fix it."</span></div>
-        <div class="e-row"><span class="x">06</span><span class="strike">"We'll test a new offer."</span></div>
+        <div class="e-row"><span class="x">06</span><span class="strike">"We need a new offer."</span></div>
+        <div class="e-row"><span class="x">07</span><span class="strike">"Patients don't value quality anymore."</span></div>
+        <div class="e-row"><span class="x">08</span><span class="strike">"We need to hire a marketing manager."</span></div>
+        <div class="e-row"><span class="x">09</span><span class="strike">"The economy is tight."</span></div>
+        <div class="e-row"><span class="x">10</span><span class="strike">"Patients don't read email anymore."</span></div>
+        <div class="e-row"><span class="x">11</span><span class="strike">"Our prices are too high."</span></div>
+        <div class="e-row"><span class="x">12</span><span class="strike">"The front desk just needs a pep talk."</span></div>
       </div>
       <div class="enemy-card">
         <span class="e-badge">Diagnosis · Constraint identified</span>
-        <h3>The real enemy is <span class="accent">fragmented growth.</span></h3>
-        <p>Your ads don't talk to your CRM. Your CRM doesn't talk to your practice management software. Your front desk doesn't know which lead came from which campaign. Your reports show clicks, not cash.</p>
-        <p>You're paying $100+ per lead and half of them don't get a call within 15 minutes. That's not a traffic problem. That's a system problem.</p>
+        <h3>You don't have a marketing problem. You have a <span class="accent">systems problem.</span></h3>
+        <p>Your ads don't talk to your booking calendar. Your booking calendar doesn't talk to the software your practice actually runs on. Your front desk has no idea which patient came from which campaign. Your reports show clicks, not cash collected.</p>
+        <p>You're paying $100+ per lead and half of them do not get a call inside 15 minutes. That is not a traffic problem, a creative problem, or an algorithm problem. It is a systems problem. And no amount of new ads will fix a leaking pipeline.</p>
         <p class="path">~/.csp/diagnosis/the-real-enemy.md</p>
       </div>
     </div>
@@ -1184,26 +1240,26 @@
 <section>
   <div class="wrap">
     <span class="sec-eye">03 · Why nothing has worked</span>
-    <h2>You've been solving a systems problem with surface-level marketing.</h2>
-    <p class="intro">The agencies weren't lying. Their prescription was wrong for the patient. Here's what every 7-figure clinic has been told and why it hasn't compounded.</p>
+    <h2>You've been sold the same three lies by four different agencies.</h2>
+    <p class="intro">The agency down the road. The agency your mate recommended. The agency that did a nice pitch deck. Different logos, same script. Here's what they all promised and why your revenue never actually compounded.</p>
     <div class="failures">
       <div class="failure">
-        <span class="num">Prescription 01</span>
-        <h4>"More ads. More staff. More tools."</h4>
-        <p>Volume on top of a broken pipeline amplifies chaos. Leads pile up, staff churns faster, tools stack up unused. Revenue plateaus at a higher-stress version of the same number.</p>
-        <div class="foot"><span class="accent">Why it fails:</span> the bottleneck isn't input, it's throughput.</div>
+        <span class="num">Lie 01</span>
+        <h4>"You just need more leads."</h4>
+        <p>They doubled your ad spend. Your lead volume doubled. Your booked revenue stayed flat. Half the new leads never got called back. The other half got a text message three days late. You paid twice as much for the same number of patients through the door.</p>
+        <div class="foot"><span class="accent">Why it failed:</span> pouring leads into a broken pipeline makes the leak bigger, not the business.</div>
       </div>
       <div class="failure">
-        <span class="num">Prescription 02</span>
-        <h4>Agencies with vague dashboards.</h4>
-        <p>CPL dropped. CTR climbed. Rankings improved. Nothing tied to collected revenue. A year in, you still can't answer "which campaign pays for itself."</p>
-        <div class="foot"><span class="accent">Why it fails:</span> vanity metrics hide the real leak.</div>
+        <span class="num">Lie 02</span>
+        <h4>"Look at these dashboards."</h4>
+        <p>Every month the account manager joined a call to walk you through colourful charts. Cost per lead went down. Click-through rate went up. Your SEO rankings improved. Twelve months in, you still can't answer one question: which campaign actually paid for itself in cash collected?</p>
+        <div class="foot"><span class="accent">Why it failed:</span> clicks, impressions, and rankings are not a bank deposit.</div>
       </div>
       <div class="failure">
-        <span class="num">Prescription 03</span>
-        <h4>Automation duct-taped across five tools.</h4>
-        <p>GHL talks to Zapier talks to Mailchimp talks to your EMR (sometimes). Every edge case breaks silently. Nobody owns the handoff. Your front desk trusts none of it.</p>
-        <div class="foot"><span class="accent">Why it fails:</span> tools aren't an operating system.</div>
+        <span class="num">Lie 03</span>
+        <h4>"We've automated your whole practice."</h4>
+        <p>They stitched five tools together with duct tape. Half of it broke after the second software update. The rest your front desk quietly stopped using because the automated messages made patients annoyed. You are still doing the follow-ups manually. The agency is still invoicing.</p>
+        <div class="foot"><span class="accent">Why it failed:</span> a pile of subscriptions is not an operating system.</div>
       </div>
     </div>
   </div>
@@ -1287,13 +1343,13 @@
 <section id="results">
   <div class="wrap">
     <span class="sec-eye">05 · Case studies</span>
-    <h2>Two clinics. Two starting points. Same results.</h2>
+    <h2>Two clinics. Two starting points. Same result.</h2>
     <p class="intro">One stuck at $150k/mo. One brand-new with zero list. Both unlocked growth by fixing the same thing: the system behind the marketing.</p>
     <div class="case-grid">
       <div class="case-hero">
         <span class="badge">James · Cosmetic dental · 3 locations</span>
         <h3>$150k/mo stuck for 18 months. Four agencies. One reactivation campaign did $70k in the first week.</h3>
-        <p>We didn't touch ad spend. We piped his CRM into his PMS, exposed true lifetime value by campaign, and automated reactivation across 6,000 dormant patients. The database did the work.</p>
+        <p>We didn't touch ad spend. We piped his CRM into his practice software, exposed true lifetime value by campaign, and automated reactivation across 6,000 dormant patients. The database did the work.</p>
         <div class="stat-row">
           <div class="stat"><div class="val count" data-count="70131" data-prefix="$">$70,131</div><div class="lab">Revenue · first 7 days</div></div>
           <div class="stat"><div class="val count" data-count="143">143</div><div class="lab">Consults · month one</div></div>
@@ -1301,9 +1357,9 @@
         </div>
       </div>
       <div class="case-hero alt">
-        <span class="badge">Ariq · Aesthetics · Brand-new clinic</span>
+        <span class="badge">Emir · Aesthetics · Brand-new clinic</span>
         <h3>Zero list. No site. No ads. Outranked the top competitor in his city in six months.</h3>
-        <p>We built the foundation from scratch. Irresistible offer, review stack, local SEO, and paid acquisition at 50% below industry CPL. He's now scaling to a second location with the same playbook.</p>
+        <p>We built the foundation from scratch. Irresistible offer, review stack, local SEO, and paid acquisition at 50% below industry cost per lead. He is now scaling to a second location with the same playbook.</p>
         <div class="stat-row">
           <div class="stat"><div class="val count" data-count="50" data-suffix="%">50%</div><div class="lab">Below industry CPL</div></div>
           <div class="stat"><div class="val count" data-count="6" data-suffix="mo">6mo</div><div class="lab">To market #1</div></div>
@@ -1338,7 +1394,14 @@
         <blockquote>We outperformed every local competitor. Real-world ROI was self-evident. Having been through many partners in the past, we've stuck with Tomás for over a year and a half.</blockquote>
         <div class="attrib">
           <div class="avatar">RE</div>
-          <div><div class="n">Ruin Ellis</div><div class="t">CO-FOUNDER · THE BRIGHT REPUBLIC · AGENCY PARTNER</div></div>
+          <div><div class="n">Ruen Ellis</div><div class="t">CO-FOUNDER · THE BRIGHT REPUBLIC · AGENCY PARTNER</div></div>
+        </div>
+      </div>
+      <div class="quote-card">
+        <blockquote>The reactivation campaign alone pulled $35k in the first round. We just closed an $80k month. Nobody else has ever gotten that out of our database.</blockquote>
+        <div class="attrib">
+          <div class="avatar">C</div>
+          <div><div class="n">Casey</div><div class="t">DENTAL PRACTICE · SUNSHINE COAST · AU</div></div>
         </div>
       </div>
       <div class="quote-card">
@@ -1364,17 +1427,35 @@
         <h2>AI where it compounds. Humans where it matters.</h2>
         <p class="intro">Every agency is selling "AI-powered" marketing right now. Most of it is a ChatGPT wrapper dressed up as a product. We install AI where it moves cash, and keep humans where patient trust is the variable.</p>
         <div class="ai-pains">
-          <div class="ai-pain">
-            <span class="ai-pain-lbl">Quote · clinic owner, AU</span>
-            <p>"The lead came in 11pm Sunday. Front desk called them Tuesday. They'd already booked with a competitor."</p>
+          <div class="ai-pair">
+            <div class="ai-pain">
+              <span class="ai-pain-lbl">Clinic owner, AU</span>
+              <p>"The lead came in at 11pm Sunday. Front desk called them Tuesday. They had already booked with a competitor."</p>
+            </div>
+            <div class="ai-fix">
+              <span class="ai-fix-lbl">What we install instead</span>
+              <p><strong>AI receptionist.</strong> Answers in under 30 seconds, 24/7. Qualifies, books, and hands the lead to your team Monday morning with full context.</p>
+            </div>
           </div>
-          <div class="ai-pain">
-            <span class="ai-pain-lbl">Quote · clinic owner, US</span>
-            <p>"I'm paying for three tools that don't talk to each other. My team ignores all of them."</p>
+          <div class="ai-pair">
+            <div class="ai-pain">
+              <span class="ai-pain-lbl">Clinic owner, US</span>
+              <p>"I'm paying for three tools that don't talk to each other. My team ignores all of them."</p>
+            </div>
+            <div class="ai-fix">
+              <span class="ai-fix-lbl">What we install instead</span>
+              <p><strong>One integrated layer.</strong> Ads, CRM, practice software, and reporting piped into a single source of truth. One screen, one set of numbers, no more swivel-chair admin.</p>
+            </div>
           </div>
-          <div class="ai-pain">
-            <span class="ai-pain-lbl">Quote · clinic owner, UK</span>
-            <p>"My team won't trust another dashboard. They've been burned five times already."</p>
+          <div class="ai-pair">
+            <div class="ai-pain">
+              <span class="ai-pain-lbl">Clinic owner, UK</span>
+              <p>"My team won't trust another dashboard. They've been burned five times already."</p>
+            </div>
+            <div class="ai-fix">
+              <span class="ai-fix-lbl">What we install instead</span>
+              <p><strong>Reporting tied to collected revenue.</strong> Every number on the dashboard links to a booked patient and a bank deposit. The moment a team sees numbers they can trust, they start using them.</p>
+            </div>
           </div>
         </div>
         <span class="ai-section-head">What we install</span>
@@ -1414,8 +1495,8 @@
 <section class="cost-waiting">
   <div class="wrap">
     <span class="sec-eye">08 · The cost of waiting</span>
-    <h2>The clinics with the best <span class="hl-inv">systems</span> win. Not the best clinicians.</h2>
-    <p class="intro">Less-qualified clinics with better systems take market share from better clinicians with worse systems. The research backs it. The gap compounds monthly.</p>
+    <h2>From 2026, the clinics with the best <span class="hl-inv">systems</span> win. Not the best clinicians.</h2>
+    <p class="intro">Less-qualified clinics with better systems take market share from better clinicians with worse systems. This trend has been accelerating since AI went mainstream. The research backs it. The gap compounds monthly.</p>
     <div class="cost-kpis">
       <div class="cost-kpi">
         <div class="v count" data-count="21" data-suffix="×">21×</div>
@@ -1443,8 +1524,8 @@
 <section class="scorecard-section" id="scorecard">
   <div class="wrap">
     <span class="sec-eye">09 · Directional diagnostic</span>
-    <h2>Score your clinic in 90 seconds.</h2>
-    <p class="intro">Seven questions about the systems that leak the most revenue. You'll see the shape of the gap. The exact dollar figure comes from the diagnostic call, not a slider.</p>
+    <h2>Score your clinic out of 100 in 90 seconds.</h2>
+    <p class="intro">Ten questions about the systems that leak the most revenue. Each slider has a 1 and a 10 anchor so you know exactly what honest looks like. You'll see the shape of the gap, the biggest opportunity, and where to start. The exact dollar figure comes from the diagnostic call, not a slider.</p>
     <div class="scorecard" id="csp-scorecard">
       <div class="sc-honest">
         This is directional, not diagnostic. The opportunity estimate is a rough indicator tied to your score, not a forensic audit of your finances. It shows you where the conversation should start. The real numbers come from looking at your actual spend, bookings, and LTV on a call.
@@ -1462,77 +1543,141 @@
         <div class="sc-row" data-sc="speed">
           <div class="sc-label">
             <span class="lbl">Speed to lead</span>
-            <span class="sub">Inbound leads contacted within 5 minutes</span>
+            <span class="sub">How fast inbound leads get a human on the line</span>
           </div>
-          <div class="sc-slider"><input type="range" min="1" max="5" value="3" aria-label="Speed to lead score" /></div>
-          <div class="sc-val">3</div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Speed to lead score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> Leads often wait 24–48 hours. We call when we get to it.</div>
+            <div class="sc-anchor hi"><b>10</b> Every inbound contacted inside 2 minutes, 24/7, tracked to the second on a live team dashboard.</div>
+          </div>
         </div>
         <div class="sc-row" data-sc="conversion">
           <div class="sc-label">
             <span class="lbl">Website to booked appointment</span>
-            <span class="sub">You know your visit-to-booking conversion rate</span>
+            <span class="sub">Your site turning visitors into scheduled consults</span>
           </div>
-          <div class="sc-slider"><input type="range" min="1" max="5" value="3" aria-label="Website conversion score" /></div>
-          <div class="sc-val">3</div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Website conversion score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> I don't know our visit-to-book rate. I don't even know where to look.</div>
+            <div class="sc-anchor hi"><b>10</b> Booking rate tracked per traffic source, A/B tested monthly, converting 2–3× industry average.</div>
+          </div>
         </div>
         <div class="sc-row" data-sc="attribution">
           <div class="sc-label">
             <span class="lbl">Lead source attribution</span>
-            <span class="sub">You know which campaign produced which dollar collected</span>
+            <span class="sub">Knowing which campaign produced which dollar</span>
           </div>
-          <div class="sc-slider"><input type="range" min="1" max="5" value="3" aria-label="Lead attribution score" /></div>
-          <div class="sc-val">3</div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Lead attribution score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> We have no idea which campaign actually brought a paying patient.</div>
+            <div class="sc-anchor hi"><b>10</b> Every patient tracked source-to-cash, multi-touch, LTV by channel, exported to shareholders weekly.</div>
+          </div>
         </div>
         <div class="sc-row" data-sc="frontdesk">
           <div class="sc-label">
             <span class="lbl">Front desk sales performance</span>
-            <span class="sub">Scripts, answer rate, and SOPs are tracked weekly</span>
+            <span class="sub">Scripts, call review, and conversion tracking</span>
           </div>
-          <div class="sc-slider"><input type="range" min="1" max="5" value="3" aria-label="Front desk score" /></div>
-          <div class="sc-val">3</div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Front desk score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> Front desk answers when they can. No script. No call review. Nobody tracks close rate.</div>
+            <div class="sc-anchor hi"><b>10</b> Every call recorded and scored. Scripts versioned. Weekly coaching. Call-to-book rate on the wall.</div>
+          </div>
         </div>
         <div class="sc-row" data-sc="reactivation">
           <div class="sc-label">
             <span class="lbl">Patient reactivation</span>
-            <span class="sub">Your existing database is mined on an automated cadence</span>
+            <span class="sub">Mining your past-patient database on cadence</span>
           </div>
-          <div class="sc-slider"><input type="range" min="1" max="5" value="3" aria-label="Reactivation score" /></div>
-          <div class="sc-val">3</div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Reactivation score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> We don't really contact past patients unless they reach out first.</div>
+            <div class="sc-anchor hi"><b>10</b> Database segmented by treatment, recency, and LTV. Monthly automated reactivation producing a predictable 5-figure lift.</div>
+          </div>
         </div>
         <div class="sc-row" data-sc="roi">
           <div class="sc-label">
             <span class="lbl">Marketing ROI visibility</span>
-            <span class="sub">Every spend line is tied to collected revenue</span>
+            <span class="sub">Spend matched to collected revenue, not CPL averages</span>
           </div>
-          <div class="sc-slider"><input type="range" min="1" max="5" value="3" aria-label="Marketing ROI score" /></div>
-          <div class="sc-val">3</div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Marketing ROI score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> I spend and I hope. Nobody can tell me ROI in dollars collected.</div>
+            <div class="sc-anchor hi"><b>10</b> Every spend matched to collected revenue inside 48 hours. Channel-level ROI is the first slide in every leadership meeting.</div>
+          </div>
         </div>
         <div class="sc-row" data-sc="integration">
           <div class="sc-label">
             <span class="lbl">Tech-stack integration</span>
-            <span class="sub">Ads, CRM, EMR, and call software all talk to each other</span>
+            <span class="sub">Ads, CRM, practice software, phone, reporting, one source of truth</span>
           </div>
-          <div class="sc-slider"><input type="range" min="1" max="5" value="3" aria-label="Integration score" /></div>
-          <div class="sc-val">3</div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Integration score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> Tools don't really talk. We paste data between screens. Reports are stitched together by hand.</div>
+            <div class="sc-anchor hi"><b>10</b> Every tool connected in real time. Zero manual data entry. Single source of truth every team member trusts.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="ltv">
+          <div class="sc-label">
+            <span class="lbl">LTV and retention</span>
+            <span class="sub">Tracking lifetime value and cross-treatment pathways</span>
+          </div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="LTV score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> We don't track lifetime value at all. A patient is a patient.</div>
+            <div class="sc-anchor hi"><b>10</b> LTV tracked per treatment, channel, and provider. Every consult priced against LTV. Cross-sell pathways mapped per patient type.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="reviews">
+          <div class="sc-label">
+            <span class="lbl">Reputation and reviews</span>
+            <span class="sub">Review stack, response cadence, map-pack dominance</span>
+          </div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Reviews score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> We ask patients for reviews when we remember. We rarely do.</div>
+            <div class="sc-anchor hi"><b>10</b> Every completed treatment triggers a personalised review request. 500+ five-star reviews. Managed response on every review.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="noshow">
+          <div class="sc-label">
+            <span class="lbl">No-show and cancellation recovery</span>
+            <span class="sub">Predictive scoring plus human-voice recovery</span>
+          </div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="No-show recovery score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> If they don't show, we move on. No recovery sequence at all.</div>
+            <div class="sc-anchor hi"><b>10</b> Every booked patient scored for ghost risk. At-risk get pre-emptive human outreach. No-show rate under 5%, 40%+ rebook rate.</div>
+          </div>
         </div>
       </div>
 
       <div class="sc-result">
         <div class="sc-result-left">
           <div class="sc-score-label">Your clinic score</div>
-          <div class="sc-score"><span id="sc-score-val">21</span><span class="max">/35</span></div>
-          <div class="sc-bar"><div class="sc-bar-fill" id="sc-bar" style="width: 60%;"></div></div>
+          <div class="sc-score" id="sc-score"><span id="sc-score-val">50</span><span class="max">/100</span></div>
+          <div class="sc-bar"><div class="sc-bar-fill" id="sc-bar" style="width: 50%;"></div></div>
         </div>
         <div class="sc-opportunity">
           <div class="o-lbl" id="sc-opp-label">Your biggest opportunity</div>
-          <div class="o-title" id="sc-opp-title">Speed to lead</div>
-          <div class="o-copy" id="sc-opp-copy">Most clinics lose over half of inbound leads to slow response. Our speed-to-lead install contacts every lead inside 5 minutes and typically recovers <strong>~$6k</strong> in the first 60 days.</div>
-          <div class="o-secondary" id="sc-opp-secondary">Secondary opportunity: <strong>Conversion architecture</strong></div>
+          <div class="o-title" id="sc-opp-title">Drag a slider to see your gap</div>
+          <div class="o-copy" id="sc-opp-copy">Rate each question honestly against its 1 and 10 anchor. The lowest score is where your biggest dollar opportunity is hiding.</div>
+          <div class="o-secondary" id="sc-opp-secondary">Add your monthly revenue above for a sharper estimate.</div>
         </div>
       </div>
 
       <div class="sc-cta-row">
-        <a class="btn btn-primary btn-lg magnetic" id="sc-cta" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=scorecard_21&score=21" target="_blank" rel="noopener">Book a diagnostic to find the real number →</a>
+        <a class="btn btn-primary btn-lg magnetic" id="sc-cta" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=scorecard_50&score=50" target="_blank" rel="noopener">Fix my biggest gap →</a>
       </div>
     </div>
   </div>
@@ -1663,28 +1808,52 @@
     <h2>Questions we often hear.</h2>
     <div class="faq">
       <details class="faq-item" open>
-        <summary><span><span class="qn">Q.01</span>I've been burned by agencies before.</span></summary>
-        <div class="ans">Fair. So don't trust us. Measure us. We define the exact KPIs, timelines, and owner responsibilities before a dollar changes hands. If week-two reactivation doesn't produce a number you can see in your bank account, we're not the right fit.</div>
+        <summary><span><span class="qn">Q.01</span>I've been burned by four agencies already.</span></summary>
+        <div class="ans">Fair. So don't trust us, measure us. We define the exact KPIs, timelines, and owner responsibilities in writing before a dollar changes hands. If the first reactivation round does not produce a number you can see in your bank account, we are not the right fit and we say so on the call.</div>
       </details>
       <details class="faq-item">
         <summary><span><span class="qn">Q.02</span>We already have an agency or internal marketer.</span></summary>
-        <div class="ans">Good. Keep them. We install between your existing stack, and the operating system runs on top. Most Engine clients keep their current creative team and let us own the conversion chain, attribution, and retention.</div>
+        <div class="ans">Keep them. We install between your existing stack. The operating system runs on top. Most Engine clients keep their current creative team and let us own the conversion chain, attribution, and retention. We don't fire the people doing good work, we just plug the leaks around them.</div>
       </details>
       <details class="faq-item">
-        <summary><span><span class="qn">Q.03</span>Our front desk handles the calls.</span></summary>
-        <div class="ans">The average clinic has 60% of inbound leads arrive after 5pm or on the weekend. Front desk isn't sales. Sales is a structured, measurable process with scripts, SLAs, and attribution. We install both, then train the team that handles them.</div>
+        <summary><span><span class="qn">Q.03</span>Our front desk handles the calls just fine.</span></summary>
+        <div class="ans">The average clinic has 60% of inbound leads arrive after 5pm or on the weekend. Front desk is not sales. Sales is a structured, measurable process with scripts, SLAs, and revenue attribution per call. We install both, train the team that handles them, and put a weekly scorecard on the wall.</div>
       </details>
       <details class="faq-item">
-        <summary><span><span class="qn">Q.04</span>We're already booked out.</span></summary>
-        <div class="ans">Booked-out with low-ticket services is a trap. The real question is revenue per chair-hour, and whether it's compounding quarter over quarter. We install the mix shift from commodity services to high-ticket treatment plans without adding volume.</div>
+        <summary><span><span class="qn">Q.04</span>We're already booked out three months ahead.</span></summary>
+        <div class="ans">Booked-out with low-ticket services is a trap. The real question is revenue per chair-hour and whether it is compounding quarter over quarter. We install the mix shift from commodity services to high-ticket treatment plans without adding volume, so the same diary produces more EBITDA.</div>
       </details>
       <details class="faq-item">
         <summary><span><span class="qn">Q.05</span>What does this cost?</span></summary>
-        <div class="ans">Custom per clinic. The Engine tier starts at a level that pays for itself inside 90 days on the 2x ROI framework. The diagnostic call is free and produces a mapped 90-day plan whether we work together or not.</div>
+        <div class="ans">Custom per clinic. The Engine tier starts at a level that pays for itself inside 90 days on a 2x ROI framework. The diagnostic call is free and produces a mapped 90-day plan whether we work together or not. If the plan is worth nothing to you, you keep the plan and walk.</div>
       </details>
       <details class="faq-item">
         <summary><span><span class="qn">Q.06</span>How long until I see results?</span></summary>
-        <div class="ans">Week-two reactivation is the first visible lift, usually mid-five-figures. 30 days for measurable consult and revenue signals. 90 days for the full engine installed. Ongoing optimization is weekly.</div>
+        <div class="ans">Week-two reactivation is the first visible lift, usually mid-five-figures. 30 days for measurable consult and revenue signals. 90 days for the full engine installed end to end. Ongoing optimization is weekly after that, with a structured constraint-diagnosis call every Monday.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="qn">Q.07</span>Are you going to lock us into a long contract?</span></summary>
+        <div class="ans">No. 90-day install, month-to-month after that. Our job is to make it obvious you should stay, not to trap you until you do. Current retention sits at 94% for a reason.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="qn">Q.08</span>Who actually runs the install, not a junior account manager?</span></summary>
+        <div class="ans">Every diagnostic call is Tomás O'Dwyer personally. Every install is led by Jess McCarthy (COO) with a named specialist per workflow. You don't get passed to a pod of juniors. You get the team on the homepage.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="qn">Q.09</span>We're thinking about selling the clinic in 2–3 years.</span></summary>
+        <div class="ans">Then this is less optional than you think. Everything we install, attribution, SOPs, LTV tracking, review stack, reactivation, is exactly what a buyer or broker will ask you to produce in due diligence. We optimise the clinic for the EBITDA multiple, not just this month's cash.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="qn">Q.10</span>What if we're not in the US or Australia?</span></summary>
+        <div class="ans">Clients currently installed across the US, AU, and UK. The system is the same. Ad platforms, compliance quirks, and tax are localised by the team. If your country is not on that list, we tell you on the call instead of figuring it out in month three.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="qn">Q.11</span>Can we just buy the AI reception or reactivation piece standalone?</span></summary>
+        <div class="ans">No. Installing AI reception into a broken front-desk process makes the problem faster, not smaller. The same goes for reactivation on top of bad attribution. The system works because the pillars reinforce each other. If you want a single tool, buy a tool. We install the layer between them.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="qn">Q.12</span>What happens on the diagnostic call?</span></summary>
+        <div class="ans">60 minutes. We look at your actual spend, attribution, consult data, and database. We identify the tightest constraint, map a custom 90-day roadmap live on the call, and tell you honestly whether we are a fit. You leave with the roadmap either way.</div>
       </details>
     </div>
   </div>

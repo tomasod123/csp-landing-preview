@@ -1,8 +1,8 @@
 /* ============================================================
  * CSP Scorecard · interactive self-assessment
- * Vanilla JS, no framework. Updates score, biggest-opportunity
- * readout, and primary CTA URL live as the user drags sliders
- * and (optionally) enters monthly revenue.
+ * 10 sliders (1-10 each) → score out of 100.
+ * Color-coded tier (red/amber/green), biggest-opportunity readout,
+ * dynamic CTA with score + top_gap + optional revenue in UTM.
  * ============================================================ */
 (function () {
   'use strict';
@@ -12,6 +12,7 @@
 
   var rows       = root.querySelectorAll('.sc-row');
   var revInput   = document.getElementById('sc-revenue-input');
+  var scoreBox   = document.getElementById('sc-score');
   var scoreEl    = document.getElementById('sc-score-val');
   var barEl      = document.getElementById('sc-bar');
   var oppLblEl   = document.getElementById('sc-opp-label');
@@ -20,20 +21,17 @@
   var oppSecEl   = document.getElementById('sc-opp-secondary');
   var ctaEl      = document.getElementById('sc-cta');
 
-  var MAX        = rows.length * 5; // 35
-  var STORE_KEY  = 'csp-scorecard-v2';
+  var MAX        = rows.length * 10; // 10 rows × 10 = 100
+  var STORE_KEY  = 'csp-scorecard-v3';
   var CTA_BASE   = 'https://book.clinicsuccesspartners.com/schedule-call';
-  var CTA_UTMS   = 'utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2';
+  var CTA_UTMS   = 'utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3';
 
-  /* Catalog: per-slider, what CSP installs + how it's framed + how much it typically recovers.
-     pctOfRev = share of monthly revenue the install tends to free up when this slot is the bottleneck.
-     staticMid = fallback mid-band recovery when no revenue is entered. */
   var CATALOG = {
     speed: {
       label: 'Speed to lead',
       module: 'Speed-to-lead automation',
       copy: function (amt) {
-        return 'Most clinics lose over half of paid leads to slow response. Our speed-to-lead install contacts every inbound inside 5 minutes and typically recovers <strong>' + amt + '</strong> in the first 60 days.';
+        return 'Most clinics lose over half of paid leads to slow response. Our speed-to-lead install contacts every inbound inside 5 minutes, 24/7, and typically recovers <strong>' + amt + '</strong> in the first 60 days.';
       },
       pctOfRev: 0.07,
       staticMid: 10000
@@ -91,6 +89,33 @@
       },
       pctOfRev: 0.04,
       staticMid: 6000
+    },
+    ltv: {
+      label: 'LTV and retention',
+      module: 'LTV engine',
+      copy: function (amt) {
+        return 'Without LTV visibility you price consults wrong and miss cross-sells. Installing LTV tracking and cross-treatment pathways typically adds <strong>' + amt + '</strong> per month from patients already in the door.';
+      },
+      pctOfRev: 0.06,
+      staticMid: 9000
+    },
+    reviews: {
+      label: 'Reputation and reviews',
+      module: 'Authority stack',
+      copy: function (amt) {
+        return 'Sitting on 40 reviews when the market leader has 500+ is how you lose on Google Maps before a patient even clicks. Installed review workflows and response cadence typically recovers <strong>' + amt + '</strong> of organic patient flow you are invisible to today.';
+      },
+      pctOfRev: 0.04,
+      staticMid: 6000
+    },
+    noshow: {
+      label: 'No-show and cancellation recovery',
+      module: 'No-show recovery flows',
+      copy: function (amt) {
+        return 'Every missed appointment is revenue you already paid to acquire. Predictive scoring plus human-voice recovery typically claws back <strong>' + amt + '</strong> of no-show revenue per month.';
+      },
+      pctOfRev: 0.07,
+      staticMid: 10000
     }
   };
 
@@ -99,27 +124,30 @@
     return '~$' + n.toLocaleString();
   }
 
-  function tierLabel(score) {
-    if (score <= 14) return 'red';
-    if (score <= 24) return 'amber';
+  /* Tier thresholds on /100 scale:
+     red 0–40 · amber 41–70 · green 71–100 */
+  function tier(score) {
+    if (score <= 40) return 'red';
+    if (score <= 70) return 'amber';
     return 'green';
+  }
+
+  /* Multiplier on 1-10 per-slider scale */
+  function multForScore(s) {
+    if (s <= 2) return 1.4;   // badly broken
+    if (s <= 4) return 1.0;   // broken
+    if (s <= 6) return 0.55;  // patchy
+    if (s <= 8) return 0.25;  // decent, still room
+    return 0;                 // 9-10 aspirational
   }
 
   function recoveryFor(key, score, revenue) {
     var cat = CATALOG[key];
     if (!cat) return 0;
-    var multiplier;
-    if (score <= 1) multiplier = 1.4;
-    else if (score === 2) multiplier = 1.0;
-    else if (score === 3) multiplier = 0.55;
-    else if (score === 4) multiplier = 0.25;
-    else multiplier = 0;
-    var raw;
-    if (revenue && revenue > 0) {
-      raw = revenue * cat.pctOfRev * multiplier;
-    } else {
-      raw = cat.staticMid * multiplier;
-    }
+    var m = multForScore(score);
+    var raw = (revenue && revenue > 0)
+      ? revenue * cat.pctOfRev * m
+      : cat.staticMid * m;
     return Math.round(raw / 500) * 500;
   }
 
@@ -134,9 +162,8 @@
     rows.forEach(function (row) {
       var key = row.getAttribute('data-sc');
       var input = row.querySelector('input[type="range"]');
-      arr.push({ key: key, score: parseInt(input.value, 10) || 3 });
+      arr.push({ key: key, score: parseInt(input.value, 10) || 5 });
     });
-    // Stable sort by score ascending; ties break by DOM order
     arr.sort(function (a, b) { return a.score - b.score; });
     return arr;
   }
@@ -153,13 +180,18 @@
 
     if (scoreEl) scoreEl.textContent = total;
 
+    var t = tier(total);
+    if (scoreBox) {
+      scoreBox.classList.remove('tier-red', 'tier-amber', 'tier-green');
+      scoreBox.classList.add('tier-' + t);
+    }
+
     if (barEl) {
       var pct = Math.max(2, Math.round((total / MAX) * 100));
       barEl.style.width = pct + '%';
       barEl.classList.remove('amber', 'green');
-      var tier = tierLabel(total);
-      if (tier === 'amber') barEl.classList.add('amber');
-      if (tier === 'green') barEl.classList.add('green');
+      if (t === 'amber') barEl.classList.add('amber');
+      if (t === 'green') barEl.classList.add('green');
     }
 
     var revenue = readRevenue();
@@ -167,30 +199,30 @@
     var primary = constraints[0];
     var secondary = constraints[1];
 
-    if (total >= 30) {
+    if (total >= 85) {
       if (oppLblEl)   oppLblEl.textContent = 'Scorecard read';
       if (oppTitleEl) oppTitleEl.textContent = 'Mostly dialed in';
       if (oppCopyEl)  oppCopyEl.innerHTML = 'At this score the structural leaks are small. The conversation is usually about <strong>a 12-month growth or exit plan</strong>, not firefighting operational gaps. Book a scoping call.';
       if (oppSecEl)   oppSecEl.innerHTML = 'Next step: <strong>strategic scope call</strong>';
     } else if (primary) {
-      var primaryCat = CATALOG[primary.key];
+      var pc = CATALOG[primary.key];
       var est = recoveryFor(primary.key, primary.score, revenue);
       var estStr = est > 0 ? formatDollar(est) : 'a 5-figure lift';
       if (oppLblEl)   oppLblEl.textContent = 'Your biggest opportunity';
-      if (oppTitleEl) oppTitleEl.textContent = primaryCat.label;
-      if (oppCopyEl)  oppCopyEl.innerHTML = primaryCat.copy(estStr);
+      if (oppTitleEl) oppTitleEl.textContent = pc.label;
+      if (oppCopyEl)  oppCopyEl.innerHTML = pc.copy(estStr);
       if (oppSecEl && secondary) {
-        var secCat = CATALOG[secondary.key];
-        oppSecEl.innerHTML = 'Secondary opportunity: <strong>' + secCat.module + '</strong>';
+        var sc = CATALOG[secondary.key];
+        oppSecEl.innerHTML = 'Secondary opportunity: <strong>' + sc.module + '</strong>';
       }
     }
 
     if (ctaEl) {
       var label;
-      if (total >= 30) {
+      if (total >= 85) {
         label = 'Book a strategic scope call →';
       } else if (primary) {
-        label = 'Unlock my ' + CATALOG[primary.key].label.toLowerCase() + ' →';
+        label = 'Fix my ' + CATALOG[primary.key].label.toLowerCase() + ' →';
       } else {
         label = 'Book a diagnostic call →';
       }
