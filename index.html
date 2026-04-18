@@ -1287,6 +1287,105 @@
     .site-footer .fg { grid-template-columns: 1fr 1fr; }
     .site-footer .bottom { flex-direction: column; align-items: flex-start; }
   }
+
+  /* ============================================================
+   * ENGINE · Scroll-sync cinematic (v2.16 scaffold)
+   * Dormant until assets/engine-scroll.mp4 is present on the server.
+   * ============================================================ */
+  .engine-cinematic {
+    position: relative;
+    height: 280vh;
+    background: #0A0A0A;
+    color: var(--csp-bg);
+    isolation: isolate;
+  }
+  .engine-cinematic-inner {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+  .engine-cinematic-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 600ms ease-out;
+  }
+  .engine-cinematic.is-ready .engine-cinematic-video { opacity: 1; }
+  .engine-cinematic-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0) 40%, rgba(10,10,10,0.62) 100%),
+      radial-gradient(ellipse at center, rgba(10,10,10,0) 55%, rgba(10,10,10,0.35) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .engine-cinematic-overlays {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+    padding: 0 clamp(24px, 6vw, 96px) clamp(56px, 8vw, 112px);
+  }
+  .engine-cinematic-overlay {
+    position: absolute;
+    left: clamp(24px, 6vw, 96px);
+    right: clamp(24px, 6vw, 96px);
+    bottom: clamp(56px, 8vw, 112px);
+    max-width: 760px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 520ms cubic-bezier(.2,.7,.2,1),
+      transform 520ms cubic-bezier(.2,.7,.2,1);
+    pointer-events: none;
+  }
+  .engine-cinematic-overlay.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .engine-cinematic-overlay .ec-eye {
+    display: inline-block;
+    font-family: var(--csp-font-mono);
+    font-size: var(--csp-text-xs);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--csp-blue-400);
+    margin-bottom: 14px;
+  }
+  .engine-cinematic-overlay .ec-h {
+    font-family: var(--csp-font-display);
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: var(--csp-track-display);
+    margin: 0 0 14px 0;
+    color: #F5F5F4;
+    max-width: 20ch;
+  }
+  .engine-cinematic-overlay .ec-p {
+    font-family: var(--csp-font-ui);
+    font-size: clamp(1rem, 1.15vw, 1.125rem);
+    line-height: 1.55;
+    color: rgba(245,245,244,0.78);
+    max-width: 44ch;
+    margin: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .engine-cinematic { display: none !important; }
+  }
+  @media (max-width: 720px) {
+    .engine-cinematic { height: 240vh; }
+    .engine-cinematic-overlay .ec-h { font-size: 2rem; max-width: 16ch; }
+    .engine-cinematic-overlay .ec-p { font-size: 0.975rem; }
+  }
 </style>
 </head>
 <body>
@@ -1458,6 +1557,48 @@
   <div class="wrap">
     <span class="sec-eye">04 · The new opportunity</span>
     <h2>The Clinic Success Operating System.</h2>
+  </div>
+
+  <!-- ============================== ENGINE · SCROLL-SYNC CINEMATIC (v2.16 scaffold) ============================== -->
+  <!-- Activates only when assets/engine-scroll.mp4 is reachable. Otherwise removes itself and the static pillar grid below carries the section. -->
+  <div class="engine-cinematic" data-engine-cinematic hidden>
+    <div class="engine-cinematic-inner">
+      <video class="engine-cinematic-video" playsinline muted preload="auto" aria-hidden="true">
+        <source src="assets/engine-scroll.mp4" type="video/mp4">
+      </video>
+      <div class="engine-cinematic-vignette" aria-hidden="true"></div>
+      <div class="engine-cinematic-overlays" aria-hidden="true">
+        <div class="engine-cinematic-overlay" data-beat="0">
+          <span class="ec-eye">Pillar 01 · Reactivation</span>
+          <h3 class="ec-h">Your database stops collecting dust.</h3>
+          <p class="ec-p">Every dormant patient mined. Every prior treatment reopened. Revenue you already paid to acquire, reactivated.</p>
+        </div>
+        <div class="engine-cinematic-overlay" data-beat="1">
+          <span class="ec-eye">Pillar 02 · Authority</span>
+          <h3 class="ec-h">You become the default option in your city.</h3>
+          <p class="ec-p">Not a price-shopped commodity. The name every qualified patient finds first, and trusts before they even walk in.</p>
+        </div>
+        <div class="engine-cinematic-overlay" data-beat="2">
+          <span class="ec-eye">Pillar 03 · Conversion</span>
+          <h3 class="ec-h">Every gap closed. Every no-show recovered.</h3>
+          <p class="ec-p">Instant nurture. Five-minute response. Pre and post-op automation. The leaks in your revenue bucket, plugged.</p>
+        </div>
+        <div class="engine-cinematic-overlay" data-beat="3">
+          <span class="ec-eye">Pillar 04 · Sales</span>
+          <h3 class="ec-h">Every consult traceable to a deposit.</h3>
+          <p class="ec-p">Scripts tied to real revenue. Attribution by campaign, by consult, by provider. Front desk and sales, aligned.</p>
+        </div>
+        <div class="engine-cinematic-overlay" data-beat="4">
+          <span class="ec-eye">The system</span>
+          <h3 class="ec-h">One operating system. Installed with your team.</h3>
+          <p class="ec-p">Not layered on top of what is broken. Rebuilt at the foundation, shoulder to shoulder with your team, so the clinic runs whether you are in the building or not.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================== END CINEMATIC ============================== -->
+
+  <div class="wrap">
     <p class="intro">Not another agency, tool, or dashboard. A diagnostic, install, and operate stack that compounds into enterprise value. Buy back your time. Become the go-to authority on Google. Build a clinic you can walk away from, not a job you can't. One system, four pillars, twelve steps, installed shoulder to shoulder with your team.</p>
     <div class="pillars">
       <div class="pillar">
@@ -2232,6 +2373,75 @@
       });
     }, { threshold: 0.5 });
     document.querySelectorAll('section').forEach(function(s){ io.observe(s); });
+  })();
+
+  /* Engine · scroll-sync cinematic (v2.16 scaffold) --------------------
+     Mounts only when assets/engine-scroll.mp4 exists. Otherwise removes
+     itself so the static pillar grid below carries the section. ------- */
+  (function(){
+    var scaffold = document.querySelector('[data-engine-cinematic]');
+    if (!scaffold) return;
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      scaffold.parentNode.removeChild(scaffold);
+      return;
+    }
+
+    var video = scaffold.querySelector('video');
+    var overlays = Array.prototype.slice.call(scaffold.querySelectorAll('.engine-cinematic-overlay'));
+
+    fetch('assets/engine-scroll.mp4', { method: 'HEAD' })
+      .then(function(r){
+        if (!r || !r.ok) throw new Error('no-video');
+        mount();
+      })
+      .catch(function(){
+        if (scaffold.parentNode) scaffold.parentNode.removeChild(scaffold);
+      });
+
+    function mount() {
+      scaffold.hidden = false;
+      video.load();
+      var onMeta = function(){
+        scaffold.classList.add('is-ready');
+        bindScroll();
+      };
+      if (video.readyState >= 1) onMeta();
+      else video.addEventListener('loadedmetadata', onMeta, { once: true });
+      video.addEventListener('error', function(){
+        if (scaffold.parentNode) scaffold.parentNode.removeChild(scaffold);
+      }, { once: true });
+    }
+
+    function bindScroll() {
+      var ticking = false;
+      function update() {
+        var rect = scaffold.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var scrollable = rect.height - vh;
+        if (scrollable > 0) {
+          var scrolled = Math.max(0, -rect.top);
+          var progress = Math.min(1, Math.max(0, scrolled / scrollable));
+
+          if (video.duration && isFinite(video.duration)) {
+            try { video.currentTime = progress * video.duration; } catch (e) {}
+          }
+
+          var beats = overlays.length;
+          var active = Math.min(beats - 1, Math.floor(progress * beats));
+          for (var i = 0; i < beats; i++) {
+            overlays[i].classList.toggle('is-visible', i === active);
+          }
+        }
+        ticking = false;
+      }
+      function onScroll() {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    }
   })();
 </script>
 
