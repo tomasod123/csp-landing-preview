@@ -519,12 +519,37 @@
 
   /* ============ AI SECTION ============ */
   .ai-section { background: var(--csp-surface-2); }
-  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-  .ai-grid h2 { margin-bottom: 18px; }
+  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .ai-grid h2 { margin-bottom: 16px; }
   .ai-grid .intro { margin-bottom: 22px; }
-  .ai-list { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-direction: column; gap: 16px; }
+  .ai-pains {
+    display: flex; flex-direction: column; gap: 10px;
+    margin: 24px 0 30px;
+  }
+  .ai-pain {
+    background: var(--csp-surface); border: 1px solid var(--csp-ink-300);
+    border-left: 2px solid var(--csp-danger);
+    border-radius: var(--csp-r);
+    padding: 13px 18px;
+  }
+  .ai-pain-lbl {
+    font-family: var(--csp-font-mono); font-size: 9.5px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--csp-ink-500); font-weight: 700; margin-bottom: 5px; display: block;
+  }
+  .ai-pain p {
+    font-family: var(--csp-font-display); font-weight: 500;
+    font-size: 14.5px; letter-spacing: -0.01em; line-height: 1.5;
+    color: var(--csp-warm-900); margin: 0;
+  }
+  .ai-section-head {
+    font-family: var(--csp-font-mono); font-size: 10.5px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--csp-blue-800); font-weight: 700; margin: 8px 0 14px; display: block;
+  }
+  .ai-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
   .ai-list li {
-    display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: flex-start;
+    display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: flex-start;
     font-size: 14.5px; color: var(--csp-ink-700); line-height: 1.55;
   }
   .ai-list li::before {
@@ -1072,7 +1097,7 @@
       <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=hero" target="_blank" rel="noopener">Book your free diagnostic →</a>
       <p class="vsl-cta-note"><span class="accent">Our best-performing clients</span> watched this video before booking a call</p>
     </div>
-    <p class="hero-sub">The 9-minute breakdown of the Clinic Success Engine. For 7 and 8-figure clinic owners who've been burned by four agencies and want an operating system, not another dashboard.</p>
+    <p class="hero-sub">The 9-minute breakdown of the Clinic Success Engine. For 7 and 8-figure clinic owners who've been burned by four agencies and want a system that compounds into EBITDA, not another dashboard.</p>
   </div>
 </section>
 
@@ -1337,12 +1362,30 @@
       <div>
         <span class="sec-eye">07 · AI, done right</span>
         <h2>AI where it compounds. Humans where it matters.</h2>
-        <p class="intro">Every agency is selling "AI-powered" marketing right now. Most of it is a wrapper around ChatGPT and a buzzword. We use AI where it moves cash, and humans where patient trust is the variable.</p>
+        <p class="intro">Every agency is selling "AI-powered" marketing right now. Most of it is a ChatGPT wrapper dressed up as a product. We install AI where it moves cash, and keep humans where patient trust is the variable.</p>
+        <div class="ai-pains">
+          <div class="ai-pain">
+            <span class="ai-pain-lbl">Quote · clinic owner, AU</span>
+            <p>"The lead came in 11pm Sunday. Front desk called them Tuesday. They'd already booked with a competitor."</p>
+          </div>
+          <div class="ai-pain">
+            <span class="ai-pain-lbl">Quote · clinic owner, US</span>
+            <p>"I'm paying for three tools that don't talk to each other. My team ignores all of them."</p>
+          </div>
+          <div class="ai-pain">
+            <span class="ai-pain-lbl">Quote · clinic owner, UK</span>
+            <p>"My team won't trust another dashboard. They've been burned five times already."</p>
+          </div>
+        </div>
+        <span class="ai-section-head">What we install</span>
         <ul class="ai-list">
-          <li><span><strong>Revenue attribution at the event level.</strong> AI reconciles ad spend with booked consults, cash collected, lifetime value. You see which campaign paid for itself, not CPL averages.</span></li>
-          <li><span><strong>Predictive no-show scoring.</strong> We model which booked patients are likely to ghost and trigger human-voice recovery before they do.</span></li>
-          <li><span><strong>AI receptionists for inbound.</strong> Picks up after-hours leads in under 30 seconds, books to calendar, hands off to staff in the morning with full context.</span></li>
-          <li><span><strong>Human touch where it closes.</strong> High-ticket consults, objection handling, and nurture calls stay with trained humans. That's where the close actually happens.</span></li>
+          <li><span><strong>AI reception and triage, 24/7.</strong> Inbound calls, form fills, and DMs answered in under 30 seconds. Qualifies intent, books to calendar, hands off to staff with full context in the morning. The Sunday-night lead becomes a Monday-morning consult.</span></li>
+          <li><span><strong>Speed-to-lead automation.</strong> Every inbound triggers a first-touch SMS and call attempt inside 5 minutes, during and after hours. Response-time studies cite 21× improvement versus 30-minute response. Your team isn't manning the phone on Sunday night. Ours is.</span></li>
+          <li><span><strong>Predictive LTV scoring.</strong> Every lead gets scored by expected lifetime value before the consult. Your best consultants spend their time on the high-intent, high-ticket patients, not tyre-kickers.</span></li>
+          <li><span><strong>Predictive no-show scoring.</strong> Model which booked patients are likely to ghost and trigger human-voice recovery before the chair goes empty. No-show revenue is the quietest leak in the building.</span></li>
+          <li><span><strong>Revenue attribution at event level.</strong> AI reconciles ad spend with consults booked, cash collected, and LTV per channel. You see which campaign paid for itself, not CPL averages. Wasted spend becomes reallocatable spend.</span></li>
+          <li><span><strong>One integrated layer, not five dashboards.</strong> Ads, CRM, EMR, call software, reporting, all piped into a single source of truth your team actually trusts. One screen, one set of numbers, one place to look.</span></li>
+          <li><span><strong>Humans where the close actually lives.</strong> High-ticket consults, objection handling, nurture calls. AI clears the path and stays out of the room when trust is the variable.</span></li>
         </ul>
       </div>
       <div class="terminal-box">
@@ -1351,13 +1394,16 @@
           <span class="tpath">~/.csp/install · engine.v2026</span>
         </div>
         <div class="terminal-body">
-          <div><span class="prompt">$</span>csp install <span class="dim">--client=your-clinic --pillars=4</span></div>
+          <div><span class="prompt">$</span>csp install <span class="dim">--client=your-clinic --ai=surgical</span></div>
+          <div><span class="out">▸ Speed-to-lead automation</span> <span class="ok">ok · 247ms avg</span></div>
+          <div><span class="out">▸ AI reception layer (24/7)</span> <span class="ok">ok</span></div>
+          <div><span class="out">▸ LTV scoring pipeline</span> <span class="ok">ok</span></div>
+          <div><span class="out">▸ No-show prediction</span> <span class="ok">ok · 73% precision</span></div>
+          <div><span class="out">▸ Revenue attribution</span> <span class="ok">ok · event-level</span></div>
+          <div><span class="out">▸ Tool consolidation</span> <span class="ok">ok · 5 → 1</span></div>
           <div><span class="out">▸ Constraint diagnosis</span> <span class="ok">ok</span></div>
-          <div><span class="out">▸ Attribution pipeline</span> <span class="ok">ok</span></div>
-          <div><span class="out">▸ AI reception layer</span> <span class="ok">ok</span></div>
-          <div><span class="out">▸ Reactivation engine</span> <span class="ok">ok</span></div>
-          <div><span class="out">▸ Consult scripts</span> <span class="ok">ok</span></div>
-          <div><span class="dim">└ Ready · Week 1 · Reactivation live</span></div>
+          <div><span class="dim">└ Humans retained: consults, objections, close</span></div>
+          <div><span class="dim">└ Ready · Week 1 · First recovered lead live</span></div>
         </div>
       </div>
     </div>
@@ -1587,7 +1633,7 @@
           <li>Constraint-first diagnosis, transparent about what we do</li>
           <li>Custom 90-day roadmap built live on the call</li>
           <li>Honest answer on fit, either way</li>
-          <li>Built toward enterprise value, not just more leads</li>
+          <li>Built toward the EBITDA multiple, not just this month's leads</li>
         </ul>
         <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v2&utm_content=fork_active" target="_blank" rel="noopener">Book my diagnostic →</a>
       </div>
