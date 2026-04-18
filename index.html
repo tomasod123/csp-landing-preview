@@ -1289,283 +1289,264 @@
   }
 
   /* ============================================================
-   * ENGINE · Operational schematic (v2.18 · v1 still, no motion yet)
-   * Scroll-sync + reveal to be layered in v2.19.
+   * ENGINE · Dashboard preview card (v2.19)
+   * Unified SaaS dashboard mock. Reads top to bottom.
    * ============================================================ */
   .engine-system {
     margin: 36px 0 20px;
-    padding: clamp(24px, 3vw, 40px) clamp(20px, 3vw, 44px);
     background: var(--csp-surface);
     border: 1px solid var(--csp-ink-300);
     border-radius: var(--csp-r-xl);
-    box-shadow: var(--csp-shadow);
+    box-shadow: var(--csp-shadow-lg);
     position: relative;
     overflow: hidden;
   }
-  .engine-system-header {
+  .es-topbar {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 20px; flex-wrap: wrap;
-    margin-bottom: 28px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--csp-ink-300);
+    gap: 16px; flex-wrap: wrap;
+    padding: 14px 22px;
+    background: var(--csp-warm-900);
+    color: #fff;
   }
-  .engine-system-header .es-eye {
+  .es-topbar-left {
+    display: flex; align-items: center; gap: 12px;
     font-family: var(--csp-font-mono);
-    font-size: 10.5px; font-weight: 700;
-    color: var(--csp-blue-800); letter-spacing: 0.18em;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    display: flex; align-items: center; gap: 10px;
   }
-  .engine-system-header .es-eye::before {
+  .es-brand {
+    display: flex; align-items: center; gap: 8px;
+    color: #fff;
+  }
+  .es-brand::before {
     content: ""; width: 7px; height: 7px; border-radius: 50%;
     background: var(--csp-success);
-    box-shadow: 0 0 8px rgba(5,150,105,0.6);
+    box-shadow: 0 0 8px rgba(5,150,105,0.8);
     animation: csp-pulse 1.8s ease-in-out infinite;
     flex-shrink: 0;
   }
-  .engine-system-phases {
-    display: flex; gap: 6px;
+  .es-sep {
+    width: 1px; height: 12px; background: rgba(255,255,255,0.15);
+    display: inline-block;
+  }
+  .es-clinic {
+    color: rgba(255,255,255,0.6); letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .es-topbar-right {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .es-phases {
+    display: inline-flex; gap: 4px;
     font-family: var(--csp-font-mono);
     font-size: 9.5px; font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
-  .engine-system-phases .phase {
-    padding: 6px 11px; border-radius: var(--csp-r-full);
-    border: 1px solid var(--csp-ink-300);
-    color: var(--csp-ink-500);
-    background: transparent;
+  .es-phases .phase {
+    padding: 5px 10px; border-radius: var(--csp-r-full);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.5);
     white-space: nowrap;
   }
-  .engine-system-phases .phase.done {
+  .es-phases .phase.done {
+    color: rgba(255,255,255,0.78);
+    border-color: rgba(255,255,255,0.22);
+  }
+  .es-phases .phase.active {
+    background: var(--csp-blue-800);
+    color: #fff;
+    border-color: var(--csp-blue-800);
+  }
+
+  .es-caption {
+    padding: 14px 22px;
     background: var(--csp-surface-2);
-    color: var(--csp-ink-700);
-    border-color: var(--csp-ink-300);
-  }
-  .engine-system-phases .phase.active {
-    background: var(--csp-blue-50);
-    color: var(--csp-blue-800);
-    border-color: var(--csp-blue-100);
-  }
-
-  .engine-system-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 24px;
-    position: relative;
-    margin-bottom: 26px;
-  }
-  .engine-system-lines {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .engine-system-core {
-    position: absolute;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 4;
-    width: 230px; height: 230px;
-    padding: 22px 20px;
-    background: var(--csp-warm-900);
-    border-radius: var(--csp-r-lg);
-    box-shadow: var(--csp-shadow-cta);
-    color: #fff;
-    display: flex; flex-direction: column; justify-content: space-between;
-    align-items: flex-start; text-align: left;
-  }
-  .engine-system-core .core-eye {
-    font-family: var(--csp-font-mono);
-    font-size: 9.5px; letter-spacing: 0.2em;
-    color: var(--csp-blue-400); text-transform: uppercase;
-    font-weight: 700;
-    display: flex; align-items: center; gap: 7px;
-  }
-  .engine-system-core .core-eye::before {
-    content: ""; width: 5px; height: 5px; border-radius: 50%;
-    background: var(--csp-success);
-    box-shadow: 0 0 6px rgba(5,150,105,0.7);
-    animation: csp-pulse 1.8s ease-in-out infinite;
-  }
-  .engine-system-core h4 {
-    font-family: var(--csp-font-display);
-    font-size: 19px; font-weight: 700;
-    letter-spacing: -0.02em;
-    margin: 8px 0 0; line-height: 1.15;
-    color: #fff;
-  }
-  .engine-system-core .core-sub {
     font-family: var(--csp-font-ui);
-    font-size: 11px; color: rgba(255,255,255,0.55);
-    margin-top: 4px; line-height: 1.4;
+    font-size: 13.5px;
+    color: var(--csp-ink-700);
+    line-height: 1.55;
+    border-bottom: 1px solid var(--csp-ink-300);
   }
-  .engine-system-core .core-metric {
+  .es-caption strong { color: var(--csp-warm-900); font-weight: 600; }
+
+  .es-kpi-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    border-bottom: 1px solid var(--csp-ink-300);
+  }
+  .es-kpi {
+    padding: 22px 24px;
+    border-right: 1px solid var(--csp-ink-300);
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .es-kpi:last-child { border-right: none; }
+  .es-kpi-lab {
     font-family: var(--csp-font-mono);
-    font-size: 22px; font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-  }
-  .engine-system-core .core-metric span {
-    display: block;
-    font-size: 8.5px; font-weight: 700;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.14em;
+    font-size: 10px; font-weight: 700;
+    color: var(--csp-ink-500); letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-top: 6px;
+  }
+  .es-kpi-val {
+    font-family: var(--csp-font-display);
+    font-size: clamp(24px, 2.4vw, 32px); font-weight: 800;
+    color: var(--csp-warm-900);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .es-kpi-val.mono {
+    font-family: var(--csp-font-mono);
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .es-kpi-sub {
+    font-family: var(--csp-font-mono);
+    font-size: 9.5px; font-weight: 700;
+    color: var(--csp-success); letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .es-kpi-sub.ink {
+    color: var(--csp-ink-500);
   }
 
-  .es-pillar {
-    background: var(--csp-bg);
-    border: 1px solid var(--csp-ink-300);
-    border-radius: var(--csp-r-lg);
-    padding: 20px 22px;
-    min-height: 210px;
+  .es-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--csp-ink-300);
+  }
+  .es-tile {
+    padding: 22px 20px;
+    border-right: 1px solid var(--csp-ink-300);
     display: flex; flex-direction: column;
-    position: relative;
-    z-index: 2;
-    transition: border-color 0.2s var(--csp-ease), box-shadow 0.2s var(--csp-ease);
+    min-height: 230px;
+    background: var(--csp-surface);
+    transition: background 0.2s var(--csp-ease);
   }
-  .es-pillar:hover {
-    border-color: var(--csp-blue-100);
-    box-shadow: var(--csp-shadow-sm);
-  }
-  .es-pillar.tl { grid-column: 1; grid-row: 1; margin-right: 80px; }
-  .es-pillar.tr { grid-column: 2; grid-row: 1; margin-left: 80px; }
-  .es-pillar.bl { grid-column: 1; grid-row: 2; margin-right: 80px; }
-  .es-pillar.br { grid-column: 2; grid-row: 2; margin-left: 80px; }
-
-  .es-pillar .es-p-eye {
+  .es-tile:last-child { border-right: none; }
+  .es-tile:hover { background: var(--csp-surface-2); }
+  .es-tile-eye {
     font-family: var(--csp-font-mono);
     font-size: 10px; font-weight: 700;
     color: var(--csp-blue-800); letter-spacing: 0.16em;
     text-transform: uppercase;
     margin-bottom: 10px;
-    display: block;
   }
-  .es-pillar h4 {
+  .es-tile h4 {
     font-family: var(--csp-font-display);
-    font-size: 16px; font-weight: 700;
-    letter-spacing: -0.01em; margin: 0 0 12px;
+    font-size: 15.5px; font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
     color: var(--csp-warm-900);
-    line-height: 1.2;
+    line-height: 1.22;
   }
-  .es-pillar ul {
-    list-style: none; padding: 0; margin: 0 0 14px;
+  .es-tile ul {
+    list-style: none; padding: 0; margin: 0 0 16px;
     font-family: var(--csp-font-mono);
     font-size: 10.5px;
     color: var(--csp-ink-700);
-    line-height: 1.8;
+    line-height: 1.75;
     letter-spacing: 0.01em;
   }
-  .es-pillar ul li {
-    display: flex; gap: 8px; align-items: flex-start;
+  .es-tile ul li {
+    display: flex; gap: 7px; align-items: flex-start;
   }
-  .es-pillar ul li::before {
+  .es-tile ul li::before {
     content: "▸"; color: var(--csp-blue-800); font-weight: 700;
     flex-shrink: 0;
   }
-  .es-pillar .es-rev {
+  .es-tile-metric {
     margin-top: auto;
     padding-top: 12px;
     border-top: 1px dashed var(--csp-ink-300);
-    font-family: var(--csp-font-mono);
-    font-size: 10.5px; font-weight: 700;
-    color: var(--csp-ink-700);
-    letter-spacing: 0.04em;
+    display: flex; flex-direction: column; gap: 3px;
   }
-  .es-pillar .es-rev span {
+  .es-tile-metric .metric-val {
+    font-family: var(--csp-font-mono);
+    font-size: 14px; font-weight: 700;
+    color: var(--csp-warm-900);
+    letter-spacing: -0.01em;
+    display: flex; align-items: baseline; gap: 3px;
+  }
+  .es-tile-metric .metric-val .up {
+    color: var(--csp-success);
+  }
+  .es-tile-metric .metric-val .amount {
     color: var(--csp-blue-800);
-    font-weight: 700;
+  }
+  .es-tile-metric .metric-lab {
+    font-family: var(--csp-font-mono);
+    font-size: 9px; font-weight: 700;
+    color: var(--csp-ink-500); letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
-  .engine-system-footer {
+  .es-footer {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 24px; align-items: center;
-    padding-top: 22px;
-    border-top: 1px solid var(--csp-ink-300);
+    padding: 22px 24px;
+    background: var(--csp-surface-2);
   }
-  .es-ev {
-    display: flex; flex-direction: column; gap: 6px;
-    min-width: 0;
-  }
-  .es-ev .es-ev-eye {
+  .es-ev { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .es-ev-eye {
     font-family: var(--csp-font-mono);
     font-size: 9.5px; font-weight: 700;
     color: var(--csp-ink-500); letter-spacing: 0.18em;
     text-transform: uppercase;
   }
-  .es-ev .es-ev-value {
+  .es-ev-val {
     font-family: var(--csp-font-display);
-    font-size: 20px; font-weight: 700;
+    font-size: 22px; font-weight: 700;
     color: var(--csp-warm-900);
     letter-spacing: -0.02em;
   }
-  .es-ev .es-ev-bar {
+  .es-ev-bar {
     height: 6px; background: var(--csp-ink-300); border-radius: var(--csp-r-full);
     position: relative; overflow: hidden;
-    margin-top: 4px; max-width: 360px;
+    margin-top: 2px; max-width: 360px;
   }
-  .es-ev .es-ev-bar::after {
+  .es-ev-bar::after {
     content: "";
     position: absolute;
     inset: 0 32% 0 0;
     background: linear-gradient(90deg, var(--csp-blue-800), var(--csp-blue-400));
     border-radius: inherit;
   }
-  .es-stamp {
-    font-family: var(--csp-font-mono);
-    font-size: 10px; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--csp-success);
-    padding: 9px 14px;
-    border: 1px solid rgba(5,150,105,0.4);
-    border-radius: var(--csp-r-full);
-    display: inline-flex; align-items: center; gap: 9px;
-    background: rgba(5, 150, 105, 0.06);
-    white-space: nowrap;
-  }
-  .es-stamp::before {
-    content: ""; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--csp-success);
-    box-shadow: 0 0 6px rgba(5,150,105,0.7);
-    animation: csp-pulse 1.8s ease-in-out infinite;
-  }
+  .es-footer .btn { white-space: nowrap; }
 
-  @media (max-width: 860px) {
-    .engine-system { padding: 22px 18px; }
-    .engine-system-grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      gap: 12px;
+  @media (max-width: 960px) {
+    .es-pillars { grid-template-columns: repeat(2, 1fr); }
+    .es-tile:nth-child(2) { border-right: none; }
+    .es-tile:nth-child(1), .es-tile:nth-child(2) {
+      border-bottom: 1px solid var(--csp-ink-300);
     }
-    .engine-system-core {
-      position: relative;
-      left: 0; top: 0;
-      transform: none;
-      width: 100%; height: auto;
-      min-height: 140px;
-      order: -1;
-      margin-bottom: 4px;
-      box-shadow: var(--csp-shadow-cta);
+    .es-tile { min-height: auto; }
+    .es-kpi-row { grid-template-columns: 1fr; }
+    .es-kpi {
+      border-right: none;
+      border-bottom: 1px solid var(--csp-ink-300);
     }
-    .es-pillar.tl, .es-pillar.tr, .es-pillar.bl, .es-pillar.br {
-      grid-column: 1; grid-row: auto; margin: 0;
-      min-height: auto;
+    .es-kpi:last-child { border-bottom: none; }
+  }
+  @media (max-width: 560px) {
+    .es-pillars { grid-template-columns: 1fr; }
+    .es-tile {
+      border-right: none;
+      border-bottom: 1px solid var(--csp-ink-300);
     }
-    .engine-system-lines { display: none; }
-    .engine-system-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .engine-system-footer { grid-template-columns: 1fr; }
-    .es-stamp { align-self: flex-start; }
+    .es-tile:last-child { border-bottom: none; }
+    .es-topbar { padding: 12px 16px; }
+    .es-caption { padding: 12px 16px; font-size: 12.5px; }
+    .es-footer { padding: 18px 16px; grid-template-columns: 1fr; }
+    .es-topbar-right { flex-wrap: wrap; }
+    .es-phases .phase { font-size: 8.5px; padding: 4px 8px; }
+    .es-kpi { padding: 18px 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .engine-system-header .es-eye::before,
-    .engine-system-core .core-eye::before,
-    .es-stamp::before { animation: none; }
+    .es-brand::before { animation: none; }
   }
 </style>
 </head>
@@ -1740,91 +1721,116 @@
     <h2>The Clinic Success Operating System.</h2>
   </div>
 
-  <!-- ============================== ENGINE · OPERATIONAL SCHEMATIC (v2.18) ============================== -->
+  <!-- ============================== ENGINE · DASHBOARD PREVIEW CARD (v2.19) ============================== -->
   <div class="wrap" style="margin-top: 30px;">
-    <div class="engine-system" aria-label="Clinic Success Engine · installed operational schematic">
-      <div class="engine-system-header">
-        <span class="es-eye">PatientFlo · Operating · Compounding</span>
-        <div class="engine-system-phases" aria-label="Install status">
-          <span class="phase done">Diagnosed</span>
-          <span class="phase done">Installed</span>
-          <span class="phase active">Operating</span>
+    <div class="engine-system" aria-label="What your clinic looks like running on the engine">
+
+      <div class="es-topbar">
+        <div class="es-topbar-left">
+          <span class="es-brand">PatientFlo</span>
+          <span class="es-sep"></span>
+          <span class="es-clinic">Your clinic · live</span>
+        </div>
+        <div class="es-topbar-right">
+          <span class="es-phases" aria-label="Install status">
+            <span class="phase done">Diagnosed</span>
+            <span class="phase done">Installed</span>
+            <span class="phase active">Operating</span>
+          </span>
         </div>
       </div>
 
-      <div class="engine-system-grid">
-        <svg class="engine-system-lines" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
-          <line x1="500" y1="250" x2="230" y2="110" stroke="#1E40AF" stroke-width="1" stroke-dasharray="4 5" opacity="0.45"/>
-          <line x1="500" y1="250" x2="770" y2="110" stroke="#1E40AF" stroke-width="1" stroke-dasharray="4 5" opacity="0.45"/>
-          <line x1="500" y1="250" x2="230" y2="390" stroke="#1E40AF" stroke-width="1" stroke-dasharray="4 5" opacity="0.45"/>
-          <line x1="500" y1="250" x2="770" y2="390" stroke="#1E40AF" stroke-width="1" stroke-dasharray="4 5" opacity="0.45"/>
-        </svg>
+      <div class="es-caption">
+        What your clinic looks like once the engine is <strong>installed and operating</strong>. Four pillars live. Twelve steps running. Numbers below are ranges we see across client installs.
+      </div>
 
-        <div class="es-pillar tl">
-          <span class="es-p-eye">Pillar 01 · Reactivation</span>
-          <h4>Database stops collecting dust.</h4>
+      <div class="es-kpi-row">
+        <div class="es-kpi">
+          <span class="es-kpi-lab">Collected · last 24h</span>
+          <span class="es-kpi-val mono">$47,318</span>
+          <span class="es-kpi-sub">● On track to monthly target</span>
+        </div>
+        <div class="es-kpi">
+          <span class="es-kpi-lab">Organic traffic</span>
+          <span class="es-kpi-val">+312%</span>
+          <span class="es-kpi-sub ink">Year over year</span>
+        </div>
+        <div class="es-kpi">
+          <span class="es-kpi-lab">Speed to lead</span>
+          <span class="es-kpi-val mono">00:47</span>
+          <span class="es-kpi-sub ink">AI first response</span>
+        </div>
+      </div>
+
+      <div class="es-pillars">
+        <div class="es-tile">
+          <span class="es-tile-eye">Pillar 01 · Reactivation</span>
+          <h4>Your database stops collecting dust.</h4>
           <ul>
             <li>Dormant patient mining</li>
-            <li>Treatment-segment reactivation</li>
-            <li>Lifetime-value optimisation</li>
+            <li>Treatment-segment campaigns</li>
+            <li>Lifetime-value tracking</li>
           </ul>
-          <div class="es-rev">Trailing lift · <span>$28–45k</span> / mo</div>
+          <div class="es-tile-metric">
+            <span class="metric-val"><span class="up">+</span><span class="amount">$28–45k</span></span>
+            <span class="metric-lab">Trailing lift · monthly</span>
+          </div>
         </div>
 
-        <div class="es-pillar tr">
-          <span class="es-p-eye">Pillar 02 · Authority</span>
-          <h4>Default option in your city.</h4>
+        <div class="es-tile">
+          <span class="es-tile-eye">Pillar 02 · Authority</span>
+          <h4>You become the default option in your city.</h4>
           <ul>
-            <li>Proprietary local SEO framework</li>
+            <li>Proprietary local SEO</li>
             <li>Review stacking at scale</li>
             <li>Platform omnipresence</li>
           </ul>
-          <div class="es-rev">Compounding · <span>$22–38k</span> / mo</div>
-        </div>
-
-        <div class="engine-system-core">
-          <div>
-            <span class="core-eye">Your clinic · live</span>
-            <h4>Clinic Success Engine</h4>
-            <div class="core-sub">Installed. Operating without you.</div>
+          <div class="es-tile-metric">
+            <span class="metric-val"><span class="up">+</span><span class="amount">$22–38k</span></span>
+            <span class="metric-lab">Compounding · monthly</span>
           </div>
-          <div class="core-metric">$47,318<span>Collected · last 24h</span></div>
         </div>
 
-        <div class="es-pillar bl">
-          <span class="es-p-eye">Pillar 03 · Conversion</span>
-          <h4>Every gap closed.</h4>
+        <div class="es-tile">
+          <span class="es-tile-eye">Pillar 03 · Conversion</span>
+          <h4>Every gap closed. Every no-show recovered.</h4>
           <ul>
-            <li>AI speed-to-lead · under 30s</li>
+            <li>AI speed-to-lead under 30s</li>
             <li>No-show recovery flows</li>
             <li>Pre and post-op automation</li>
           </ul>
-          <div class="es-rev">Recovered · <span>$20–32k</span> / mo</div>
+          <div class="es-tile-metric">
+            <span class="metric-val"><span class="up">+</span><span class="amount">$20–32k</span></span>
+            <span class="metric-lab">Recovered · monthly</span>
+          </div>
         </div>
 
-        <div class="es-pillar br">
-          <span class="es-p-eye">Pillar 04 · Sales</span>
-          <h4>Every consult to a deposit.</h4>
+        <div class="es-tile">
+          <span class="es-tile-eye">Pillar 04 · Sales</span>
+          <h4>Every consult traceable to a deposit.</h4>
           <ul>
-            <li>Script training · weekly call review</li>
+            <li>Script training · call review</li>
             <li>Revenue attribution · live</li>
             <li>Front-desk SOP alignment</li>
           </ul>
-          <div class="es-rev">Closed · <span>$24–40k</span> / mo</div>
+          <div class="es-tile-metric">
+            <span class="metric-val"><span class="up">+</span><span class="amount">$24–40k</span></span>
+            <span class="metric-lab">Closed · monthly</span>
+          </div>
         </div>
       </div>
 
-      <div class="engine-system-footer">
+      <div class="es-footer">
         <div class="es-ev">
           <span class="es-ev-eye">Enterprise value · directional</span>
-          <span class="es-ev-value">$9.6M – $14.4M</span>
+          <span class="es-ev-val">$9.6M – $14.4M</span>
           <div class="es-ev-bar" aria-hidden="true"></div>
         </div>
-        <span class="es-stamp">Installed with your team</span>
+        <a href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=engine_preview" target="_blank" rel="noopener" class="btn btn-primary">See my install plan →</a>
       </div>
     </div>
   </div>
-  <!-- ============================== END ENGINE SYSTEM ============================== -->
+  <!-- ============================== END ENGINE DASHBOARD ============================== -->
 
   <div class="wrap">
     <p class="intro">Not another agency, tool, or dashboard. A diagnostic, install, and operate stack that compounds into enterprise value. Buy back your time. Become the go-to authority on Google. Build a clinic you can walk away from, not a job you can't. One system, four pillars, twelve steps, installed shoulder to shoulder with your team.</p>
