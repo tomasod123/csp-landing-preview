@@ -2,7 +2,8 @@
  * CSP Scorecard · interactive self-assessment
  * 10 sliders (1-10 each) → score out of 100.
  * Color-coded tier (red/amber/green), biggest-opportunity readout,
- * dynamic CTA with score + top_gap + optional revenue in UTM.
+ * currency-aware recovery estimate (USD/GBP/EUR/AUD), dynamic CTA
+ * with score + top_gap + optional revenue/currency in UTM.
  * ============================================================ */
 (function () {
   'use strict';
@@ -10,67 +11,70 @@
   var root = document.getElementById('csp-scorecard');
   if (!root) return;
 
-  var rows       = root.querySelectorAll('.sc-row');
-  var revInput   = document.getElementById('sc-revenue-input');
-  var scoreBox   = document.getElementById('sc-score');
-  var scoreEl    = document.getElementById('sc-score-val');
-  var barEl      = document.getElementById('sc-bar');
-  var oppLblEl   = document.getElementById('sc-opp-label');
-  var oppTitleEl = document.getElementById('sc-opp-title');
-  var oppCopyEl  = document.getElementById('sc-opp-copy');
-  var oppSecEl   = document.getElementById('sc-opp-secondary');
-  var ctaEl      = document.getElementById('sc-cta');
+  var rows          = root.querySelectorAll('.sc-row');
+  var revInput      = document.getElementById('sc-revenue-input');
+  var currencyInput = document.getElementById('sc-currency-input');
+  var scoreBox      = document.getElementById('sc-score');
+  var scoreEl       = document.getElementById('sc-score-val');
+  var barEl         = document.getElementById('sc-bar');
+  var oppLblEl      = document.getElementById('sc-opp-label');
+  var oppTitleEl    = document.getElementById('sc-opp-title');
+  var oppCopyEl     = document.getElementById('sc-opp-copy');
+  var oppSecEl      = document.getElementById('sc-opp-secondary');
+  var ctaEl         = document.getElementById('sc-cta');
 
-  var MAX        = rows.length * 10; // 10 rows × 10 = 100
-  var STORE_KEY  = 'csp-scorecard-v3';
-  var CTA_BASE   = 'https://book.clinicsuccesspartners.com/schedule-call';
-  var CTA_UTMS   = 'utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3';
+  var MAX       = rows.length * 10; // 10 rows × 10 = 100
+  var STORE_KEY = 'csp-scorecard-v4';
+  var CTA_BASE  = 'https://book.clinicsuccesspartners.com/schedule-call';
+  var CTA_UTMS  = 'utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3';
+
+  var CURRENCY_SYMBOLS = { USD: '$', GBP: '£', EUR: '€', AUD: 'A$' };
 
   var CATALOG = {
     speed: {
       label: 'Speed to lead',
       module: 'Speed-to-lead automation',
       copy: function (amt) {
-        return 'Most clinics lose over half of paid leads to slow response. Our speed-to-lead install contacts every inbound inside 5 minutes, 24/7, and typically recovers <strong>' + amt + '</strong> in the first 60 days.';
+        return 'The average clinic takes 24 to 48 hours to call a new inquiry. 78% of sales go to the vendor who responds first. Installing speed-to-lead automation, every inbound contacted inside 5 minutes, 24/7, typically recovers <strong>' + amt + '</strong> in the first 60 days.';
       },
-      pctOfRev: 0.07,
-      staticMid: 10000
+      pctOfRev: 0.09,
+      staticMid: 22000
     },
     conversion: {
       label: 'Website to booked appointment',
       module: 'Conversion architecture',
       copy: function (amt) {
-        return 'Your site is renting traffic, not converting it. Rebuilding the booking path, qualification, and offer structure typically recovers <strong>' + amt + '</strong> in the first 60 days from the same ad spend.';
+        return 'The average clinic site converts under 2% of visitors into booked consults. Rebuilding the booking path, qualifier, and offer structure typically lifts visit-to-book 2 to 3×, recovering <strong>' + amt + '</strong> in the first 60 days from the same ad spend you are already paying for.';
       },
-      pctOfRev: 0.05,
-      staticMid: 8000
+      pctOfRev: 0.08,
+      staticMid: 20000
     },
     attribution: {
       label: 'Lead source attribution',
       module: 'Revenue attribution layer',
       copy: function (amt) {
-        return 'You cannot scale what you cannot see. Wiring attribution campaign-to-cash typically exposes <strong>' + amt + '</strong> of wasted spend in the first 30 days, ready to redeploy into channels that actually pay.';
+        return 'The average clinic wastes 20 to 40% of ad spend on channels that never produce a paying patient. Wiring attribution campaign-to-cash typically exposes <strong>' + amt + '</strong> of reallocatable spend inside the first 30 days.';
       },
-      pctOfRev: 0.06,
-      staticMid: 9000
+      pctOfRev: 0.08,
+      staticMid: 16000
     },
     frontdesk: {
       label: 'Front desk sales performance',
       module: 'Front-desk scripting and training',
       copy: function (amt) {
-        return 'The front desk is where paid leads turn into booked consults, or do not. Installed scripts, call review, and weekly coaching typically recovers <strong>' + amt + '</strong> per month without adding a single new lead.';
+        return 'The front desk is where paid leads turn into booked consults, or do not. With installed scripts, call review, and weekly coaching, call-to-book rate typically lifts 25 to 40%, recovering <strong>' + amt + '</strong> per month without adding a single new lead.';
       },
-      pctOfRev: 0.08,
-      staticMid: 12000
+      pctOfRev: 0.10,
+      staticMid: 24000
     },
     reactivation: {
       label: 'Patient reactivation',
       module: 'Database reactivation engine',
       copy: function (amt) {
-        return 'You have already paid to acquire these patients. A properly segmented reactivation campaign typically produces <strong>' + amt + '</strong> in the first 30 days, most of it in week two.';
+        return 'You have already paid to acquire these patients. A properly segmented reactivation campaign typically produces <strong>' + amt + '</strong> in the first 30 days, most of it inside week two. This is usually the single largest line item in month one.';
       },
-      pctOfRev: 0.10,
-      staticMid: 15000
+      pctOfRev: 0.12,
+      staticMid: 30000
     },
     roi: {
       label: 'Marketing ROI visibility',
@@ -78,50 +82,55 @@
       copy: function (amt) {
         return 'Vanity dashboards hide the real leak. Rebuilding reporting around collected revenue per channel typically frees <strong>' + amt + '</strong> of inefficient spend in the first two reporting cycles.';
       },
-      pctOfRev: 0.05,
-      staticMid: 8000
+      pctOfRev: 0.07,
+      staticMid: 16000
     },
     integration: {
       label: 'Tech-stack integration',
       module: 'Unified tech stack',
       copy: function (amt) {
-        return 'Five tools that do not talk to each other is five places your team loses trust in the data. A single integrated layer typically recovers <strong>' + amt + '</strong> by cutting tool waste and closing handoff gaps.';
+        return 'Five tools that do not talk to each other is five places your team loses trust in the data. A single integrated layer typically recovers <strong>' + amt + '</strong> by cutting tool waste, closing handoff gaps, and freeing front-desk hours for actual sales.';
       },
-      pctOfRev: 0.04,
-      staticMid: 6000
+      pctOfRev: 0.05,
+      staticMid: 11000
     },
     ltv: {
       label: 'LTV and retention',
       module: 'LTV engine',
       copy: function (amt) {
-        return 'Without LTV visibility you price consults wrong and miss cross-sells. Installing LTV tracking and cross-treatment pathways typically adds <strong>' + amt + '</strong> per month from patients already in the door.';
+        return 'Without LTV visibility you price consults wrong and miss cross-sells. Installing LTV tracking per treatment and cross-treatment pathways typically adds <strong>' + amt + '</strong> per month from patients already in the door.';
       },
-      pctOfRev: 0.06,
-      staticMid: 9000
+      pctOfRev: 0.09,
+      staticMid: 20000
     },
     reviews: {
       label: 'Reputation and reviews',
       module: 'Authority stack',
       copy: function (amt) {
-        return 'Sitting on 40 reviews when the market leader has 500+ is how you lose on Google Maps before a patient even clicks. Installed review workflows and response cadence typically recovers <strong>' + amt + '</strong> of organic patient flow you are invisible to today.';
+        return 'Sitting on 40 reviews when the market leader has 500+ is how you lose on Google Maps before a patient even clicks. Installed review workflows and managed response cadence typically recover <strong>' + amt + '</strong> of organic patient flow you are invisible to today.';
       },
-      pctOfRev: 0.04,
-      staticMid: 6000
+      pctOfRev: 0.06,
+      staticMid: 13000
     },
     noshow: {
       label: 'No-show and cancellation recovery',
       module: 'No-show recovery flows',
       copy: function (amt) {
-        return 'Every missed appointment is revenue you already paid to acquire. Predictive scoring plus human-voice recovery typically claws back <strong>' + amt + '</strong> of no-show revenue per month.';
+        return 'Every missed appointment is revenue you already paid to acquire and prepared to deliver. Predictive ghost-risk scoring plus human-voice recovery typically claws back <strong>' + amt + '</strong> of no-show revenue per month.';
       },
-      pctOfRev: 0.07,
-      staticMid: 10000
+      pctOfRev: 0.09,
+      staticMid: 19000
     }
   };
 
-  function formatDollar(n) {
-    if (n >= 1000) return '~$' + Math.round(n / 1000).toLocaleString() + 'k';
-    return '~$' + n.toLocaleString();
+  function readCurrency() {
+    return (currencyInput && currencyInput.value) || 'USD';
+  }
+
+  function formatAmount(n) {
+    var sym = CURRENCY_SYMBOLS[readCurrency()] || '$';
+    if (n >= 1000) return '~' + sym + Math.round(n / 1000).toLocaleString() + 'k';
+    return '~' + sym + n.toLocaleString();
   }
 
   /* Tier thresholds on /100 scale:
@@ -134,11 +143,11 @@
 
   /* Multiplier on 1-10 per-slider scale */
   function multForScore(s) {
-    if (s <= 2) return 1.4;   // badly broken
-    if (s <= 4) return 1.0;   // broken
-    if (s <= 6) return 0.55;  // patchy
-    if (s <= 8) return 0.25;  // decent, still room
-    return 0;                 // 9-10 aspirational
+    if (s <= 2) return 1.4;
+    if (s <= 4) return 1.0;
+    if (s <= 6) return 0.55;
+    if (s <= 8) return 0.25;
+    return 0;
   }
 
   function recoveryFor(key, score, revenue) {
@@ -207,7 +216,7 @@
     } else if (primary) {
       var pc = CATALOG[primary.key];
       var est = recoveryFor(primary.key, primary.score, revenue);
-      var estStr = est > 0 ? formatDollar(est) : 'a 5-figure lift';
+      var estStr = est > 0 ? formatAmount(est) : 'a 5-figure monthly lift';
       if (oppLblEl)   oppLblEl.textContent = 'Your biggest opportunity';
       if (oppTitleEl) oppTitleEl.textContent = pc.label;
       if (oppCopyEl)  oppCopyEl.innerHTML = pc.copy(estStr);
@@ -224,18 +233,18 @@
       } else if (primary) {
         label = 'Fix my ' + CATALOG[primary.key].label.toLowerCase() + ' →';
       } else {
-        label = 'Book a diagnostic call →';
+        label = 'Book a clinic roadmap call →';
       }
       ctaEl.textContent = label;
       var utmContent = 'scorecard_' + total + (primary ? '_' + primary.key : '');
       var href = CTA_BASE + '?' + CTA_UTMS + '&utm_content=' + utmContent + '&score=' + total;
       if (primary) href += '&top_gap=' + primary.key;
-      if (revenue > 0) href += '&rev=' + revenue;
+      if (revenue > 0) href += '&rev=' + revenue + '&cur=' + readCurrency();
       ctaEl.href = href;
     }
 
     try {
-      var state = { rev: revenue };
+      var state = { rev: revenue, cur: readCurrency() };
       rows.forEach(function (row) {
         var key = row.getAttribute('data-sc');
         var input = row.querySelector('input[type="range"]');
@@ -256,6 +265,7 @@
         if (state[key] != null) input.value = state[key];
       });
       if (state.rev && revInput) revInput.value = state.rev;
+      if (state.cur && currencyInput) currencyInput.value = state.cur;
     }
   } catch (e) { /* ignore */ }
 
@@ -268,6 +278,9 @@
   if (revInput) {
     revInput.addEventListener('input', update);
     revInput.addEventListener('change', update);
+  }
+  if (currencyInput) {
+    currencyInput.addEventListener('change', update);
   }
 
   update();
