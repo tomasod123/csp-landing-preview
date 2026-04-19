@@ -34,7 +34,20 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon-192.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
 
+<!-- Resource hints: preconnect critical origins for faster TLS -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://fast.vidalytics.com" crossorigin />
+<link rel="dns-prefetch" href="https://book.clinicsuccesspartners.com" />
+
+<!-- Google Fonts loaded directly (moved out of tokens.css @import to avoid sequential CSS chain) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+
+<!-- VSL poster preload: speeds up LCP for the above-fold Vidalytics thumbnail -->
+<link rel="preload" as="image" href="https://fast.vidalytics.com/video/HPq2IGBn/w9SCL74Icphn06Eu/img/thumbnail/blob-69e3a6c3eb606.jpg" fetchpriority="high" />
+
 <!-- Brand system -->
+<link rel="preload" href="./brand/tokens.css" as="style" />
 <link rel="stylesheet" href="./brand/tokens.css" />
 <link rel="stylesheet" href="./brand/motion.css" />
 <link rel="stylesheet" href="./css/page.css" />
@@ -1832,7 +1845,7 @@
         </div>
         <div class="es-kpi">
           <span class="es-kpi-lab">Speed to lead</span>
-          <span class="es-kpi-val mono">00:47</span>
+          <span class="es-kpi-val mono">0:0:47</span>
           <span class="es-kpi-sub ink">AI first response</span>
         </div>
       </div>

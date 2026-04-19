@@ -5,7 +5,9 @@
  * All colors, fonts, spacing, shadows, radii live here.
  * ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* NOTE: Google Fonts are loaded directly in index.html <head> via <link>.
+   The @import pattern created a sequential CSS dependency chain that added
+   200-500ms to First Contentful Paint. Do not re-add @import here. */
 
 :root {
   /* ---------- Color · Warm neutrals ---------- */
