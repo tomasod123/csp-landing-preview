@@ -221,11 +221,19 @@
     font-family: var(--csp-font-mono);
     font-size: 10.5px; font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
-    cursor: pointer; padding: 4px 8px; margin-top: 2px;
+    cursor: pointer; padding: 8px 14px; margin-top: 2px;
+    min-height: 36px;
     transition: color 0.2s var(--csp-ease);
+    -webkit-tap-highlight-color: transparent;
   }
-  .vsl-restart:hover { color: rgba(255,255,255,0.85); }
+  @media (hover: hover) {
+    .vsl-restart:hover { color: rgba(255,255,255,0.85); }
+  }
+  .vsl-restart:active { color: rgba(255,255,255,0.9); }
   .vsl-restart:focus-visible { outline: 1px solid rgba(255,255,255,0.35); outline-offset: 2px; }
+  @media (max-width: 720px) {
+    .vsl-restart { font-size: 11px; padding: 10px 16px; min-height: 40px; }
+  }
 
   /* ============ PROOF BAR ============ */
   .proof-bar {
@@ -246,14 +254,26 @@
     will-change: transform;
     transition: box-shadow 0.4s var(--csp-ease);
   }
-  .proof-card:hover {
-    box-shadow: 0 36px 90px rgba(0,0,0,0.2), 0 12px 28px rgba(30,64,175,0.18);
+  @media (hover: hover) {
+    .proof-card:hover {
+      box-shadow: 0 36px 90px rgba(0,0,0,0.2), 0 12px 28px rgba(30,64,175,0.18);
+    }
   }
   @keyframes csp-float {
     0%, 100% { transform: translate(0, 0); }
     25%     { transform: translate(-1.5px, -4px); }
     50%     { transform: translate(0, -8px); }
     75%     { transform: translate(1.5px, -4px); }
+  }
+  @keyframes csp-float-sm {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+  }
+  @media (max-width: 720px) {
+    .proof-card {
+      animation-name: csp-float-sm;
+      animation-duration: 6s;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .proof-card { animation: none; }
