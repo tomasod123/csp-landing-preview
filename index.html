@@ -153,6 +153,19 @@
   }
   .btn-outline:hover { border-color: var(--csp-blue-800); color: var(--csp-blue-800); }
   .btn-lg { padding: 16px 28px; font-size: 15px; }
+  .btn-xl {
+    padding: 20px 38px; font-size: 17px; font-weight: 700;
+    letter-spacing: -0.01em; gap: 10px;
+    box-shadow: 0 14px 32px rgba(30,64,175,0.32), 0 2px 6px rgba(15,23,42,0.18);
+  }
+  .btn-xl:hover { box-shadow: 0 18px 40px rgba(30,64,175,0.40), 0 3px 8px rgba(15,23,42,0.20); }
+  @media (max-width: 480px) {
+    .btn-xl { padding: 18px 26px; font-size: 16px; width: 100%; justify-content: center; }
+  }
+  /* Desktop nav CTA: more presence at >=768px */
+  @media (min-width: 768px) {
+    .site-nav .btn-primary { padding: 15px 28px; font-size: 14.5px; font-weight: 700; }
+  }
 
   /* ============ HERO (VSL above the fold, dark) ============ */
   .hero {
@@ -1689,7 +1702,7 @@
     </div>
     <div class="vsl-cta-row">
       <p class="vsl-cta-note"><span class="accent">Watch it first.</span> Every client worth $100k+ watched this before they booked.</p>
-      <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=hero" target="_blank" rel="noopener">Book your clinic roadmap call →</a>
+      <a class="btn btn-primary btn-xl magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=hero" target="_blank" rel="noopener">Book your clinic roadmap call →</a>
       <button type="button" class="vsl-restart" onclick="window.cspRestartVSL && window.cspRestartVSL()" aria-label="Restart video if playback is stuck">Video stuck? Restart it</button>
     </div>
     <p class="hero-sub">A focused breakdown of the Clinic Success Engine. For 7 and 8-figure operators who want a system that compounds into EBITDA, not another dashboard.</p>
