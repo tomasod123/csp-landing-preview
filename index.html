@@ -719,6 +719,97 @@
   .terminal-body .dim { color: rgba(255,255,255,0.5); }
   .terminal-body .out { color: rgba(255,255,255,0.75); }
   .terminal-body .ok { color: var(--csp-success); }
+
+  /* ============ PATIENTFLO LIVE OPS PANEL (premium, niche-native) ============ */
+  .ops-panel {
+    background: linear-gradient(180deg, #1A1916 0%, #131210 100%);
+    color: rgba(255,255,255,0.92);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--csp-r-lg);
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .ops-panel::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.4) 50%, transparent 100%);
+  }
+  .ops-panel-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.015);
+  }
+  .ops-panel-brand { display: flex; align-items: center; gap: 10px; }
+  .ops-live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--csp-success);
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.18), 0 0 8px rgba(34,197,94,0.6);
+    animation: csp-pulse 1.8s ease-in-out infinite;
+  }
+  .ops-panel-title {
+    font-family: var(--csp-font-display); font-weight: 700;
+    font-size: 14px; letter-spacing: -0.01em; color: #fff;
+  }
+  .ops-panel-sep {
+    width: 1px; height: 14px; background: rgba(255,255,255,0.12);
+  }
+  .ops-panel-sub {
+    font-family: var(--csp-font-mono); font-size: 10.5px;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .ops-panel-status {
+    font-family: var(--csp-font-mono); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--csp-success);
+    padding: 4px 9px; border-radius: 4px;
+    background: rgba(34,197,94,0.10);
+    border: 1px solid rgba(34,197,94,0.22);
+  }
+  .ops-panel-body { padding: 18px 20px; }
+  .ops-row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 9px 0;
+    font-size: 13.5px;
+    border-bottom: 1px dashed rgba(255,255,255,0.05);
+  }
+  .ops-row:last-child { border-bottom: none; }
+  .ops-lbl {
+    font-family: var(--csp-font-ui); font-weight: 500;
+    color: rgba(255,255,255,0.65); letter-spacing: -0.005em;
+  }
+  .ops-val {
+    font-family: var(--csp-font-mono); font-weight: 600;
+    color: #fff; letter-spacing: -0.01em;
+  }
+  .ops-val .ops-sub {
+    font-family: var(--csp-font-mono); font-weight: 500;
+    color: rgba(255,255,255,0.42); margin-left: 6px; font-size: 11.5px;
+  }
+  .ops-val-pending { color: var(--csp-blue-400); }
+  .ops-val-pending .ops-sub { color: rgba(147,197,253,0.55); }
+  .ops-val-kpi { font-size: 14.5px; color: #fff; }
+  .ops-trend-down { color: var(--csp-success); margin-left: 2px; font-size: 12px; }
+  .ops-divider {
+    height: 1px; background: rgba(255,255,255,0.08);
+    margin: 8px 0; position: relative;
+  }
+  .ops-divider::before {
+    content: ""; position: absolute; left: 0; top: 0; height: 1px; width: 32px;
+    background: var(--csp-blue-400); opacity: 0.5;
+  }
+  .ops-panel-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: var(--csp-font-mono); font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .ops-foot-label { color: rgba(255,255,255,0.45); }
+  .ops-foot-value { color: rgba(255,255,255,0.85); font-weight: 600; }
+
   @media (max-width: 900px) { .ai-grid { grid-template-columns: 1fr; gap: 28px; } }
 
   /* ============ COST OF WAITING (with citations) ============ */
@@ -1663,7 +1754,7 @@
   <div class="wrap-narrow">
     <span class="eye">Watch first</span>
     <h1>Your clinic doesn't have a marketing problem. It has a <span class="hl shimmer">systems</span> problem.</h1>
-    <p class="hero-resolver">The fix for 7-figure clinics who've already tried new ads, new offers, and new agencies. Agencies send you leads. We fill your books and build your enterprise value.</p>
+    <p class="hero-resolver">For clinic owners doing $80k+/month who've already tried new ads, new offers, and new agencies. We install the operating system that fills your books, recovers your ad spend, and compounds into enterprise value.</p>
     <div class="vsl-wrap">
       <div id="vidalytics_embed_Swi29HjsECOPJ_vA" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
       <script type="text/javascript">
@@ -1786,7 +1877,7 @@
 <section style="background: var(--csp-surface-2)" data-cursor-glow>
   <div class="wrap">
     <span class="sec-eye">02 · How the leak shows up</span>
-    <h2>Four symptoms every 7-figure clinic owner sees first.</h2>
+    <h2>Four symptoms every clinic owner doing $80k+/month sees first.</h2>
     <p class="intro">If three of these feel familiar, the constraint isn't your traffic. It's your architecture.</p>
     <div class="problem-list">
       <div class="problem"><span class="x">✕</span><p><strong>Leads arrive. Nothing answers.</strong> CRM logs the lead at 2:03pm Sunday. Front desk calls at 10:47am Tuesday. The patient booked somewhere else on Monday.</p></div>
@@ -1795,7 +1886,7 @@
       <div class="problem"><span class="x">✕</span><p><strong>Every month feels like a treadmill.</strong> Same spend, same staff, same output, same 80-hour weeks. You push harder. Nothing compounds into enterprise value.</p></div>
     </div>
     <div style="margin-top: 36px;">
-      <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=after_symptoms" target="_blank" rel="noopener">Book my roadmap call →</a>
+      <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=after_symptoms" target="_blank" rel="noopener">Show me my biggest leak →</a>
     </div>
   </div>
 </section>
@@ -1886,10 +1977,6 @@
             <li>Treatment-segment campaigns</li>
             <li>Lifetime-value tracking</li>
           </ul>
-          <div class="es-tile-metric">
-            <span class="metric-val"><span class="up">+</span><span class="amount">$28–45k</span></span>
-            <span class="metric-lab">Trailing lift · monthly</span>
-          </div>
         </div>
 
         <div class="es-tile">
@@ -1900,10 +1987,6 @@
             <li>Review stacking at scale</li>
             <li>Platform omnipresence</li>
           </ul>
-          <div class="es-tile-metric">
-            <span class="metric-val"><span class="up">+</span><span class="amount">$22–38k</span></span>
-            <span class="metric-lab">Compounding · monthly</span>
-          </div>
         </div>
 
         <div class="es-tile">
@@ -1914,10 +1997,6 @@
             <li>No-show recovery flows</li>
             <li>Pre and post-op automation</li>
           </ul>
-          <div class="es-tile-metric">
-            <span class="metric-val"><span class="up">+</span><span class="amount">$20–32k</span></span>
-            <span class="metric-lab">Recovered · monthly</span>
-          </div>
         </div>
 
         <div class="es-tile">
@@ -1928,17 +2007,13 @@
             <li>Revenue attribution · live</li>
             <li>Front-desk SOP alignment</li>
           </ul>
-          <div class="es-tile-metric">
-            <span class="metric-val"><span class="up">+</span><span class="amount">$24–40k</span></span>
-            <span class="metric-lab">Closed · monthly</span>
-          </div>
         </div>
       </div>
 
       <div class="es-footer">
         <div class="es-ev">
-          <span class="es-ev-eye">Enterprise value · directional</span>
-          <span class="es-ev-val">$9.6M – $14.4M</span>
+          <span class="es-ev-eye">Example install · first 30 days</span>
+          <span class="es-ev-val">$35k – $80k recovered</span>
           <div class="es-ev-bar" aria-hidden="true"></div>
         </div>
         <a href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=engine_preview" target="_blank" rel="noopener" class="btn btn-primary">See my install plan →</a>
@@ -1948,7 +2023,7 @@
   <!-- ============================== END ENGINE DASHBOARD ============================== -->
 
   <div class="wrap">
-    <p class="intro">Not another agency, tool, or dashboard. A diagnostic, install, and operate stack that compounds into enterprise value. Buy back your time. Become the go-to authority on Google. Build a clinic you can walk away from, not a job you can't. One system, four pillars, twelve steps, installed shoulder to shoulder with your operation.</p>
+    <p class="intro">A diagnostic, install, and operate stack that compounds into enterprise value. Buy back your time. Become the go-to authority on Google. Build a clinic you can walk away from, not a job you can't. One system, four pillars, installed shoulder to shoulder with your operation.</p>
     <div class="pillars">
       <div class="pillar">
         <span class="p-num">PILLAR 01 · REACTIVATION</span>
@@ -1992,27 +2067,8 @@
       </div>
     </div>
 
-    <div class="steps-strip">
-      <span class="s-eye">12 steps · installed across your operation</span>
-      <h3>What gets installed, end to end.</h3>
-      <div class="steps-grid">
-        <div class="step"><span class="n">STEP 01</span><strong>Constraint diagnosis</strong>Where the real leak is</div>
-        <div class="step"><span class="n">STEP 02</span><strong>Revenue attribution</strong>Campaign to cash collected</div>
-        <div class="step"><span class="n">STEP 03</span><strong>Speed-to-lead</strong>5-minute response SLA</div>
-        <div class="step"><span class="n">STEP 04</span><strong>CRM to PMS pipe</strong>Single source of truth</div>
-        <div class="step"><span class="n">STEP 05</span><strong>Reactivation engine</strong>Database mining live</div>
-        <div class="step"><span class="n">STEP 06</span><strong>Authority stack</strong>Local SEO and reviews</div>
-        <div class="step"><span class="n">STEP 07</span><strong>Paid acquisition</strong>Meta and Google, tuned</div>
-        <div class="step"><span class="n">STEP 08</span><strong>No-show recovery</strong>AI plus human fallback</div>
-        <div class="step"><span class="n">STEP 09</span><strong>Consult scripts</strong>Front desk and provider</div>
-        <div class="step"><span class="n">STEP 10</span><strong>Team training</strong>Live coaching cadence</div>
-        <div class="step"><span class="n">STEP 11</span><strong>Retention flows</strong>Post-op and LTV</div>
-        <div class="step"><span class="n">STEP 12</span><strong>Weekly diagnosis</strong>Ongoing optimization</div>
-      </div>
-    </div>
-
     <div style="margin-top: 36px; display: flex; justify-content: center;">
-      <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=after_pillars" target="_blank" rel="noopener">Book my clinic roadmap call →</a>
+      <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=after_pillars" target="_blank" rel="noopener">Map the install for my clinic →</a>
     </div>
   </div>
 </section>
@@ -2222,31 +2278,31 @@
             </div>
           </div>
         </div>
-        <span class="ai-section-head">What we install</span>
-        <ul class="ai-list">
-          <li><span><strong>AI reception, triage, and speed-to-lead, 24/7.</strong> Every inbound answered inside 30 seconds. Qualified, booked, and passed to your team with full context. The Sunday-night lead becomes a Monday-morning consult.</span></li>
-          <li><span><strong>Predictive LTV and no-show scoring.</strong> Every lead scored by expected lifetime value before the consult. Every booked patient scored for ghost risk. Your best consultants spend their time on the right patients. Chairs stay full.</span></li>
-          <li><span><strong>Revenue attribution, event level.</strong> Ad spend reconciled with consults booked, cash collected, and LTV per channel. You see which campaign paid for itself. Wasted spend becomes reallocatable spend.</span></li>
-          <li><span><strong>One integrated layer, not five dashboards.</strong> Ads, CRM, practice software, phone, reporting, all in one source of truth your team actually trusts. One screen. One set of numbers.</span></li>
-          <li><span><strong>Humans where the close actually lives.</strong> High-ticket consults, objection handling, nurture calls stay with trained humans. AI clears the path. It stays out of the room when trust is the variable.</span></li>
-        </ul>
       </div>
-      <div class="terminal-box">
-        <div class="terminal-head">
-          <span class="td r"></span><span class="td y"></span><span class="td g"></span>
-          <span class="tpath">~/.csp/install · engine.v2026</span>
+      <div class="ops-panel" aria-label="PatientFlo live clinic operations panel">
+        <div class="ops-panel-head">
+          <div class="ops-panel-brand">
+            <span class="ops-live-dot" aria-hidden="true"></span>
+            <span class="ops-panel-title">PatientFlo</span>
+            <span class="ops-panel-sep"></span>
+            <span class="ops-panel-sub">Live operations · Today</span>
+          </div>
+          <span class="ops-panel-status">OPERATING</span>
         </div>
-        <div class="terminal-body">
-          <div><span class="prompt">$</span>csp install <span class="dim">--client=your-clinic --ai=surgical</span></div>
-          <div><span class="out">▸ Speed-to-lead automation</span> <span class="ok">ok · 247ms avg</span></div>
-          <div><span class="out">▸ AI reception layer (24/7)</span> <span class="ok">ok</span></div>
-          <div><span class="out">▸ LTV scoring pipeline</span> <span class="ok">ok</span></div>
-          <div><span class="out">▸ No-show prediction</span> <span class="ok">ok · 73% precision</span></div>
-          <div><span class="out">▸ Revenue attribution</span> <span class="ok">ok · event-level</span></div>
-          <div><span class="out">▸ Tool consolidation</span> <span class="ok">ok · 5 → 1</span></div>
-          <div><span class="out">▸ Constraint diagnosis</span> <span class="ok">ok</span></div>
-          <div><span class="dim">└ Humans retained: consults, objections, close</span></div>
-          <div><span class="dim">└ Ready · first recovered lead live from day one</span></div>
+        <div class="ops-panel-body">
+          <div class="ops-row"><span class="ops-lbl">New inquiries today</span><span class="ops-val">14 <span class="ops-sub">all booked</span></span></div>
+          <div class="ops-row"><span class="ops-lbl">Reactivation sent</span><span class="ops-val">4 <span class="ops-sub">this morning</span></span></div>
+          <div class="ops-row"><span class="ops-lbl">No-shows recovered</span><span class="ops-val">2 <span class="ops-sub">saved $4,200</span></span></div>
+          <div class="ops-row"><span class="ops-lbl">High-LTV consult</span><span class="ops-val ops-val-pending">1 <span class="ops-sub">2:00pm today</span></span></div>
+          <div class="ops-row"><span class="ops-lbl">Missed callbacks</span><span class="ops-val">0 <span class="ops-sub">clean</span></span></div>
+          <div class="ops-divider"></div>
+          <div class="ops-row"><span class="ops-lbl">Collected · last 24h</span><span class="ops-val ops-val-kpi">$47,318</span></div>
+          <div class="ops-row"><span class="ops-lbl">Avg response time</span><span class="ops-val ops-val-kpi">0:00:47</span></div>
+          <div class="ops-row"><span class="ops-lbl">No-show rate</span><span class="ops-val ops-val-kpi">4.2% <span class="ops-trend-down">▾</span></span></div>
+        </div>
+        <div class="ops-panel-foot">
+          <span class="ops-foot-label">Weekly diagnosis</span>
+          <span class="ops-foot-value">Monday · 9:00am</span>
         </div>
       </div>
     </div>
@@ -2368,52 +2424,18 @@
           <li>Willing to change process with your team, not just outsource it.</li>
         </ul>
         <p class="q-note">The engine compounds hardest above $300k/month. Below that we install, but the upside is capped.</p>
-        <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=qualify_good" target="_blank" rel="noopener">Book my roadmap call →</a>
+        <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=qualify_good" target="_blank" rel="noopener">Yes, this is me. Book the call →</a>
       </div>
       <div class="qualify-col bad">
-        <span class="q-eye">Not for you if</span>
-        <h3>You want a freelancer, not a system.</h3>
+        <span class="q-eye">Probably not the full engine if</span>
+        <h3>You're earlier in the journey, or want a freelancer.</h3>
         <ul>
-          <li>Pre-revenue or consistently under $40k/month collected.</li>
+          <li>Below the $80k/month threshold and still building your foundation. We have entry-level offers for this stage. Ask on the call.</li>
           <li>You want a creative agency, a one-off funnel, or a "set and forget" promise.</li>
           <li>You are unwilling to change how your front desk operates.</li>
           <li>You measure success in CPL and click-through rate, not cash collected.</li>
           <li>You want to disappear from the business, not lead the install.</li>
         </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================== FORK ============================== -->
-<section style="background: var(--csp-surface-2)" data-cursor-glow>
-  <div class="wrap">
-    <span class="sec-eye">11 · Your next move</span>
-    <h2>Two options. Neither is "keep doing what you're doing."</h2>
-    <div class="fork-grid">
-      <div class="fork-card inactive">
-        <div class="fk-eye">Option 01 · Do nothing</div>
-        <h3>Keep running the same broken playbook.</h3>
-        <p>Another year of fire-fighting. Another agency swap. Another round of new offers that don't move the bank balance. Your competitors with weaker clinical skill but a tighter system eat your market share one patient at a time. Your team burns out. Your clinic stays a job with a salary ceiling, not an asset with a multiple.</p>
-        <ul>
-          <li>Same revenue, same stress, same lost weekends</li>
-          <li>Database keeps compounding as dead weight while you pay to acquire new leads</li>
-          <li>Market share erodes to AI-enabled competitors quarter after quarter</li>
-          <li>Enterprise value stays flat, the EBITDA multiple never compounds</li>
-        </ul>
-        <div style="font-family: var(--csp-font-mono); font-size: 10.5px; color: var(--csp-ink-500); letter-spacing: 0.1em; text-transform: uppercase; margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--csp-ink-300);">This is the default path. Most owners pick it by not picking.</div>
-      </div>
-      <div class="fork-card active">
-        <div class="fk-eye">Option 02 · Roadmap call</div>
-        <h3>Book a clinic roadmap call.</h3>
-        <p>We look at your current stack, identify the tightest revenue leak, and ship you a custom clinic roadmap live on the call. Tomás or the Head of Strategy runs every session personally.</p>
-        <ul>
-          <li>Constraint-first diagnosis, transparent about what we actually do</li>
-          <li>Custom clinic roadmap built live on the call</li>
-          <li>Honest answer on fit, either way</li>
-          <li>Built toward the EBITDA multiple, not just this month's leads</li>
-        </ul>
-        <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=fork_active" target="_blank" rel="noopener">Book my roadmap call →</a>
       </div>
     </div>
   </div>
@@ -2442,7 +2464,7 @@
     <div class="faq">
       <details class="faq-item" open>
         <summary><span><span class="qn">Q.01</span>What makes you different from the four agencies we've already been burned by?</span></summary>
-        <div class="ans">We are not an agency. Agencies sell you campaigns. We install the engine that sits between your campaigns, your front desk, and your bank account. Every KPI, timeline, and owner responsibility is in writing before a dollar changes hands. If the first reactivation round doesn't put money in your deposits, we're not the right fit. We say so on the call.</div>
+        <div class="ans">Agencies sell you campaigns. We install the operating system that sits between your campaigns, your front desk, and your bank account. Every KPI, timeline, and owner responsibility is in writing before a dollar changes hands. If the first reactivation round doesn't put money in your deposits, we're not the right fit. We say so on the call.</div>
       </details>
       <details class="faq-item">
         <summary><span><span class="qn">Q.02</span>What if we already have an agency or internal marketer?</span></summary>
