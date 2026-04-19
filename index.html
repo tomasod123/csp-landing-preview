@@ -2078,19 +2078,21 @@
   }
   .integ-pill {
     display: flex; align-items: center; justify-content: center;
-    padding: 14px 16px; min-height: 56px;
+    padding: 14px 16px; min-height: 68px;
     background: var(--csp-surface);
     border: 1px solid var(--csp-ink-300);
     border-radius: var(--csp-r);
-    font-family: var(--csp-font-mono);
-    font-size: 12px; font-weight: 600;
-    letter-spacing: 0.04em; text-transform: uppercase;
-    color: var(--csp-warm-900);
-    text-align: center; line-height: 1.35;
     transition: border-color 0.2s var(--csp-ease);
+  }
+  .integ-pill img {
+    height: 28px; max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.72);
+    transition: filter 0.2s ease;
   }
   @media (hover: hover) {
     .integ-pill:hover { border-color: var(--csp-blue-800); }
+    .integ-pill:hover img { filter: grayscale(0) opacity(1); }
   }
   .integ-foot {
     display: flex; gap: 12px; align-items: flex-start;
@@ -2121,20 +2123,20 @@
       <p>No rip-and-replace. No "our proprietary CRM only" trap. The engine plugs into your existing practice management system so bookings, revenue, and lifetime-value events flow into a single source of truth.</p>
     </div>
     <div class="integ-grid" aria-label="Integrated practice management systems">
-      <div class="integ-pill">Pabau</div>
-      <div class="integ-pill">Dentally</div>
-      <div class="integ-pill">Cliniko</div>
-      <div class="integ-pill">Fresha</div>
-      <div class="integ-pill">Phorest</div>
-      <div class="integ-pill">Aesthetic Record</div>
-      <div class="integ-pill">PatientNow</div>
-      <div class="integ-pill">Nextech</div>
-      <div class="integ-pill">Mindbody</div>
-      <div class="integ-pill">Boulevard</div>
-      <div class="integ-pill">Open Dental</div>
-      <div class="integ-pill">ModMed</div>
-      <div class="integ-pill">Dentrix Ascend</div>
-      <div class="integ-pill">Jane App</div>
+      <div class="integ-pill"><img src="./assets/pms-logos/pabau.png" alt="Pabau" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/dentally.png" alt="Dentally" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/cliniko.png" alt="Cliniko" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/fresha.png" alt="Fresha" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/phorest.png" alt="Phorest" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/aestheticrecord.png" alt="Aesthetic Record" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/patientnow.png" alt="PatientNow" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/nextech.png" alt="Nextech" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/mindbody.png" alt="Mindbody" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/boulevard.png" alt="Boulevard" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/opendental.png" alt="Open Dental" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/modmed.png" alt="ModMed" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/dentrixascend.png" alt="Dentrix Ascend" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill"><img src="./assets/pms-logos/jane.png" alt="Jane App" width="96" height="28" loading="lazy" decoding="async" /></div>
     </div>
     <div class="integ-foot">
       <span class="integ-foot-eye">Attribution-grade</span>
