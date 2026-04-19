@@ -579,7 +579,7 @@
   /* ============ TESTIMONIALS ============ */
   .testi-featured {
     display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px;
-    align-items: start;
+    align-items: center;
   }
   .testi-video {
     position: relative;
@@ -590,7 +590,7 @@
     box-shadow: var(--csp-shadow-lg);
   }
   .testi-video iframe { border: 0; width: 100%; height: 100%; display: block; }
-  .testi-meta { padding: 18px 0 0; }
+  .testi-meta { padding: 0; }
   .testi-meta .m-eye {
     font-family: var(--csp-font-mono); font-size: 10.5px;
     letter-spacing: 0.18em; text-transform: uppercase;
@@ -605,6 +605,25 @@
   .testi-meta p { font-size: 14.5px; color: var(--csp-ink-700); line-height: 1.55; margin: 0 0 16px; }
   .testi-attrib { font-family: var(--csp-font-mono); font-size: 11.5px; color: var(--csp-ink-500); letter-spacing: 0.08em; }
   .testi-attrib strong { color: var(--csp-warm-900); }
+  .testi-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--csp-ink-200);
+  }
+  .testi-stats .s {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .testi-stats .s-val {
+    font-family: var(--csp-font-display); font-weight: 700;
+    font-size: 22px; color: var(--csp-warm-900);
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .testi-stats .s-lab {
+    font-family: var(--csp-font-mono); font-size: 9.5px;
+    color: var(--csp-ink-500); letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
   .testi-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
   @media (max-width: 720px) { .testi-quotes { grid-template-columns: 1fr; } }
@@ -1864,7 +1883,7 @@
       </div>
       <div class="enemy-card">
         <span class="e-badge">Diagnosis · Constraint identified</span>
-        <h3>You don't have a marketing problem. You have a <span class="accent">systems problem.</span></h3>
+        <h3>You don't have a marketing problem. You have a <span class="hl shimmer">systems problem.</span></h3>
         <p>Your ads don't talk to your booking calendar. Your booking calendar doesn't talk to the software your practice actually runs on. Your front desk has no idea which patient came from which campaign. Your reports show clicks, not cash collected.</p>
         <p>You're paying $100+ per lead and half of them do not get a call inside 15 minutes. That is not a traffic problem, a creative problem, or an algorithm problem. It is a systems problem. And no amount of new ads will fix a leaking pipeline.</p>
         <p class="path">~/.csp/diagnosis/the-real-enemy.md</p>
@@ -1877,7 +1896,7 @@
 <section style="background: var(--csp-surface-2)" data-cursor-glow>
   <div class="wrap">
     <span class="sec-eye">02 · How the leak shows up</span>
-    <h2>Four symptoms every clinic owner doing $80k+/month sees first.</h2>
+    <h2>Four symptoms every clinic owner sees first.</h2>
     <p class="intro">If three of these feel familiar, the constraint isn't your traffic. It's your architecture.</p>
     <div class="problem-list">
       <div class="problem"><span class="x">✕</span><p><strong>Leads arrive. Nothing answers.</strong> CRM logs the lead at 2:03pm Sunday. Front desk calls at 10:47am Tuesday. The patient booked somewhere else on Monday.</p></div>
@@ -2119,8 +2138,13 @@
       <div class="testi-meta">
         <span class="m-eye">Featured testimonial</span>
         <h4>"They really boosted my numbers. It's made a big, big difference throughout this year."</h4>
-        <p>Liridon used CSP to install SMS reactivation, Meta ads, and Google Ads inside his podiatry practice. CSP became his drop-in marketing department.</p>
+        <p>Podiatry practice with no internal marketing team. We installed three acquisition channels as one integrated stack: SMS reactivation to the existing database, Meta for net-new, Google for high-intent. Twelve months in, all three are running under one roof with weekly diagnosis and per-provider attribution.</p>
         <div class="testi-attrib"><strong>LIRIDON</strong> · JAKUPI PODIATRY · 12-MONTH CLIENT</div>
+        <div class="testi-stats">
+          <div class="s"><span class="s-val">3</span><span class="s-lab">Channels live · SMS · Meta · Google</span></div>
+          <div class="s"><span class="s-val">12<span style="font-size: 14px; color: var(--csp-ink-500); font-weight: 500; margin-left: 2px;">mo</span></span><span class="s-lab">Operating window</span></div>
+          <div class="s"><span class="s-val">Weekly</span><span class="s-lab">Constraint diagnosis</span></div>
+        </div>
       </div>
     </div>
     <div class="testi-quotes">
