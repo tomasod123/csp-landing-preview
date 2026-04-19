@@ -200,7 +200,7 @@
   }
   .hero h1 {
     font-family: var(--csp-font-display); font-weight: 800;
-    font-size: clamp(36px, 5vw, 60px); line-height: 1.06;
+    font-size: clamp(36px, 4.4vw, 54px); line-height: 1.06;
     letter-spacing: -0.035em; color: #fff;
     margin: 0 auto 22px; max-width: 880px;
   }
@@ -221,14 +221,22 @@
     color: rgba(255,255,255,0.82);
     margin: 0 auto 28px; max-width: 720px;
   }
-  /* Desktop-only hero visual reorder: eye, H1, VSL, CTA row, resolver. Mobile keeps DOM order (matches live). */
+  /* Desktop-only hero visual reorder + tightened spacing so CTA sits above the fold. Mobile unchanged. */
   @media (min-width: 768px) {
+    .hero { padding: 16px 0 56px; }
     .hero .wrap-narrow { display: flex; flex-direction: column; align-items: stretch; }
-    .hero .eye { order: 1; align-self: center; }
-    .hero h1 { order: 2; }
-    .hero .vsl-wrap { order: 3; width: 100%; align-self: center; }
-    .hero .vsl-cta-row { order: 4; }
-    .hero p.hero-resolver { order: 5; margin: 28px auto 0; }
+    .hero .eye { order: 1; align-self: center; margin-bottom: 10px; }
+    .hero h1 { order: 2; margin-bottom: 12px; }
+    .hero .vsl-wrap { order: 3; width: 100%; max-width: 640px; align-self: center; margin-bottom: 12px; }
+    .hero .vsl-cta-row { order: 4; gap: 10px; }
+    .hero p.hero-resolver { order: 5; margin: 22px auto 0; }
+  }
+  /* Taller viewports: progressively grow VSL back toward original prominence */
+  @media (min-width: 768px) and (min-height: 820px) {
+    .hero .vsl-wrap { max-width: 720px; }
+  }
+  @media (min-width: 768px) and (min-height: 900px) {
+    .hero .vsl-wrap { max-width: 820px; }
   }
 
   .vsl-wrap {
@@ -2092,8 +2100,17 @@
     color: var(--csp-ink-700); margin: 0; max-width: 720px; }
   .integ-grid {
     display: grid; gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     margin-bottom: 28px;
+  }
+  .integ-pill--text span {
+    font-family: var(--csp-font-display); font-weight: 700;
+    font-size: 18px; letter-spacing: -0.02em;
+    color: var(--csp-ink-700); opacity: 0.72;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+  @media (hover: hover) {
+    .integ-pill--text:hover span { color: var(--csp-warm-900); opacity: 1; }
   }
   .integ-pill {
     display: flex; align-items: center; justify-content: center;
@@ -2139,7 +2156,7 @@
     <div class="integ-head">
       <span class="sec-eye">06b · Plugs into your stack</span>
       <h2>Attribution-grade integration with the software you already run.</h2>
-      <p>No rip-and-replace. No "our proprietary CRM only" trap. The engine plugs into your existing practice management system so bookings, revenue, and lifetime-value events flow into a single source of truth.</p>
+      <p>You can't optimize what you can't measure. Most clinics run ads blind: spend goes out, bookings show up in the practice software, and the line between them lives in three different dashboards nobody reconciles. The engine plugs directly into the software you already run, so every booking, revenue event, and lifetime-value signal is tied back to the exact campaign, channel, and ad that produced it. Real ROI per dollar, in one place.</p>
     </div>
     <div class="integ-grid" aria-label="Integrated practice management systems">
       <div class="integ-pill"><img src="./assets/pms-logos/pabau.png" alt="Pabau" width="96" height="28" loading="lazy" decoding="async" /></div>
@@ -2156,6 +2173,7 @@
       <div class="integ-pill"><img src="./assets/pms-logos/modmed.png" alt="ModMed" width="96" height="28" loading="lazy" decoding="async" /></div>
       <div class="integ-pill"><img src="./assets/pms-logos/dentrixascend.png" alt="Dentrix Ascend" width="96" height="28" loading="lazy" decoding="async" /></div>
       <div class="integ-pill"><img src="./assets/pms-logos/jane.png" alt="Jane App" width="96" height="28" loading="lazy" decoding="async" /></div>
+      <div class="integ-pill integ-pill--text" title="Zenoti"><span>Zenoti</span></div>
     </div>
     <div class="integ-foot">
       <span class="integ-foot-eye">Attribution-grade</span>
