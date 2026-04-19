@@ -1,0 +1,180 @@
+<!--
+  ARCHIVED: Scorecard / "Score your clinic out of 100 in 90 seconds" section
+  Removed from index.html on 2026-04-19 (commit pending) per Tomas: numbers
+  read as fabricated to visitor (no visible methodology / no revenue anchor).
+  To be replaced post-stress-test by the Sellability Report.
+
+  To restore:
+    1. Paste this section back into index.html immediately AFTER the
+       "INTEGRATIONS / Plugs into your stack" section and BEFORE the
+       "WHY CSP" section.
+    2. Re-add to <head>/<body> bottom: <script src="./js/scorecard.js" defer></script>
+    3. Re-add footer link: <li><a href="#scorecard">Free diagnostic</a></li>
+    4. CSS for .scorecard-section / .sc-* lives inline in index.html and was
+       intentionally left in place for fast restore.
+    5. Logic file js/scorecard.js was kept in place (unused after removal).
+-->
+
+<!-- ============================== SCORECARD ============================== -->
+<section class="scorecard-section" id="scorecard" data-cursor-glow>
+  <div class="wrap">
+    <span class="sec-eye">09 · Directional diagnostic</span>
+    <h2>Score your clinic out of 100 in 90 seconds.</h2>
+    <p class="intro">The average 7-figure clinic owner finds $30-50k of reallocatable monthly revenue inside the roadmap call itself. This is the warm-up: ten questions about the systems that leak the most cash. Each slider has a 1 and a 10 anchor so you know exactly what honest looks like.</p>
+    <div class="scorecard" id="csp-scorecard">
+      <div class="sc-honest">
+        This is directional, not diagnostic. The opportunity estimate is a rough indicator tied to your score, not a forensic audit of your finances. It shows you where the conversation should start. The real numbers come from looking at your actual spend, bookings, and LTV on a call.
+      </div>
+
+      <div class="sc-tier" id="sc-tier">
+        <span class="sc-tier-eye">Step 1 of 2</span>
+        <h3 class="sc-tier-title">Which 3 areas concern you most right now?</h3>
+        <p class="sc-tier-sub">Tap your top 3. We'll reveal the sliders for just those first so you can move fast. You can expand to all 10 afterwards.</p>
+        <div class="sc-chips" role="group" aria-label="Pick your top 3 concerns">
+          <button type="button" class="sc-chip" data-target="speed">Speed to lead</button>
+          <button type="button" class="sc-chip" data-target="conversion">Website to booked</button>
+          <button type="button" class="sc-chip" data-target="attribution">Lead attribution</button>
+          <button type="button" class="sc-chip" data-target="frontdesk">Front desk sales</button>
+          <button type="button" class="sc-chip" data-target="reactivation">Patient reactivation</button>
+          <button type="button" class="sc-chip" data-target="roi">Marketing ROI visibility</button>
+          <button type="button" class="sc-chip" data-target="integration">Tech-stack integration</button>
+          <button type="button" class="sc-chip" data-target="ltv">LTV and retention</button>
+          <button type="button" class="sc-chip" data-target="reviews">Reputation and reviews</button>
+          <button type="button" class="sc-chip" data-target="noshow">No-show recovery</button>
+        </div>
+        <button type="button" class="sc-tier-skip" id="sc-tier-skip">Or skip this, score all 10 at once →</button>
+      </div>
+
+      <div class="sc-revenue">
+        <div>
+          <span class="r-label">Current monthly revenue</span>
+          <span class="r-sub">Optional, for a more precise opportunity indicator</span>
+        </div>
+        <div class="sc-rev-inputs">
+          <select id="sc-currency-input" aria-label="Currency">
+            <option value="USD">$ USD</option>
+            <option value="GBP">£ GBP</option>
+            <option value="EUR">€ EUR</option>
+            <option value="AUD">A$ AUD</option>
+          </select>
+          <input id="sc-revenue-input" type="number" min="0" step="5000" placeholder="e.g. 150000" inputmode="numeric" aria-label="Current monthly revenue, optional" />
+        </div>
+      </div>
+
+      <div class="sc-rows">
+        <div class="sc-row" data-sc="speed">
+          <div class="sc-label"><span class="lbl">Speed to lead</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Speed to lead score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> Leads wait 24–48 hours for a call.</div>
+            <div class="sc-anchor hi"><b>10</b> Every inbound contacted inside 2 minutes, 24/7.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="conversion">
+          <div class="sc-label"><span class="lbl">Website to booked appointment</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Website conversion score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> I don't know our visit-to-book rate.</div>
+            <div class="sc-anchor hi"><b>10</b> Booking rate tracked per traffic source, A/B tested monthly.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="attribution">
+          <div class="sc-label"><span class="lbl">Lead source attribution</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Lead attribution score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> No idea which campaign brought which paying patient.</div>
+            <div class="sc-anchor hi"><b>10</b> Every patient tracked source-to-cash, LTV by channel.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="frontdesk">
+          <div class="sc-label"><span class="lbl">Front desk sales performance</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Front desk score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> No scripts, no call review, no close-rate tracking.</div>
+            <div class="sc-anchor hi"><b>10</b> Every call scored, scripts versioned, weekly coaching, rate on the wall.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="reactivation">
+          <div class="sc-label"><span class="lbl">Patient reactivation</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Reactivation score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> We don't contact past patients unless they reach out.</div>
+            <div class="sc-anchor hi"><b>10</b> Monthly automated reactivation producing predictable 5-figure lift.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="roi">
+          <div class="sc-label"><span class="lbl">Marketing ROI visibility</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Marketing ROI score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> I spend and hope. Nobody can tell me ROI in cash.</div>
+            <div class="sc-anchor hi"><b>10</b> Every spend matched to collected revenue inside 48 hours.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="integration">
+          <div class="sc-label"><span class="lbl">Tech-stack integration</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Integration score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> Tools don't talk. We paste data between screens.</div>
+            <div class="sc-anchor hi"><b>10</b> Every tool connected in real time, zero manual data entry.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="ltv">
+          <div class="sc-label"><span class="lbl">LTV and retention</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="LTV score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> We don't track lifetime value at all.</div>
+            <div class="sc-anchor hi"><b>10</b> LTV tracked per treatment, channel, and provider. Cross-sell mapped.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="reviews">
+          <div class="sc-label"><span class="lbl">Reputation and reviews</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="Reviews score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> We ask for reviews when we remember. We rarely do.</div>
+            <div class="sc-anchor hi"><b>10</b> 500+ five-star reviews. Every review gets a managed response.</div>
+          </div>
+        </div>
+        <div class="sc-row" data-sc="noshow">
+          <div class="sc-label"><span class="lbl">No-show and cancellation recovery</span></div>
+          <div class="sc-slider"><input type="range" min="1" max="10" value="5" aria-label="No-show recovery score" /></div>
+          <div class="sc-val">5</div>
+          <div class="sc-anchors">
+            <div class="sc-anchor lo"><b>1</b> If they don't show, we move on. No recovery.</div>
+            <div class="sc-anchor hi"><b>10</b> Ghost-risk scoring, pre-emptive outreach, under 5% no-show rate.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-expand">
+        <button type="button" id="sc-expand-btn">Score all 10 areas for a full diagnostic →</button>
+      </div>
+
+      <div class="sc-result">
+        <div class="sc-result-left">
+          <div class="sc-score-label">Your clinic score</div>
+          <div class="sc-score" id="sc-score"><span id="sc-score-val">50</span><span class="max">/100</span></div>
+          <div class="sc-bar"><div class="sc-bar-fill" id="sc-bar" style="width: 50%;"></div></div>
+        </div>
+        <div class="sc-opportunity">
+          <div class="o-lbl" id="sc-opp-label">Your biggest opportunity</div>
+          <div class="o-title" id="sc-opp-title">Drag a slider to see your gap</div>
+          <div class="o-copy" id="sc-opp-copy">Rate each question honestly against its 1 and 10 anchor. The lowest score is where your biggest dollar opportunity is hiding.</div>
+          <div class="o-secondary" id="sc-opp-secondary">Add your monthly revenue above for a sharper estimate.</div>
+        </div>
+      </div>
+
+      <div class="sc-cta-row">
+        <a class="btn btn-primary btn-lg magnetic" id="sc-cta" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=scorecard_50&score=50" target="_blank" rel="noopener">Fix my biggest gap →</a>
+      </div>
+    </div>
+  </div>
+</section>
