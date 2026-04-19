@@ -1,0 +1,57 @@
+# ============================================================
+# Clinic Success Partners · WordPress → single-page migration
+# Every legacy URL 301s to / (homepage). Preserves SEO + inbound links.
+# Generated 2026-04-19 from 19 cataloged URLs in .tmp/old-urls.txt
+# ============================================================
+
+Options -Indexes -MultiViews
+RewriteEngine On
+
+# --- 1. Force HTTPS ----------------------------------------------------------
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+# --- 2. Strip www. -----------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^www\.clinicsuccesspartners\.com$ [NC]
+RewriteRule ^(.*)$ https://clinicsuccesspartners.com/$1 [L,R=301]
+
+# --- 3. Serve the homepage untouched ----------------------------------------
+RewriteRule ^$ - [L]
+
+# --- 4. Let real files and real directories through -------------------------
+# (covers /assets/, /favicon.ico, /robots.txt, /sitemap.xml, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# --- 5. Catch-all: every other request 301s to homepage ---------------------
+RewriteRule ^.*$ / [L,R=301]
+
+# --- 6. Cache headers --------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                "access plus 0 seconds"
+  ExpiresByType text/css                 "access plus 1 month"
+  ExpiresByType application/javascript   "access plus 1 month"
+  ExpiresByType image/webp               "access plus 6 months"
+  ExpiresByType image/png                "access plus 6 months"
+  ExpiresByType image/jpeg               "access plus 6 months"
+  ExpiresByType image/svg+xml            "access plus 6 months"
+  ExpiresByType image/x-icon             "access plus 1 year"
+  ExpiresByType font/woff2               "access plus 1 year"
+</IfModule>
+
+# --- 7. Gzip -----------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/xml text/plain
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- 8. Security headers ----------------------------------------------------
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "interest-cohort=()"
+</IfModule>
