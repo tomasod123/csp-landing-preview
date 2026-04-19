@@ -215,6 +215,17 @@
     animation: csp-pulse 1.8s ease-in-out infinite;
   }
   .vsl-cta-note .accent { color: #fff; font-weight: 700; }
+  .vsl-restart {
+    background: transparent; border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: var(--csp-font-mono);
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; padding: 4px 8px; margin-top: 2px;
+    transition: color 0.2s var(--csp-ease);
+  }
+  .vsl-restart:hover { color: rgba(255,255,255,0.85); }
+  .vsl-restart:focus-visible { outline: 1px solid rgba(255,255,255,0.35); outline-offset: 2px; }
 
   /* ============ PROOF BAR ============ */
   .proof-bar {
@@ -231,12 +242,18 @@
     background: var(--csp-warm-900); color: #fff;
     padding: 22px 24px; border-radius: var(--csp-r-lg);
     box-shadow: var(--csp-shadow-xl);
-    animation: csp-float 6s ease-in-out infinite;
+    animation: csp-float 7s ease-in-out infinite;
     will-change: transform;
+    transition: box-shadow 0.4s var(--csp-ease);
+  }
+  .proof-card:hover {
+    box-shadow: 0 36px 90px rgba(0,0,0,0.2), 0 12px 28px rgba(30,64,175,0.18);
   }
   @keyframes csp-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+    0%, 100% { transform: translate(0, 0); }
+    25%     { transform: translate(-1.5px, -4px); }
+    50%     { transform: translate(0, -8px); }
+    75%     { transform: translate(1.5px, -4px); }
   }
   @media (prefers-reduced-motion: reduce) {
     .proof-card { animation: none; }
@@ -1576,15 +1593,39 @@
     <div class="vsl-wrap">
       <div id="vidalytics_embed_Swi29HjsECOPJ_vA" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
       <script type="text/javascript">
-      (function (v, i, d, a, l, y, t, c, s) {
-          y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
-          if (!vsl){vsl=function(u,cb){
-              if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
-              if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
-              i.getElementsByTagName("head")[0].appendChild(s);
-          };}
-          vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-      })(window, document, 'Vidalytics', 'vidalytics_embed_Swi29HjsECOPJ_vA', 'https://fast.vidalytics.com/embeds/HPq2IGBn/Swi29HjsECOPJ_vA/');
+      // Vidalytics loader, factored into a named function so we can reinit on demand
+      window.cspLoadVSL = function () {
+        var v = window, i = document, d = 'Vidalytics', a = 'vidalytics_embed_Swi29HjsECOPJ_vA',
+            l = 'https://fast.vidalytics.com/embeds/HPq2IGBn/Swi29HjsECOPJ_vA/';
+        var y='_'+d.toLowerCase(), c=d+'L';
+        if(!v[d]){v[d]={};} if(!v[c]){v[c]={};} if(!v[y]){v[y]={};}
+        var vl='Loader', vli=v[y][vl], vsl=v[c][vl + 'Script'], vlf=v[c][vl + 'Loaded'], ve='Embed', t, s;
+        if (!vsl){
+          vsl = function(u, cb){
+            if(t){cb();return;} s=i.createElement("script"); s.type="text/javascript"; s.async=1; s.src=u;
+            if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState==="complete"){s.onreadystatechange=null;vlf=1;cb();}};}
+            else {s.onload=function(){vlf=1;cb();};}
+            i.getElementsByTagName("head")[0].appendChild(s);
+          };
+        }
+        vsl(l+'loader.min.js', function(){
+          if(!vli){var vlc=v[c][vl]; vli=new vlc();}
+          vli.loadScript(l+'player.min.js', function(){
+            var vec=v[d][ve]; t=new vec(); t.run(a);
+          });
+        });
+      };
+      window.cspLoadVSL();
+
+      // Restart button wipes the stuck player and re-runs the loader.
+      window.cspRestartVSL = function () {
+        var el = document.getElementById('vidalytics_embed_Swi29HjsECOPJ_vA');
+        if (!el) return;
+        el.innerHTML = '';
+        // Reset any Vidalytics session state if the API exposes it
+        try { if (window.Vidalytics && window.Vidalytics.Embed) { /* force fresh instance */ } } catch(e) {}
+        window.cspLoadVSL();
+      };
       </script>
 
       <script type="application/ld+json">
@@ -1603,6 +1644,7 @@
     <div class="vsl-cta-row">
       <p class="vsl-cta-note"><span class="accent">Watch it first.</span> Every client worth $100k+ watched this before they booked.</p>
       <a class="btn btn-primary btn-lg magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=hero" target="_blank" rel="noopener">Book your clinic roadmap call →</a>
+      <button type="button" class="vsl-restart" onclick="window.cspRestartVSL && window.cspRestartVSL()" aria-label="Restart video if playback is stuck">Video stuck? Restart it</button>
     </div>
     <p class="hero-sub">A focused breakdown of the Clinic Success Engine. For 7 and 8-figure operators who want a system that compounds into EBITDA, not another dashboard.</p>
   </div>
