@@ -67,9 +67,15 @@
 
 <style>
   /* ============ LAYOUT ============ */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { overflow-x: hidden; max-width: 100%; }
   body { margin: 0; }
+  img, svg, video, iframe { max-width: 100%; }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
   .wrap-narrow { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 640px) {
+    .wrap, .wrap-narrow { padding: 0 20px; }
+  }
   section { padding: 88px 0; }
   section + section { border-top: 1px solid var(--csp-ink-300); }
   .sec-eye {
@@ -128,6 +134,15 @@
   }
   @media (max-width: 640px) {
     .nav-status { display: none; }
+    .site-nav { padding: 8px 0; }
+    .site-nav .wrap { gap: 10px; }
+    .nav-logo img { height: 20px; }
+    .site-nav .btn { padding: 9px 14px; font-size: 13px; }
+    .site-nav .btn .full { display: none; }
+  }
+  .site-nav .btn .short { display: none; }
+  @media (max-width: 640px) {
+    .site-nav .btn .short { display: inline; }
   }
 
   /* ============ BUTTONS ============ */
@@ -220,6 +235,21 @@
     font-size: 16px; line-height: 1.55;
     color: rgba(255,255,255,0.82);
     margin: 0 auto 28px; max-width: 720px;
+  }
+  /* Mobile hero: VSL + CTA above the fold. Headline tightened, resolver dropped below CTA. */
+  @media (max-width: 767px) {
+    .hero { padding: 18px 0 40px; }
+    .hero .wrap-narrow { display: flex; flex-direction: column; align-items: stretch; }
+    .hero .eye { order: 1; align-self: center; margin-bottom: 8px; }
+    .hero h1 {
+      order: 2;
+      font-size: clamp(26px, 7.4vw, 34px);
+      line-height: 1.08;
+      margin: 0 auto 14px;
+    }
+    .hero .vsl-wrap { order: 3; margin: 0 auto 14px; }
+    .hero .vsl-cta-row { order: 4; gap: 10px; margin-bottom: 12px; }
+    .hero p.hero-resolver { order: 5; font-size: 14.5px; margin: 6px auto 0; }
   }
   /* Desktop-only hero visual reorder + tightened spacing so CTA sits above the fold. Mobile unchanged. */
   @media (min-width: 768px) {
@@ -1446,8 +1476,11 @@
     box-shadow: 0 10px 22px rgba(0,0,0,0.22);
   }
   @media (max-width: 640px) {
-    .sticky-cta .copy { display: none; }
-    .sticky-cta .btn { width: 100%; justify-content: center; }
+    .sticky-cta { padding: 12px 16px; }
+    .sticky-cta .wrap { gap: 0; justify-content: center; }
+    .sticky-cta .copy,
+    .sticky-cta .spacer { display: none; }
+    .sticky-cta .btn { width: 100%; justify-content: center; text-align: center; }
   }
   body { padding-bottom: 0; }
   body.has-sticky { padding-bottom: 72px; }
@@ -1788,7 +1821,7 @@
     </a>
     <div class="spacer"></div>
     <span class="nav-status" id="nav-status">APRIL INTAKE · 3 SLOTS</span>
-    <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=nav" target="_blank" rel="noopener">Book roadmap call →</a>
+    <a class="btn btn-primary magnetic" href="https://book.clinicsuccesspartners.com/schedule-call?utm_source=csp_homepage&utm_medium=organic&utm_campaign=vsl_v3&utm_content=nav" target="_blank" rel="noopener"><span class="full">Book roadmap call →</span><span class="short">Book call →</span></a>
   </div>
 </nav>
 
