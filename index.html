@@ -525,7 +525,9 @@
     padding-top: 12px; border-top: 1px dashed var(--csp-ink-300); margin-top: auto;
   }
   .failure .foot .accent { color: var(--csp-blue-800); font-weight: 700; }
+  .failures.failures-2col { grid-template-columns: repeat(2, 1fr); }
   @media (max-width: 860px) { .failures { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .failures.failures-2col { grid-template-columns: 1fr; } }
 
   /* ============ ENGINE PILLARS ============ */
   .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -1315,6 +1317,9 @@
     align-self: flex-start; margin-top: 22px;
   }
   @media (max-width: 760px) { .qualify-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    .qualify-col .btn { align-self: stretch; justify-content: center; text-align: center; }
+  }
 
   /* ============ FORK ============ */
   .fork-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 1100px; }
@@ -1954,7 +1959,7 @@
     <span class="sec-eye">02 · How the leak shows up</span>
     <h2>Four symptoms every clinic owner sees first.</h2>
     <p class="intro">Three of these feel familiar? The constraint isn't your traffic. It's your architecture.</p>
-    <div class="failures" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="failures failures-2col">
       <div class="failure">
         <span class="num">Symptom 01</span>
         <h4>"Leads come in. Nothing answers."</h4>
