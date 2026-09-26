@@ -76,7 +76,7 @@ Site restored to WordPress in ~30 seconds.
 **Full backup archives** (WordPress files + DB, SHA256-verified, April 2026):
 - SiteGround: `/home/customer/backups/wordpress-{db,files}-20260419-154727UTC.*`
 - Mac: `~/csp-landing/.tmp/backups/`
-- Hetzner: `root@204.168.203.29:/root/backups/csp-wordpress/`
+- Hetzner: `root@<hetzner-server>:/root/backups/csp-wordpress/`
 - SiteGround daily auto-backup: Site Tools → Security → Backups (30-day retention)
 
 ## Git remotes (all push on `git push origin main` via multi-push URL)
@@ -84,7 +84,7 @@ Site restored to WordPress in ~30 seconds.
 - `origin`: GitHub preview (https://github.com/tomasod123/csp-landing-preview.git)
 - `origin` (2nd push URL): GitHub private (https://github.com/tomasod123/csp-landing.git)
 - `private`: GitHub private (explicit name)
-- `hetzner`: Hetzner bare repo (root@204.168.203.29:/root/git/csp-landing.git)
+- `hetzner`: Hetzner bare repo (root@<hetzner-server>:/root/git/csp-landing.git)
 
 ## Known SiteGround quirks
 
