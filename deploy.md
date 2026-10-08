@@ -105,3 +105,6 @@ Site restored to WordPress in ~30 seconds.
 
 - SiteGround support: https://tools.siteground.com → Support → Contact
 - GoDaddy DNS (for emergencies only): https://dcc.godaddy.com
+
+## Log
+- 8 Oct 2026 13:19 CEST: added /privacy-policy/, /terms/, /earnings-disclaimer/ (static pages built from ~/active/csp-ig-link-restriction-oct8/legal/make_legal.py with LEGAL_BASE=https://clinicsuccesspartners.com), footer legal links + rewritten footer disclaimer, sitemap entries, and removed the Meta pixel block that had been added on the server only (never in git; no consent banner exists). Deployed with a plain rsync of those paths (NO --delete: the server has a `plans/` folder that is not in this repo). Backups: ~/backups/public_html-before-legal-20261008-1118.tar.gz and -after-legal-20261008-1119.tar.gz on SiteGround, copies in ~/active/_backups/2026-10-08-csp-landing/. Rollback = untar the before file. Homepage served from SiteGround cache until Tomás flushes it (Site Tools > Speed > Caching) or max-age 300 + proxy cache expire.
