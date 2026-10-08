@@ -1,22 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PBHSXC2W');</script>
-<!-- End Google Tag Manager -->
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6S5L3CMLVD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6S5L3CMLVD');
-</script>
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -1829,11 +1814,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .es-brand::before { animation: none; }
   }
 </style>
+<!-- Analytics load only after the cookie choice (8 Oct 2026). GTM-PBHSXC2W + GA4 G-6S5L3CMLVD. -->
+<script>
+window.cspLoadAnalytics=function(){
+  if(window.__cspAnalyticsLoaded)return;window.__cspAnalyticsLoaded=true;
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PBHSXC2W');
+  var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=G-6S5L3CMLVD';document.head.appendChild(g);
+  window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;gtag('js',new Date());gtag('config','G-6S5L3CMLVD');
+};
+</script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBHSXC2W"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- ============================== NAV ============================== -->
@@ -2625,7 +2617,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
     </div>
-    <p class="footer-disclaimer">Clinic Success Partners is an independent marketing agency. Not part of, or endorsed by, Facebook, Instagram, Meta, Google or any practice-software platform shown. Client results shown are their own and are not typical. Outcomes vary. <a href="/privacy-policy/" style="color:inherit;text-decoration:underline">Privacy notice</a> · <a href="/terms/" style="color:inherit;text-decoration:underline">Website terms</a> · <a href="/earnings-disclaimer/" style="color:inherit;text-decoration:underline">Earnings and results disclaimer</a></p>
+    <p class="footer-disclaimer">Clinic Success Partners is an independent marketing agency. Not part of, or endorsed by, Facebook, Instagram, Meta, Google or any practice-software platform shown. Client results shown are their own and are not typical. Outcomes vary. <a href="/privacy-policy/" style="color:inherit;text-decoration:underline">Privacy notice</a> · <a href="/terms/" style="color:inherit;text-decoration:underline">Website terms</a> · <a href="/earnings-disclaimer/" style="color:inherit;text-decoration:underline">Earnings and results disclaimer</a> · <a href="#" data-csp-consent="open" style="color:inherit;text-decoration:underline">Cookie choice</a></p>
     <div class="bottom">
       <span>© 2026 · Clinic Success Partners</span>
       <span>v 2.0 · Protocol.Homepage</span>
@@ -2836,5 +2828,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- GHL external tracking (US account, where bookings land) -->
 <script defer src="https://links.patientflo.ai/js/external-tracking.js" data-tracking-id="tk_e5d32b9a8bcd4a41a84ccfe3ac7737fc"></script>
+<!-- CSP cookie choice (8 Oct 2026): nothing non-essential loads until the visitor says yes. Choice saved in this browser only. -->
+<div id="csp-consent" hidden role="dialog" aria-label="Cookie choice" style="position:fixed;top:0;left:0;right:0;z-index:2147483000;background:#0F172A;color:#F8F8F7;font:500 14px/1.45 Inter,system-ui,-apple-system,sans-serif;padding:10px 14px;box-shadow:0 2px 12px rgba(0,0,0,.25)">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:center;text-align:center">
+    <span>We use a Meta pixel and Google Analytics to see which ads and pages bring enquiries. OK to switch them on? <a href="/privacy-policy/" style="color:#93C5FD;text-decoration:underline">Privacy notice</a></span>
+    <span style="display:flex;gap:8px">
+      <button type="button" data-csp-consent="yes" style="background:#1E40AF;color:#fff;border:0;border-radius:8px;padding:8px 14px;font:600 14px Inter,system-ui,sans-serif;cursor:pointer">Yes, that&rsquo;s fine</button>
+      <button type="button" data-csp-consent="no" style="background:transparent;color:#F8F8F7;border:1px solid #64748B;border-radius:8px;padding:8px 14px;font:600 14px Inter,system-ui,sans-serif;cursor:pointer">No thanks</button>
+    </span>
+  </div>
+</div>
+<script>
+(function(){
+  var K='csp-consent-v1', PIX='2086479645508732';
+  function get(){try{return localStorage.getItem(K)}catch(e){return null}}
+  function set(v){try{localStorage.setItem(K,v)}catch(e){}}
+  function loadMeta(){
+    if(window.fbq)return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',PIX);fbq('track','PageView');
+  }
+  function loadAll(){loadMeta();if(typeof window.cspLoadAnalytics==='function'){try{window.cspLoadAnalytics()}catch(e){}}}
+  var bar=document.getElementById('csp-consent');
+  function show(){if(bar)bar.hidden=false}
+  function hide(){if(bar)bar.hidden=true}
+  var c=get();
+  if(c==='yes'){loadAll()}else if(c!=='no'){show()}
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-csp-consent]');if(!t)return;e.preventDefault();
+    var a=t.getAttribute('data-csp-consent');
+    if(a==='yes'){set('yes');loadAll();hide()}else if(a==='no'){set('no');hide()}else if(a==='open'){show()}
+  });
+})();
+</script>
 </body>
 </html>
